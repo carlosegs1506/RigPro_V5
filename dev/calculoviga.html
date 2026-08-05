@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Calculo Viga</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+    <div class="container_todos">
+      <h2>VIGA H</h2>
+      <div class="inputs">
+        <form>
+          <fieldset>
+            <legend>Alas (planchas A y B)</legend>
+            <label for="largo_ab"
+              >Largo (mts)<span class="descripcion"
+                ><br />Largo de cada ala, en metros (ej: 3)</span
+              ></label
+            >
+            <input
+              type="number"
+              id="largo_ab"
+              step="0.01"
+              name="largo"
+              placeholder="Ingresa largo en mts (ej: 3)"
+              required
+            />
+            <div id="largo_abError" class="error-message"></div>
+            <label for="ancho_ab"
+              >Ancho (mm)<span class="descripcion"
+                ><br />Ancho de cada ala, en milímetros (ej: 200)</span
+              ></label
+            >
+            <input
+              type="number"
+              id="ancho_ab"
+              step="0.01"
+              name="ancho"
+              placeholder="Ingresa ancho en mm (ej: 200)"
+              required
+            />
+            <div id="ancho_abError" class="error-message"></div>
+            <label for="espesor_ab"
+              >Espesor (mm)<span class="descripcion"
+                ><br />Espesor de las planchas, en milímetros (ej: 8)</span
+              ></label
+            >
+            <input
+              type="number"
+              id="espesor_ab"
+              step="0.01"
+              name="espesor"
+              placeholder="Ingresa espesor en mm (ej: 8)"
+              required
+            />
+            <div id="espesor_abError" class="error-message"></div>
+            <label for="alto_viga"
+              >Alto de la Viga (mm)<span class="descripcion"
+                ><br />Alto total del perfil H, de borde a borde de las alas, en milímetros (ej: 200)</span
+              ></label
+            >
+            <input
+              type="number"
+              id="alto_viga"
+              step="0.01"
+              name="alto_viga"
+              placeholder="Ingresa alto de la viga en mm (ej: 200)"
+              required
+            />
+            <div id="alto_vigaError" class="error-message"></div>
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Alma (plancha C)</legend>
+            <label for="largo_c"
+              >Largo (mts)<span class="descripcion"
+                ><br />Se completa solo: siempre es igual al largo de las alas</span
+              ></label
+            >
+            <input
+              type="number"
+              id="largo_c"
+              step="0.01"
+              name="largo"
+              placeholder="Se calcula automáticamente"
+              readonly
+            />
+            <div id="largo_cError" class="error-message"></div>
+            <label for="ancho_c"
+              >Ancho (mm)<span class="descripcion"
+                ><br />Se calcula solo = Alto de la Viga − 2 × Espesor de las alas (ej: 200 − 2×8 = 184)</span
+              ></label
+            >
+            <input
+              type="number"
+              id="ancho_c"
+              step="0.01"
+              name="ancho"
+              placeholder="Se calcula automáticamente"
+              readonly
+            />
+            <div id="ancho_cError" class="error-message"></div>
+            <label for="espesor_c"
+              >Espesor (mm)<span class="descripcion"
+                ><br />Espesor de la plancha del alma, en milímetros (ej: 8)</span
+              ></label
+            >
+            <input
+              type="number"
+              id="espesor_c"
+              step="0.01"
+              name="espesor"
+              placeholder="Ingresa espesor en mm (ej: 8)"
+              required
+            />
+            <div id="espesor_cError" class="error-message"></div>
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>Peso Específico</legend>
+            <label for="peso_especifico"
+              >Peso Específico del Material<span class="descripcion"
+                ><br />En Ton/m³ (ej: acero = 7.85)</span
+              ></label
+            >
+            <input
+              type="number"
+              id="peso_especifico"
+              step="0.01"
+              name="peso_especifico"
+              placeholder="Ingresa peso específico en Ton/m³"
+              required
+            />
+            <div id="peso_especificoError" class="error-message"></div>
+          </fieldset>
+        </form>
+      </div>
+      <button class="enviar" onclick="calcularVolumenViga()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Peso: <span id="vigaH"></span></p>
+      </div>
+    </div>
+    <div id="procesoViga" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/viga_h-transformed.png"
+        alt="imagen oreja de montaje"
+      />
+    </div>
+    <script src="../assest/js/calculoviga.js"></script>
+  </body>
+</html>

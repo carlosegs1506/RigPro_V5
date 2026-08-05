@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 54 -->
+                    <h3>54) El color de la eslinga determina:</h3>
+                    <label><input type="radio" name="q54" value="a"> a. Su elasticidad.</label>
+                    <label><input type="radio" name="q54" value="b"> b. Su capacidad.</label>
+                    <label><input type="radio" name="q54" value="c"> c. Su largo.</label>
+                    <label><input type="radio" name="q54" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q54', 'b', 'result54')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 54 -->
+                    <div id="result54"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 55 -->
+                    <h3>55) Los estabilizadores deben estar:
+                    </h3>
+                    <label><input type="radio" name="q55" value="a"> a. Minimo 3/4 partes extendidos.</label>
+                    <label><input type="radio" name="q55" value="b"> b. Completamente extendidos.</label>
+                    <label><input type="radio" name="q55" value="c"> c. Completamente retraidos.</label>
+                    <label><input type="radio" name="q55" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q55', 'b', 'result55')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 55 -->
+                    <div id="result55"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 56 -->
+                    <h3>56) El minimo de vueltas que debe quedar en el tambor el winche cuando la pluma esta en su
+                        minima capacidad y maxima altura, al bajar el gancho a nivel del suelo es:
+                    </h3>
+                    <label><input type="radio" name="q56" value="a"> a. 1 vuelta.</label>
+                    <label><input type="radio" name="q56" value="b"> b. 2 vueltas</label>
+                    <label><input type="radio" name="q56" value="c"> c. 3 vueltas.</label>
+                    <label><input type="radio" name="q56" value="d"> d. 4 vueltas.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q56', 'c', 'result56')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 56 -->
+                    <div id="result56"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 57 -->
+                    <h3>57) Que compenente no es parte del tren de potencia del equipo:
+                    </h3>
+                    <label><input type="radio" name="q57" value="a"> a. Motor.</label>
+                    <label><input type="radio" name="q57" value="b"> b. Transmision.</label>
+                    <label><input type="radio" name="q57" value="c"> c. Diferencial.</label>
+                    <label><input type="radio" name="q57" value="d"> d. Paquete de frenos.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q57', 'd', 'result57')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 57 -->
+                    <div id="result57"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 58 -->
+                    <h3>58) Que funcion tiene el sistema anti two lock:
+                    </h3>
+                    <label><input type="radio" name="q58" value="a"> a. Evita el volcamiento de la maquina.</label>
+                    <label><input type="radio" name="q58" value="b"> b. Evita el golpe del gancho contra el
+                        boom.</label>
+                    <label><input type="radio" name="q58" value="c"> c. Evita sobrecargar la pluma.</label>
+                    <label><input type="radio" name="q58" value="d"> d. Permite manejar a distancia el equipo.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q58', 'b', 'result58')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 58 -->
+                    <div id="result58"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 59 -->
+                    <h3>59) Como se llama el sistema que evita que la pluma pase por sobre la cabina:
+                    </h3>
+                    <label><input type="radio" name="q59" value="a"> a. Anti Two lock.</label>
+                    <label><input type="radio" name="q59" value="b"> b. Jaula virtual.</label>
+                    <label><input type="radio" name="q59" value="c"> c. Mando a distancia.</label>
+                    <label><input type="radio" name="q59" value="d"> d. Limite switch.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q59', 'b', 'result59')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 59 -->
+                    <div id="result59"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 60 -->
+                    <h3>60) IWRC significa Centro Independiente del Cable de Acero:
+                    </h3>
+                    <label><input type="radio" name="q60" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q60" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q60', 'a', 'result60')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 60 -->
+                    <div id="result60"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 61 -->
+                    <h3>61) Se pueden presentar situaciones donde el factor del limite de capacidad no está en la tabla
+                        de carga sino en el número de
+                        líneas pasadas a través de la punta del brazo:
+                    </h3>
+                    <label><input type="radio" name="q61" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q61" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q61', 'a', 'result61')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 61 -->
+                    <div id="result61"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 62 -->
+                    <h3>62) Variación de las capacidades no ocurre cuando se mueve la carga desde un cuadrante de
+                        operación a otro en maquinas con tablas de capacidades de levantamiento de frente o de lado:
+                    </h3>
+                    <label><input type="radio" name="q62" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q62" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q62', 'b', 'result62')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 62 -->
+                    <div id="result62"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 63 -->
+                    <h3>63) Situaciones complejas de levantamiento con grúas múltiples todavía requieren una y solamente
+                        una persona para dar las señales, en todas las ocasiones:
+                    </h3>
+                    <label><input type="radio" name="q63" value="a"> a. Verdadero. </label>
+                    <label><input type="radio" name="q63" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q63', 'a', 'result63')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 63 -->
+                    <div id="result63"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 64 -->
+                    <h3>64) El soporte apropiado del terreno es una parte integral del sistema de levantamiento:
+                    </h3>
+                    <label><input type="radio" name="q64" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q64" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q64', 'a', 'result64')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 64 -->
+                    <div id="result64"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>

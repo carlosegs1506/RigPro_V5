@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Cálculo de Peso de una Pieza Triangular</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CÁLCULO PESO DE UNA PIEZA TRIANGULAR</h2>
+      <div class="inputs">
+        <label for="alto"
+          >Alto (mts)<span class="descripcion"
+            ><br />Ej: 0.70</span
+          ></label
+        >
+        <input
+          type="number"
+          id="alto"
+          name="alto"
+          step="any"
+          placeholder="Ingresa alto en mts (ej: 0.70)"
+          required
+        />
+        <div id="altoError" class="error-message"></div>
+
+        <label for="ancho"
+          >Ancho (mts)<span class="descripcion"
+            ><br />Ej: 0.45</span
+          ></label
+        >
+        <input
+          type="number"
+          id="ancho"
+          name="ancho"
+          step="any"
+          placeholder="Ingresa ancho en mts (ej: 0.45)"
+          required
+        />
+        <div id="anchoError" class="error-message"></div>
+
+        <label for="espesor"
+          >Espesor (mm)<span class="descripcion"
+            ><br />Espesor de la plancha, en milímetros (ej: 35)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="espesor"
+          name="espesor"
+          step="any"
+          placeholder="Ingresa espesor en mm (ej: 35)"
+          required
+        />
+        <div id="espesorError" class="error-message"></div>
+
+        <label for="pesoEspecifico"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: acero = 7.85)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="pesoEspecifico"
+          name="pesoEspecifico"
+          step="any"
+          placeholder="Ingresa peso específico en Ton/m3"
+          required
+        />
+        <div id="pesoEspecificoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularPesoTriangulo()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Peso del Rectángulo:
+          <span id="pesoRectanguloResultado"></span>
+        </p>
+        <p>
+          Peso del Triángulo:
+          <span id="pesoTrianguloResultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoTriangulo" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/PiezaTriangulo.png" alt="imagen triangulo" />
+    </div>
+
+    <script src="../assest/js/piezaTriangulo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Carga Segura Estrobo 45° o mas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CAPACIDAD ESTROBOS SEGUN SU DIAMETRO</h2>
+      <div class="inputs">
+        <label for="capacidadEstrobo"
+          >Diámetro del Cable<span class="descripcion"
+            ><br />En pulgadas (ej: 7/8, 1 1/2, 2)</span
+          ></label
+        >
+        <input
+          type="text"
+          id="capacidadEstrobo"
+          step="any"
+          name="capacidad"
+          placeholder="Ingresa pulgadas + fraccion"
+          required
+        />
+        <div id="capacidadError" class="error-message"></div>
+        <label for="amarre">Tipo de Estrobado</label>
+        <select id="amarre">
+          <option value="axial">Axial</option>
+          <option value="lazo">Lazo</option>
+          <option value="canasta">Canasta</option>
+        </select>
+      </div>
+      <button class="enviar" onclick="calcularCapacidad()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Capacidad:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div class="container_todos">
+      <h2>CARGA SEGURA EN ESTROBOS 45° O MAS</h2>
+      <p class="nota-ayuda">
+        Calcula la tensión que soporta cada estrobo cuando el ángulo de
+        izaje es de 45° o mayor, según la relación entre el largo del
+        estrobo y la altura de izaje.
+      </p>
+      <div class="inputs">
+        <label for="angulada"
+          >Carga Vertical por Estrobo<span class="descripcion"
+            ><br />Mitad del peso total de la carga, en Toneladas. Ej: si la
+            carga pesa 2 Ton, ingresa 1</span
+          ></label
+        >
+        <input
+          type="number"
+          id="angulada"
+          name="angulada"
+          step="any"
+          placeholder="Ingresa carga vertical en Ton"
+          required
+        />
+        <div id="anguladaError" class="error-message"></div>
+
+        <label for="largo"
+          >Largo (mts)<span class="descripcion"
+            ><br />Largo real del estrobo, de punta a punta</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo"
+          name="largo"
+          step="any"
+          placeholder="Ingresa largo en mts"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+
+        <label for="altura"
+          >Altura (mts)<span class="descripcion"
+            ><br />Distancia vertical desde el gancho hasta la carga</span
+          ></label
+        >
+        <input
+          type="number"
+          id="altura"
+          name="altura"
+          step="any"
+          placeholder="Ingresa altura en mts"
+          required
+        />
+        <div id="alturaError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="capacidadSegura()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Carga Segura:
+          <span id="capacidadSeguraEstrobo"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="proceso45" class="proceso"></div>
+
+    <script src="../assest/js/capEstrAngulada.js"></script>
+  </body>
+</html>

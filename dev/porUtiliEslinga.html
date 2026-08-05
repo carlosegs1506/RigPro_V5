@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Utilizacion de Eslingas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>ANGULO DE TRABAJO</h2>
+      <p class="nota-ayuda">
+        Calcula el ángulo de la eslinga a partir de dos medidas fáciles de
+        tomar en terreno. Después usa ese resultado en el campo "Angulo" de
+        abajo.
+      </p>
+      <div class="inputs">
+        <label for="radio"
+          >Radio<span class="descripcion"
+            ><br />Distancia horizontal desde el punto de enganche hasta el
+            centro de la carga</span
+          ></label
+        >
+        <input
+          type="number"
+          id="radio"
+          step="any"
+          placeholder="Ingresa radio"
+          name="radio"
+          required
+        />
+        <div id="radioError" class="error-message"></div>
+
+        <label for="largo"
+          >Largo<span class="descripcion"
+            ><br />Largo real de la eslinga, de punta a punta</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo"
+          step="any"
+          placeholder="Ingresa largo"
+          name="largo"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+      </div>
+      <button id="calcularAnguloBtn" class="enviar" onclick="calcularAngulo()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Angulo:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div class="container_todos">
+      <h2>TENSION ESLINGAS</h2>
+      <div class="inputs">
+        <label for="peso">Peso</label>
+        <input
+          type="number"
+          id="peso"
+          step="any"
+          name="peso"
+          placeholder="Ingresa peso"
+          required
+        />
+        <div id="pesoError" class="error-message"></div>
+
+        <label for="numero">Número de Eslingas</label>
+        <input
+          type="number"
+          id="numero"
+          step="any"
+          name="numero"
+          placeholder="Ingresa número de eslingas"
+          required
+        />
+        <div id="numeroError" class="error-message"></div>
+
+        <label for="angulo">Angulo</label>
+        <input
+          type="number"
+          id="angulo"
+          step="any"
+          name="angulo"
+          placeholder="Ingresa angulo"
+          required
+        />
+        <div id="anguloError" class="error-message"></div>
+      </div>
+      <button
+        id="calcularTensionBtn"
+        class="enviar"
+        onclick="calcularTensionEslngas()"
+      >
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Tension:
+          <span id="tensionEslingas"></span>
+        </p>
+      </div>
+    </div>
+
+    <div class="container_todos">
+      <h2>% DE UTILIZACION</h2>
+      <div class="inputs">
+        <label for="tension">Tension Eslinga</label>
+        <input
+          type="number"
+          id="tension"
+          step="any"
+          name="tension"
+          placeholder="Ingresa tension"
+          required
+        />
+        <div id="tensionError" class="error-message"></div>
+
+        <label for="capacidad">Capacidad Eslinga</label>
+        <input
+          type="number"
+          id="capacidad"
+          step="any"
+          name="capacidad"
+          placeholder="Ingresa capacidad"
+          required
+        />
+        <div id="capacidadError" class="error-message"></div>
+      </div>
+      <button
+        id="calcularUtilizacionBtn"
+        class="enviar"
+        onclick="calculoUtilizacionEslingas()"
+      >
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          % Utilizacion:
+          <span id="utilizacionEslingas"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+
+    <script src="../assest/js/porUtiliEslinga.js" defer></script>
+  </body>
+</html>

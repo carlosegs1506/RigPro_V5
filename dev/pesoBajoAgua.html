@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Peso de un Dado Bajo el Agua</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>PESO DE UN DADO BAJO EL AGUA</h2>
+      <p class="nota-ayuda">
+        Calcula el peso real (en el aire) de un dado o bloque sólido, y su
+        peso aparente sumergido en agua (Principio de Arquímedes) — útil para
+        estimar la tensión real de la eslinga al izar una pieza que sale
+        desde el agua (ej: dados de anclaje, rescate de equipos).
+      </p>
+      <div class="inputs">
+        <label for="largo"
+          >Largo (mts)<span class="descripcion"><br />Ej: 1.5</span></label
+        >
+        <input
+          type="number"
+          id="largo"
+          name="largo"
+          step="any"
+          placeholder="Ingresa largo en mts (ej: 1.5)"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+
+        <label for="ancho"
+          >Ancho (mts)<span class="descripcion"><br />Ej: 0.90</span></label
+        >
+        <input
+          type="number"
+          id="ancho"
+          name="ancho"
+          step="any"
+          placeholder="Ingresa ancho en mts (ej: 0.90)"
+          required
+        />
+        <div id="anchoError" class="error-message"></div>
+
+        <label for="alto"
+          >Alto (mts)<span class="descripcion"><br />Ej: 2</span></label
+        >
+        <input
+          type="number"
+          id="alto"
+          name="alto"
+          step="any"
+          placeholder="Ingresa alto en mts (ej: 2)"
+          required
+        />
+        <div id="altoError" class="error-message"></div>
+
+        <label for="pesoEspecifico"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: hormigón = 2.4, acero = 7.85)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="pesoEspecifico"
+          name="pesoEspecifico"
+          step="any"
+          placeholder="Ingresa peso específico en Ton/m³ (ej: 2.4)"
+          required
+        />
+        <div id="pesoEspecificoError" class="error-message"></div>
+
+        <label for="pesoEspecificoAgua"
+          >Peso Específico del Agua<span class="descripcion"
+            ><br />En Ton/m³ (ej: agua dulce = 1.000, agua de mar = 1.025)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="pesoEspecificoAgua"
+          name="pesoEspecificoAgua"
+          step="any"
+          placeholder="Ingresa peso específico del agua (ej: 1.000)"
+          required
+        />
+        <div id="pesoEspecificoAguaError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularPesoBajoAgua()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Volumen: <span id="volumenResultado"></span></p>
+        <p>Peso Real (en el aire): <span id="pesoRealResultado"></span></p>
+        <p>Peso Sumergido: <span id="pesoSumergidoResultado"></span></p>
+      </div>
+    </div>
+
+    <div id="procesoBajoAgua" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/cubo.png" alt="imagen de dado sumergido en agua" />
+    </div>
+
+    <script src="../assest/js/pesoBajoAgua.js"></script>
+  </body>
+</html>

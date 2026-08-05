@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Cálculo Volumen y Peso de una Esfera Vacía</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CÁLCULO VOLUMEN Y PESO DE UNA ESFERA VACÍA</h2>
+      <div class="inputs">
+        <label for="diametro"
+          >Diámetro (mts)<span class="descripcion"
+            ><br />Diámetro exterior de la esfera (ej: 0.50)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diametro"
+          name="diametro"
+          step="any"
+          placeholder="Ingresa diámetro en mts (ej: 0.50)"
+          required
+        />
+        <div id="diametroError" class="error-message"></div>
+
+        <label for="espesor"
+          >Espesor (mm)<span class="descripcion"
+            ><br />Espesor de la pared de la esfera, en milímetros (ej: 30)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="espesor"
+          name="espesor"
+          step="any"
+          placeholder="Ingresa espesor en mm (ej: 30)"
+          required
+        />
+        <div id="espesorError" class="error-message"></div>
+
+        <label for="pesoEspecifico"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Kg/m³, sin puntos (ej: acero = 7850)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="pesoEspecifico"
+          name="pesoEspecifico"
+          step="any"
+          placeholder="Ingresa peso específico en Kg/m3"
+          required
+        />
+        <div id="pesoEspecificoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularVolumenYPeso()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Volumen:
+          <span id="volumenResultado"></span>
+        </p>
+        <p>
+          Peso:
+          <span id="pesoResultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoEsfera" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/EsferaVacia.png" alt="imagen esfera vacía" />
+    </div>
+
+    <script src="../assest/js/esferaVacia.js"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Capacidad Eslinga Segun Sus Capas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="../dev/principal.html">Regresar</a></button>
+            <img class="imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CAPACIDAD ESLINGAS SEGUN SUS CAPAS</h2>
+        <div class="inputs">
+            <label for="color">Selecciona el Color de la Eslinga</label>
+            <select id="color">
+                <option value="violeta">Violeta (1 pulgada)</option>
+                <option value="verde">Verde (2 pulgadas)</option>
+                <option value="amarillo">Amarillo (3 pulgadas)</option>
+                <option value="gris">Gris (4 pulgadas)</option>
+                <option value="rojo">Rojo (5 pulgadas)</option>
+                <option value="cafe">Café (6 pulgadas)</option>
+                <option value="azul">Azul (8 pulgadas)</option>
+                <option value="naranja_10">Naranja (10 pulgadas)</option>
+                <option value="naranja_12">Naranja (12 pulgadas)</option>
+            </select>
+            <label for="capas">Selecciona el Número de Capas</label>
+            <select id="capas">
+                <option value="1">1 capa</option>
+                <option value="2">2 capas</option>
+                <option value="3">3 capas</option>
+                <option value="4">4 capas</option>
+            </select>
+            <label for="amarre">Tipo de Estrobado</label>
+            <select id="amarre">
+                <option value="axial">Axial</option>
+                <option value="lazo">Lazo</option>
+                <option value="canasta">Canasta</option>
+            </select>
+
+        </div>
+
+        <button class="enviar" onclick="calcularCapacidad()"><span class="span">Calcular</span></button>
+        <div class="result">
+            <p>Capacidad:
+                <span id="resultado"></span>
+            </p>
+        </div>
+
+        <script src="../assest/js/capacidadEslingasSegunSusCapas.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Calculo Resistencia Eslinga Sintetica</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>RESISTENCIA ESLINGA SINTETICA</h2>
+      <div class="inputs">
+        <label for="resistenciaRotura"
+          >Resistencia a la Rotura (RR)<span class="descripcion"
+            ><br />Carga de ruptura de la eslinga, en Kg o Ton</span
+          ></label
+        >
+        <input
+          type="number"
+          id="resistenciaRotura"
+          step="any"
+          placeholder="Ingresa resistencia a la rotura"
+          name="resistenciaRotura"
+          required
+        />
+        <div id="resistenciaRoturaError" class="error-message"></div>
+
+        <label for="factorSeguridad"
+          >Factor de Seguridad (FS)<span class="descripcion"
+            ><br />Ej: 5 (habitual en eslingas sintéticas)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="factorSeguridad"
+          step="any"
+          placeholder="Ingresa factor de seguridad"
+          name="factorSeguridad"
+          required
+        />
+        <div id="factorSeguridadError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularResistenciaEslinga()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          CMT (Capacidad Máxima de Trabajo):
+          <span id="resistenciaEslinga"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoResistencia" class="proceso"></div>
+
+    <script src="../assest/js/calResistenciaEslSintetica.js"></script>
+  </body>
+</html>

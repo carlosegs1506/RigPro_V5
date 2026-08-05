@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Angulo de Trabajo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>ÁNGULO DE TRABAJO</h2>
+      <div class="inputs">
+        <label for="radio"
+          >Radio<span class="descripcion"
+            ><br />Distancia horizontal desde el centro de giro hasta el
+            punto de trabajo</span
+          ></label
+        >
+        <input
+          type="number"
+          id="radio"
+          step="any"
+          placeholder="Ingresa radio"
+          name="radio"
+          required
+        />
+        <div id="radioError" class="error-message"></div>
+
+        <label for="largo">Largo</label>
+        <input
+          type="number"
+          id="largo"
+          step="any"
+          placeholder="Ingresa largo"
+          name="largo"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+      </div>
+      <button class="enviar">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Angulo:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="proceso" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/angulo.png"
+        alt="imagen altura de trabajo"
+      />
+    </div>
+
+    <script src="../assest/js/angulo.js" defer></script>
+  </body>
+</html>

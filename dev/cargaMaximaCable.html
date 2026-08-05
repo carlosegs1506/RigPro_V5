@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Carga Máxima de Trabajo Cable</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CARGA MÁXIMA DE TRABAJO CABLES ACERO</h2>
+      <div class="inputs">
+        <label for="esfuerzo"
+          >Esfuerzo de Ruptura (MBL)<span class="descripcion"
+            ><br />Carga de ruptura del cable, en Kg</span
+          ></label
+        >
+        <input
+          type="number"
+          id="esfuerzo"
+          step="any"
+          placeholder="Ingresa esfuerzo de ruptura en Kg"
+          name="esfuerzo"
+          required
+        />
+        <div id="esfuerzoError" class="error-message"></div>
+
+        <label for="factor"
+          >Factor de Seguridad<span class="descripcion"
+            ><br />Ej: 5 (habitual en cables de acero)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="factor"
+          step="any"
+          placeholder="Ingresa factor de seguridad"
+          name="factor"
+          required
+        />
+        <div id="factorError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="cargaMaxima()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Carga Máxima de Trabajo: <span id="resultado"></span></p>
+      </div>
+    </div>
+
+    <div id="procesoCarga" class="proceso"></div>
+
+    <script src="../assest/js/cargaMaximaCable.js"></script>
+  </body>
+</html>

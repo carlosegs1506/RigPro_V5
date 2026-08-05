@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Distancia Mínima a Líneas Eléctricas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>DISTANCIA MÍNIMA DE SEGURIDAD A LÍNEAS ELÉCTRICAS</h2>
+      <p class="nota-ayuda">
+        Distancia mínima que debe mantener cualquier parte de la grúa, pluma
+        o carga respecto a líneas eléctricas energizadas, según el voltaje de
+        la línea y si la grúa está operando (fija) o en movimiento (con pluma
+        o mástil desplazándose). Fuente: tabla de referencia Torque
+        Capacitaciones / norma ASME B30.5.
+      </p>
+      <div class="inputs">
+        <label for="voltaje"
+          >Voltaje de la Línea (kV)<span class="descripcion"
+            ><br />Consulta a la compañía eléctrica si no lo conoces (ej:
+            100)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="voltaje"
+          step="any"
+          placeholder="Ingresa el voltaje en kV (ej: 100)"
+          required
+        />
+        <div id="voltajeError" class="error-message"></div>
+
+        <label for="categoria"
+          >Situación de la Grúa<span class="descripcion"
+            ><br />"Operando" = grúa fija trabajando cerca de la línea.
+            "En movimiento" = grúa desplazándose con pluma o mástil
+            inclinado/en tránsito</span
+          ></label
+        >
+        <select id="categoria">
+          <option value="operando">Operando (grúa fija)</option>
+          <option value="movimiento">En movimiento (pluma/mástil)</option>
+        </select>
+      </div>
+      <button class="enviar" onclick="calcularDistanciaLinea()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Distancia Mínima Requerida: <span id="resultado"></span></p>
+      </div>
+    </div>
+
+    <div id="procesoDistancia" class="proceso"></div>
+
+    <script src="../assest/js/distanciaLineasElectricas.js"></script>
+  </body>
+</html>

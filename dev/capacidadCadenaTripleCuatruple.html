@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <title>Capacidad Cadenas</title>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CAPACIDAD DE CADENAS 3 y 4 RAMALES</h2>
+
+      <div class="inputs">
+        <label for="cargaMaxima"
+          >Carga Máxima de Trabajo por Ramal (Kg)<span class="descripcion"
+            ><br />Capacidad nominal de UN solo ramal en posición vertical (axial), según su tabla de carga</span
+          ></label
+        >
+        <input
+          type="number"
+          id="cargaMaxima"
+          name="cargaMaxima"
+          placeholder="Ingresa carga máxima en Kg"
+        />
+        <div id="cargaError" class="error-message"></div>
+
+        <label for="altura"
+          >Altura (m)<span class="descripcion"
+            ><br />Distancia vertical desde el gancho hasta la carga</span
+          ></label
+        >
+        <input
+          type="number"
+          id="altura"
+          name="altura"
+          placeholder="Ingresa altura en mts"
+        />
+        <div id="alturaError" class="error-message"></div>
+
+        <label for="largo"
+          >Largo del Ramal (m)<span class="descripcion"
+            ><br />Largo de una sola cadena, desde el gancho hasta el
+            enganche (misma unidad que la Altura)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo"
+          name="largo"
+          placeholder="Ingresa largo en mts"
+        />
+        <div id="largoError" class="error-message"></div>
+
+        <label for="eslingas"
+          >Número de Eslingas<span class="descripcion"
+            ><br />Cantidad de ramales de la maniobra</span
+          ></label
+        >
+        <select id="eslingas">
+          <option value="3">3 Eslingas</option>
+          <option value="4">4 Eslingas</option>
+        </select>
+      </div>
+
+      <button class="enviar" onclick="calcularCapacidad()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Capacidad:
+          <span id="result"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoCadenas" class="proceso"></div>
+    <script src="../assest/js/capacidadCadenaTripleCuatruple.js"></script>
+  </body>
+</html>

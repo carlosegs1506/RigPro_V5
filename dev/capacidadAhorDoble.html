@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Capacidad Lazo Doble</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <style>
+      .info-nota {
+        background-color: #fff8e6;
+        border-left: 4px solid #e6a817;
+        padding: 10px 14px;
+        margin: 10px 0;
+        font-size: 0.9em;
+        line-height: 1.4;
+        text-align: left;
+      }
+      .info-nota p {
+        margin: 6px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>ÁNGULO DE TRABAJO</h2>
+      <div class="inputs">
+        <label for="radio">Radio:</label>
+        <input
+          type="number"
+          id="radio"
+          step="any"
+          placeholder="Ingresa radio"
+          name="radio"
+          required
+        />
+        <div id="radioError" class="error-message"></div>
+
+        <label for="largo">Largo:</label>
+        <input
+          type="number"
+          id="largo"
+          step="any"
+          placeholder="Ingresa largo"
+          name="largo"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularAngulo()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Angulo:
+          <span id="resultadoAngulo"></span>
+        </p>
+      </div>
+    </div>
+
+    <div class="container_todos">
+      <h2>UNIDADES DE MEDIDA Y PESO</h2>
+      <br />
+      <div class="inputs">
+        <label for="unidadesOrigen">Seleccione la unidad de origen:</label>
+        <select id="unidadesOrigen" title="Unidad de Origen">
+          <option value="milimetros">Milímetros</option>
+          <option value="centimetros">Centímetros</option>
+          <option value="metros">Metros</option>
+          <option value="pies">Pies</option>
+          <option value="pulgadas">Pulgadas</option>
+          <option value="libras">Libras</option>
+          <option value="kilogramos">Kilogramos</option>
+        </select>
+        <br />
+        <label for="valor">Ingrese el valor a convertir:</label>
+        <input
+          type="number"
+          id="valor"
+          name="valor"
+          placeholder="Ingrese el valor"
+          step="any"
+          required
+          title="Valor a convertir"
+        />
+        <div id="valorError" class="error-message"></div>
+        <br />
+        <label for="unidadesDestino">Seleccione la unidad de destino:</label>
+        <select id="unidadesDestino" title="Unidad de Destino">
+          <option value="metros">Metros</option>
+          <option value="milimetros">Milímetros</option>
+          <option value="centimetros">Centímetros</option>
+          <option value="pies">Pies</option>
+          <option value="libras">Libras</option>
+          <option value="pulgadas">Pulgadas</option>
+          <option value="kilogramos">Kilogramos</option>
+          <option value="toneladas">Toneladas</option>
+        </select>
+        <br />
+        <label for="resultado">Resultado:</label>
+        <input type="text" id="resultado" readonly title="Resultado" />
+      </div>
+
+      <button class="enviar" onclick="convertirUnidades()">
+        <span class="span">Convertir</span>
+      </button>
+    </div>
+
+    <div class="container_todos">
+      <h2>CAPACIDAD MANIOBRA LAZO DOBLE</h2>
+      <div class="inputs">
+        <label for="diametro">Diametro Elemento(Cañeria, Tubo)</label>
+        <input
+          type="number"
+          id="diametro"
+          step="any"
+          placeholder="Ingresa diametro en mts"
+          name="diametro"
+          required
+        />
+        <div id="diametroError" class="error-message"></div>
+
+        <label for="largo1">Largo Maniobra</label>
+        <input
+          type="number"
+          id="largo1"
+          step="any"
+          placeholder="Ingresa largo en mts"
+          name="largo"
+          required
+        />
+        <div id="largo1Error" class="error-message"></div>
+
+        <label for="radio1">Radio Maniobra</label>
+        <input
+          type="number"
+          id="radio1"
+          step="any"
+          placeholder="Ingresa radio en mts"
+          name="radio"
+          required
+        />
+        <div id="radio1Error" class="error-message"></div>
+
+        <label for="capacidad">Capacidad Axial de 1 Eslinga/Estrobo</label>
+        <input
+          type="number"
+          id="capacidad"
+          step="any"
+          placeholder="Ingresa capacidad de un ramal (Kg)"
+          name="capacidad"
+          required
+        />
+        <div id="capacidadError" class="error-message"></div>
+
+        <label for="angulo">Ángulo de Estrangulación (válido 120°-180°)</label>
+        <input
+          type="number"
+          id="angulo"
+          step="any"
+          placeholder="Ingresa el ángulo de la vuelta/ahorcado"
+          name="angulo"
+          required
+        />
+        <div id="anguloError" class="error-message"></div>
+
+        <div class="info-nota">
+          <p>
+            <strong>¿Qué es este ángulo?</strong> No es el ángulo de trabajo
+            (el que forman los ramales en el gancho, calculado arriba con
+            radio/largo). Es el ángulo que forma la eslinga en el punto
+            donde se dobla sobre sí misma para ahorcar la cañería/tubo. Se
+            mide en terreno con transportador, comparando visualmente el
+            doblez.
+          </p>
+          <p>
+            <strong>¿Por qué el rango 120°-180°?</strong> Mientras más
+            cerrado el doblez (ángulo más chico), mayor es la tensión sobre
+            las fibras exteriores de la eslinga y mayor la pérdida real de
+            capacidad. El factor de reducción del 75% que usa esta
+            calculadora solo es válido dentro de ese rango (Manual del
+            Rigger, pág. 70). Por debajo de 120° la pérdida real puede ser
+            mayor al 25% y el resultado de "Capacidad Real" deja de ser
+            confiable.
+          </p>
+          <p>
+            <strong>Salvedad de terreno:</strong> en la práctica, el
+            ángulo de estrangulación casi nunca se mide con decimales
+            exactos — se estima al ojo comparando con los ángulos
+            "redondos" más comunes: <strong>120°, 135°, 150°, 165° y
+            180°</strong>. Si tu medición en terreno da un valor
+            intermedio, es válido aproximarlo al más cercano de esta
+            lista antes de calcular.
+          </p>
+        </div>
+      </div>
+      <button class="enviar" onclick="calculoTensionAhorcadoDoble()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Capacidad Bruta (sin reducción 75%):
+          <span id="capacidadBrutaAhorcadoDoble"></span>
+        </p>
+        <p>
+          Capacidad Real (con reducción 75%):
+          <span id="capacidadRealAhorcadoDoble"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoAhorcado" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/lazo doble.png" alt="imagen altura de trabajo" />
+    </div>
+
+    <script src="../assest/js/angulo.js"></script>
+    <script src="../assest/js/unidadesMasaYPeso.js"></script>
+    <script src="../assest/js/capacidadAhorDoble.js"></script>
+  </body>
+</html>

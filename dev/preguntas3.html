@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 32 -->
+                    <h3>32) Que norma ASME hace referencia a la inspeccion de ganchos :</h3>
+                    <label><input type="radio" name="q32" value="a"> a. B30.10.</label>
+                    <label><input type="radio" name="q32" value="b"> b. B30.26.</label>
+                    <label><input type="radio" name="q32" value="c"> c. B30.9.</label>
+                    <label><input type="radio" name="q32" value="d"> d. B30.5.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q32', 'a', 'result32')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 32 -->
+                    <div id="result32"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 33 -->
+                    <h3>33) Cuando se realiza un izaje con una eslinga de 4 ramales se debe considerar un capacidad de:
+                    </h3>
+                    <label><input type="radio" name="q33" value="a"> a. 1 eslinga.</label>
+                    <label><input type="radio" name="q33" value="b"> b. 2 eslingas para el esfuerzo y dos para el
+                        equilibrio.</label>
+                    <label><input type="radio" name="q33" value="c"> c. Las cuatro eslingas con carga uniformemente
+                        distribuidas.</label>
+                    <label><input type="radio" name="q33" value="d"> d. 3 eslingas.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q33', 'b', 'result33')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 33 -->
+                    <div id="result33"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 34 -->
+                    <h3>34) En un enganche en U, que capacidad tiene en funcion de uno axial:
+                    </h3>
+                    <label><input type="radio" name="q34" value="a"> a. 25%.</label>
+                    <label><input type="radio" name="q34" value="b"> b. 55%.</label>
+                    <label><input type="radio" name="q34" value="c"> c. 100%.</label>
+                    <label><input type="radio" name="q34" value="d"> d. 200%.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q34', 'd', 'result34')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 34 -->
+                    <div id="result34"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 35 -->
+                    <h3>35) Si una eslinga tiene WLL de 15.1 ton, y su factor de seguridad es 4:1, cual es su carga de
+                        ruptura:
+                    </h3>
+                    <label><input type="radio" name="q35" value="a"> a. 56.4 ton.</label>
+                    <label><input type="radio" name="q35" value="b"> b. 60.4 ton.</label>
+                    <label><input type="radio" name="q35" value="c"> c. 55.4 ton.</label>
+                    <label><input type="radio" name="q35" value="d"> d. 14.1 ton.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q35', 'b', 'result35')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 35 -->
+                    <div id="result35"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 36 -->
+                    <h3>36) A que se refiere el termino de carga bruta:
+                    </h3>
+                    <label><input type="radio" name="q36" value="a"> a. Al peso de los accesorios de izaje.</label>
+                    <label><input type="radio" name="q36" value="b"> b. Al peso de la carga.</label>
+                    <label><input type="radio" name="q36" value="c"> c. Al peso de carga, los accesorios, moton y el
+                        gancho.</label>
+                    <label><input type="radio" name="q36" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q36', 'c', 'result36')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 36 -->
+                    <div id="result36"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 37 -->
+                    <h3>37) Un cable de acero esta constituido por:
+                    </h3>
+                    <label><input type="radio" name="q37" value="a"> a. El alma o nucleo, y dos alambres.</label>
+                    <label><input type="radio" name="q37" value="b"> b. El alma y toron.</label>
+                    <label><input type="radio" name="q37" value="c"> c. El alma, toron y alambres.</label>
+                    <label><input type="radio" name="q37" value="d"> d. Toron y alambres.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q37', 'c', 'result37')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 37 -->
+                    <div id="result37"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 38 -->
+                    <h3>38) En un enganche realizado con dos eslingas en 45°, se tiene una capacidad total de:
+                    </h3>
+                    <label><input type="radio" name="q38" value="a"> a. 35% de una vertical.</label>
+                    <label><input type="radio" name="q38" value="b"> b. 65% de una vertical.</label>
+                    <label><input type="radio" name="q38" value="c"> c. 120% de una vertical.</label>
+                    <label><input type="radio" name="q38" value="d"> d. 140% de una vertical.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q38', 'd', 'result38')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 38 -->
+                    <div id="result38"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 39 -->
+                    <h3>39) Un enganche realizado con dos eslingas en 60°, sobre la horizontal de la carga, cual es la
+                        capacidad en % de la eslinga:
+                    </h3>
+                    <label><input type="radio" name="q39" value="a"> a. 86%.</label>
+                    <label><input type="radio" name="q39" value="b"> b. 90%.</label>
+                    <label><input type="radio" name="q39" value="c"> c. 50%.</label>
+                    <label><input type="radio" name="q39" value="d"> d. 100%.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q39', 'a', 'result39')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 39 -->
+                    <div id="result39"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 40 -->
+                    <h3>40) Cuantos alambres cortados de un estrobo de acero, permite la norma ASME B30.9:
+                    </h3>
+                    <label><input type="radio" name="q40" value="a"> a. 2 alambres en un toron y 5 en un paso.</label>
+                    <label><input type="radio" name="q40" value="b"> b. 4 alambres en un toron y 6 en un paso.</label>
+                    <label><input type="radio" name="q40" value="c"> c. 5 alambres en un toron y 10 en un paso.</label>
+                    <label><input type="radio" name="q40" value="d"> d. 7 alambres en un toron y 14 en un paso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q40', 'c', 'result40')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 40 -->
+                    <div id="result40"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 41 -->
+                    <h3>41) Un enganche tipo U invertida, se puede emplear cuando:
+                    </h3>
+                    <label><input type="radio" name="q41" value="a"> a. Cuando se emplean grilletes con 25% superior a
+                        la capacidad de enganche. </label>
+                    <label><input type="radio" name="q41" value="b"> b. Solo se debe emplear con eslingas de
+                        acero.</label>
+                    <label><input type="radio" name="q41" value="c"> c. Solo se debe emplear con eslingas sinteticas.
+                    </label>
+                    <label><input type="radio" name="q41" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q41', 'a', 'result41')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 41 -->
+                    <div id="result41"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 42 -->
+                    <h3>42) Cuantos alambres rotos se permiten segun la norma ASME B30.9, en cables de eslingas
+                        trenzados hasta en 8 pares:
+                    </h3>
+                    <label><input type="radio" name="q42" value="a"> a. 14 alambres por trenza.</label>
+                    <label><input type="radio" name="q42" value="b"> b. 20 alambres por trenza.</label>
+                    <label><input type="radio" name="q42" value="c"> c. 22 alambres ppor trenza.
+                    </label>
+                    <label><input type="radio" name="q42" value="d"> d. 30 alambres por trenza.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q42', 'b', 'result42')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 42 -->
+                    <div id="result42"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>
+
+</html>

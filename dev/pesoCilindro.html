@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Peso de un Cilindro</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>PESO DE UN CILINDRO MACIZO</h2>
+      <p class="nota-ayuda">
+        Todas las medidas en metros. El Diámetro es lo que mides directo con
+        huincha o pie de metro (de borde a borde, pasando por el centro).
+      </p>
+      <div class="inputs">
+        <label for="diametro">Diámetro</label>
+        <input
+          type="number"
+          id="diametro"
+          step="any"
+          name="diametro"
+          placeholder="Ingresa diámetro en mts"
+          required
+        />
+        <div id="diametroError" class="error-message"></div>
+
+        <label for="longitud">Longitud</label>
+        <input
+          type="number"
+          id="longitud"
+          step="any"
+          name="longitud"
+          placeholder="Ingresa longitud en mts"
+          required
+        />
+        <div id="longitudError" class="error-message"></div>
+
+        <label for="peso"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: acero = 7.85)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="peso"
+          step="any"
+          name="peso"
+          placeholder="Ingresa peso específico en Ton/m3"
+          required
+        />
+        <div id="pesoError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularCilindro()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Peso:
+          <span id="calcularC"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/cilindro_1-transformed.png"
+        alt="imagen altura de trabajo"
+      />
+    </div>
+
+    <script src="../assest/js/pesoCilindro.js"></script>
+  </body>
+</html>

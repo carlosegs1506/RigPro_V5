@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>RigPro</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050503" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/png" href="./assest/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="./assest/icons/icon-192.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assest/css/style.css" />
+  </head>
+
+  <body>
+    <header class="principal">
+      <!-- <span class="imagen-wrap"><img class="imagen" src="./assest/img/logo1.png" /></span> -->
+      <h1 class="">TU HERRAMIENTA DE RIGGING</h1>
+    </header>
+    <main class="container">
+      <!-- <button ><a href="./dev/index_en.html">Ingles</a></button> -->
+      <button ><a href="./dev/index_es.html">Ingresar</a></button>
+      <div class="button principal">
+        <img src="./assest/img/grua1_negro.png" alt="grúa" />
+      </div>
+    </main>
+
+    <footer class="primario">
+      <h3>Desarrollado por Carlos González</h3>
+      <p>© 2026 RigPro · <a href="./dev/politicaPrivacidad.html">Política de Privacidad</a></p>
+    </footer>
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./service-worker.js");
+        });
+      }
+    </script>
+
+  </body>
+</html>

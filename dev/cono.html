@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculo de peso de cono</title>
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <script src="../assest/js/cono.js"></script>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+    <div class="container_todos">
+      <h2>CALCULO PESO CONO TRONCADO</h2>
+      <div class="inputs">
+        <label for="alto">Altura</label>
+        <input
+          type="number"
+          id="alto"
+          step="any"
+          name="alto"
+          placeholder="Ingresa altura en mts"
+          required
+        />
+        <div id="altoError" class="error-message"></div>
+        <label for="diametro_superior">Diámetro Superior</label>
+        <input
+          type="number"
+          id="diametro_superior"
+          step="any"
+          name="diametro_superior"
+          placeholder="Ingresa diámetro superior en mts"
+          required
+        />
+        <div id="diametro_superiorError" class="error-message"></div>
+        <label for="diametro_inferior">Diámetro Inferior</label>
+        <input
+          type="number"
+          id="diametro_inferior"
+          step="any"
+          name="diametro_inferior"
+          placeholder="Ingresa diámetro inferior en mts"
+          required
+        />
+        <div id="diametro_inferiorError" class="error-message"></div>
+        <label for="peso_material"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: acero = 7.85)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="peso_material"
+          step="any"
+          name="peso_material"
+          placeholder="Ingresa peso específico en Toneladas por metro cúbico"
+          required
+        />
+        <div id="peso_materialError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calculoCono()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Peso:
+          <span id="cono"></span>
+        </p>
+      </div>
+    </div>
+    <div id="procesoCono" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/cono truncado.png" alt="imagen de cono" />
+    </div>
+  </body>
+</html>

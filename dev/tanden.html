@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Tensión Tándem</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>TÁNDEM</h2>
+      <div class="inputs">
+        <label
+          >Ingresa los valores para calcular la tensión con estrobada inicial
+          pareja:</label
+        >
+        <form id="tensionForm">
+          <label for="peso"
+            >Peso de la Carga (Ton)<span class="descripcion"
+              ><br />Peso total de la pieza, en toneladas</span
+            ></label
+          >
+          <input
+            type="number"
+            id="peso"
+            placeholder="Ingresa peso en Ton"
+            step="any"
+            required
+          />
+          <div id="pesoError" class="error-message"></div>
+
+          <label for="d1"
+            >D1 (m)<span class="descripcion"
+              ><br />Distancia desde el centro de la carga (CG) hasta el
+              punto de izaje IZQUIERDO</span
+            ></label
+          >
+          <input
+            type="number"
+            id="d1"
+            placeholder="Ingresa D1 en mts"
+            step="any"
+            required
+          />
+          <div id="d1Error" class="error-message"></div>
+
+          <label for="d2"
+            >D2 (m)<span class="descripcion"
+              ><br />Distancia desde el centro de la carga (CG) hasta el
+              punto de izaje DERECHO</span
+            ></label
+          >
+          <input
+            type="number"
+            id="d2"
+            placeholder="Ingresa D2 en mts"
+            step="any"
+            required
+          />
+          <div id="d2Error" class="error-message"></div>
+
+          <label for="d3"
+            >D3 (m)<span class="descripcion"
+              ><br />Excentricidad vertical de la carga — ver dibujo</span
+            ></label
+          >
+          <input
+            type="number"
+            id="d3"
+            placeholder="Ingresa D3 en mts"
+            step="any"
+            required
+          />
+          <div id="d3Error" class="error-message"></div>
+
+          <label for="angulo"
+            >Ángulo (grados)<span class="descripcion"
+              ><br />Ángulo de inclinación de la pieza respecto a la horizontal — ver dibujo</span
+            ></label
+          >
+          <input
+            type="number"
+            id="angulo"
+            placeholder="Ingresa ángulo en grados"
+            step="any"
+            required
+          />
+          <div id="anguloError" class="error-message"></div>
+        </form>
+      </div>
+
+      <button class="tanden" onclick="calcularTension()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p id="resultado"></p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/tandem.png" alt="imagen oreja de montaje" />
+    </div>
+
+    <script src="../assest/js/tanden.js"></script>
+  </body>
+</html>

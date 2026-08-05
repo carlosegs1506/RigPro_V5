@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Calculo Barra de Fierro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>UNIDADES DE MEDIDA Y PESO</h2>
+      <br />
+      <div class="inputs">
+        <label for="unidadesOrigen">Seleccione la unidad de origen:</label>
+        <select id="unidadesOrigen" title="Unidad de Origen">
+          <option value="milimetros">Milímetros</option>
+          <option value="centimetros">Centímetros</option>
+          <option value="metros">Metros</option>
+          <option value="pies">Pies</option>
+          <option value="pulgadas">Pulgadas</option>
+          <option value="libras">Libras</option>
+          <option value="kilogramos">Kilogramos</option>
+        </select>
+        <br />
+        <label for="valor">Ingrese el valor a convertir:</label>
+        <input
+          type="number"
+          id="valor"
+          name="valor"
+          placeholder="Ingrese el valor"
+          step="any"
+          required
+          title="Valor a convertir"
+        />
+        <div id="valorError" class="error-message"></div>
+        <br />
+        <label for="unidadesDestino">Seleccione la unidad de destino:</label>
+        <select id="unidadesDestino" title="Unidad de Destino">
+          <option value="metros">Metros</option>
+          <option value="milimetros">Milímetros</option>
+          <option value="centimetros">Centímetros</option>
+          <option value="pies">Pies</option>
+          <option value="libras">Libras</option>
+          <option value="pulgadas">Pulgadas</option>
+          <option value="kilogramos">Kilogramos</option>
+          <option value="toneladas">Toneladas</option>
+        </select>
+        <br />
+        <label for="resultado">Resultado:</label>
+        <input type="text" id="resultado" readonly title="Resultado" />
+      </div>
+
+      <button class="enviar" onclick="convertirUnidades()">
+        <span class="span">Convertir</span>
+      </button>
+    </div>
+
+    <div class="container_todos">
+      <h2>BARRA DE CONSTRUCCION</h2>
+      <div class="inputs">
+        <label for="diametro"
+          >Diámetro (mm)<span class="descripcion"
+            ><br />Diámetro nominal de la barra, en milímetros (ej: 8, 10, 12, 16, 22, 36)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diametro"
+          name="diametro"
+          placeholder="Ingresa diámetro en mm (ej: 12)"
+          required
+        />
+        <div id="diametroError" class="error-message"></div>
+
+        <label for="largo"
+          >Largo (mts)<span class="descripcion"
+            ><br />Largo total de la barra, en metros (ej: D=36mm y L=12mts → 95.9 Kg)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo"
+          name="largo"
+          placeholder="Ingresa largo en mts (ej: 12)"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calculoBarraFierro()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Peso:
+          <span id="barraFierro"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoBarra" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/barra_de_fierro-transformed.png"
+        alt="imagen oreja de montaje"
+      />
+    </div>
+
+    <script src="../assest/js/unidadesMasaYPeso.js"></script>
+    <script src="../assest/js/barraFierro.js"></script>
+  </body>
+</html>

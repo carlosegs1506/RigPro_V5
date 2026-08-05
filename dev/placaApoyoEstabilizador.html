@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Placa de Apoyo para Estabilizadores</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>PLACA DE APOYO PARA ESTABILIZADORES</h2>
+      <p class="nota-ayuda">
+        Calcula el tamaño mínimo de la placa de apoyo (madera, acero o
+        "crib mat") necesaria bajo cada pata estabilizadora de la grúa, para
+        que la presión transmitida al suelo no exceda su capacidad portante
+        y evitar hundimientos o vuelco.
+      </p>
+      <div class="inputs">
+        <label for="carga"
+          >Carga sobre el Estabilizador (Ton)<span class="descripcion"
+            ><br />Carga máxima que transmite esa pata al suelo, según la
+            tabla de cargas del fabricante de la grúa (ej: 10)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="carga"
+          step="any"
+          placeholder="Ingresa la carga en Ton (ej: 10)"
+          required
+        />
+        <div id="cargaError" class="error-message"></div>
+
+        <label for="capacidadPortante"
+          >Capacidad Portante del Suelo (Ton/m²)<span class="descripcion"
+            ><br />Consulta un estudio de suelo si existe. Referencia: suelo
+            blando ~2-5, suelo compactado ~5-10, hormigón ~20 (ej: 5)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="capacidadPortante"
+          step="any"
+          placeholder="Ingresa la capacidad portante en Ton/m² (ej: 5)"
+          required
+        />
+        <div id="capacidadPortanteError" class="error-message"></div>
+
+        <label for="factorSeguridad"
+          >Factor de Seguridad (opcional)<span class="descripcion"
+            ><br />Por defecto 1.5. Usa un valor mayor si la capacidad
+            portante del suelo es incierta</span
+          ></label
+        >
+        <input
+          type="number"
+          id="factorSeguridad"
+          step="any"
+          placeholder="Ej: 1.5 (opcional)"
+        />
+        <div id="factorSeguridadError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularPlacaApoyo()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Área Mínima de la Placa: <span id="resultado"></span></p>
+      </div>
+    </div>
+
+    <div id="procesoPlaca" class="proceso"></div>
+
+    <script src="../assest/js/placaApoyoEstabilizador.js"></script>
+  </body>
+</html>

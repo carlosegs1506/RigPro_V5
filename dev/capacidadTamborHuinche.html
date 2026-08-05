@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Capacidad de Tambor de Huinche</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CAPACIDAD DE TAMBOR DE HUINCHE</h2>
+      <p class="nota-ayuda">
+        Estima cuántos metros de cable de acero caben enrollados en un
+        tambor de huinche/malacate, según sus dimensiones y el diámetro del
+        cable. Útil para verificar si un cable de cierto largo cabrá en el
+        tambor antes de instalarlo.
+      </p>
+      <div class="inputs">
+        <label for="nucleo"
+          >Diámetro del Núcleo (mm)<span class="descripcion"
+            ><br />Diámetro del tambor sin cable enrollado (ej: 300)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="nucleo"
+          step="any"
+          placeholder="Ingresa el núcleo en mm (ej: 300)"
+          required
+        />
+        <div id="nucleoError" class="error-message"></div>
+
+        <label for="brida"
+          >Diámetro de la Brida (mm)<span class="descripcion"
+            ><br />Diámetro máximo de las bridas/discos laterales del tambor
+            (ej: 600)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="brida"
+          step="any"
+          placeholder="Ingresa la brida en mm (ej: 600)"
+          required
+        />
+        <div id="bridaError" class="error-message"></div>
+
+        <label for="ancho"
+          >Ancho del Tambor (mm)<span class="descripcion"
+            ><br />Distancia entre las bridas, disponible para enrollar el
+            cable (ej: 800)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="ancho"
+          step="any"
+          placeholder="Ingresa el ancho en mm (ej: 800)"
+          required
+        />
+        <div id="anchoError" class="error-message"></div>
+
+        <label for="diametroCable"
+          >Diámetro del Cable (mm)<span class="descripcion"
+            ><br />Diámetro nominal del cable de acero a enrollar (ej:
+            16)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diametroCable"
+          step="any"
+          placeholder="Ingresa el diámetro del cable en mm (ej: 16)"
+          required
+        />
+        <div id="diametroCableError" class="error-message"></div>
+
+        <label for="factorEficiencia"
+          >Factor de Eficiencia % (opcional)<span class="descripcion"
+            ><br />Por defecto 80% (espacios entre vueltas). Déjalo vacío
+            para usar el valor por defecto</span
+          ></label
+        >
+        <input
+          type="number"
+          id="factorEficiencia"
+          step="any"
+          placeholder="Ej: 80 (opcional)"
+        />
+        <div id="factorEficienciaError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularCapacidadTambor()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Capacidad de Cable: <span id="resultado"></span></p>
+      </div>
+    </div>
+
+    <div id="procesoTambor" class="proceso"></div>
+
+    <script src="../assest/js/capacidadTamborHuinche.js"></script>
+  </body>
+</html>

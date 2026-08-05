@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 21 -->
+                    <h3>21) Cual sera la tension de eslingas para una maniobra con brazos desiguales, peso de la carga
+                        16 ton, largo eslinga 1: 6.88 mts, eslinga 2: 9.13 mts, altura: 5.2 mts,
+                        diferencia 1: 4.5 mts, diferencia 2: 7.5 mts. :</h3>
+                    <label><input type="radio" name="q21" value="a"> a. Tension 1 = 13.2 ton, Tension 2 = 10.5
+                        ton.</label>
+                    <label><input type="radio" name="q21" value="b"> b. Tension 1 = 11.1 ton, Tension 2 = 9.5
+                        ton.</label>
+                    <label><input type="radio" name="q21" value="c"> c. Tension 1 = 14.5 ton, Tension 2 = 7.5
+                        ton.</label>
+                    <label><input type="radio" name="q21" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q21', 'a', 'result21')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 21 -->
+                    <div id="result21"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 22 -->
+                    <h3>22) Cual sera la maxima capacidad en % y Ton para los siguientes angulos 73°, 62°, 51°, 37°,
+                        para un enganche en U, con una eslinga de 5 mts con una capacidad de 3900 kg :
+                    </h3>
+                    <label><input type="radio" name="q22" value="a"> a. 191%-7.459Kg, 176%-6.886Kg, 155%-6.061Kg,
+                        120%-4.694Kg.</label>
+                    <label><input type="radio" name="q22" value="b"> b. 167%-6.466Kg, 155%-7.886Kg, 156%-4.061Kg,
+                        130%-2.694Kg.</label>
+                    <label><input type="radio" name="q22" value="c"> c. 137%-6.466Kg, 123%-3.886Kg, 176%-1.061Kg,
+                        150%-7.694Kg.</label>
+                    <label><input type="radio" name="q22" value="d"> d. 157%-9.466Kg, 153%-6.886Kg, 186%-3.061Kg,
+                        140%-7.694Kg.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q22', 'a', 'result22')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 22 -->
+                    <div id="result22"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 23 -->
+                    <h3>23) Al usar un enganche enlazado (corredizo), este pierde la capacidad en un % de:
+                    </h3>
+                    <label><input type="radio" name="q23" value="a"> a. 10 a 25%.</label>
+                    <label><input type="radio" name="q23" value="b"> b. 50 a 55%.</label>
+                    <label><input type="radio" name="q23" value="c"> c. 30 a 35%.</label>
+                    <label><input type="radio" name="q23" value="d"> d. 20 a 25%.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q23', 'd', 'result23')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 23 -->
+                    <div id="result23"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 24 -->
+                    <h3>24) Que significa las siglas (WLL):
+                    </h3>
+                    <label><input type="radio" name="q24" value="a"> a. Carga limite de trabajo.</label>
+                    <label><input type="radio" name="q24" value="b"> b. Carga segura de tabajo.</label>
+                    <label><input type="radio" name="q24" value="c"> c. Carga limite de ruptura.</label>
+                    <label><input type="radio" name="q24" value="d"> d. Carga segura de trabajo.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q24', 'a', 'result24')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 24 -->
+                    <div id="result24"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 25 -->
+                    <h3>25) Que significan las siglas (SWL):
+                    </h3>
+                    <label><input type="radio" name="q25" value="a"> a. Carga segura de trabajo.</label>
+                    <label><input type="radio" name="q25" value="b"> b. Carga excedente.</label>
+                    <label><input type="radio" name="q25" value="c"> c. Carga limite de trabajo.</label>
+                    <label><input type="radio" name="q25" value="d"> d. Sin peso de lado.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q25', 'a', 'result25')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 25 -->
+                    <div id="result25"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 26 -->
+                    <h3>26) Que significan las siglas FD o FS, y para que se da su aplicacion sobre los accesiorios de
+                        izaje:
+                    </h3>
+                    <label><input type="radio" name="q26" value="a"> a. Factor de seguridad, y es la capacidad de
+                        reserva teorica.</label>
+                    <label><input type="radio" name="q26" value="b"> b. Factor de diseño, y es la capacidad de reserva
+                        teorica que puede trabajar el elemento o accesorio.</label>
+                    <label><input type="radio" name="q26" value="c"> c. Fuerza simple, y es la capacidad de ruptura del
+                        elemento o accesorio de izaje.</label>
+                    <label><input type="radio" name="q26" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q26', 'b', 'result26')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 26 -->
+                    <div id="result26"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 27 -->
+                    <h3>27) El angulo de trabajo o de operacion es:
+                    </h3>
+                    <label><input type="radio" name="q27" value="a"> a. El que se forma por la elevacion de la pluma en
+                        relacion al chasis.</label>
+                    <label><input type="radio" name="q27" value="b"> b. El formado por la horizontal del suelo y la
+                        elevacion de la pluma.</label>
+                    <label><input type="radio" name="q27" value="c"> c. El formado por la elevacion de la pluma y la
+                        horizontal del suelo.</label>
+                    <label><input type="radio" name="q27" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q27', 'a', 'result27')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 27 -->
+                    <div id="result27"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 28 -->
+                    <h3>28) Que es el radio de trabajo o de operacion:
+                    </h3>
+                    <label><input type="radio" name="q28" value="a"> a. Espacio necesario para que la grua gire
+                        completamente.</label>
+                    <label><input type="radio" name="q28" value="b"> b. Distancia horizontal medida entre el centro de
+                        rotacion de la grua y el eje vertical del centro de gravedad de la carga o del gancho de
+                        levante.</label>
+                    <label><input type="radio" name="q28" value="c"> c. Distancia vertical entre el nivel de apoyo de la
+                        grua y el dispositivo de aprehension.</label>
+                    <label><input type="radio" name="q28" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q28', 'b', 'result28')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 28 -->
+                    <div id="result28"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 29 -->
+                    <h3>29) Que es un lay:
+                    </h3>
+                    <label><input type="radio" name="q29" value="a"> a. Numero de vueltas que un alambre enrrollado en
+                        una pulgada de distancia del toron.</label>
+                    <label><input type="radio" name="q29" value="b"> b. Configuracion caracteristica del enrrolado de
+                        los torones para ser utilizados en los equipos de izaje.</label>
+                    <label><input type="radio" name="q29" value="c"> c. Distancia que mide el paso de un toron alrededor
+                        del nucleo de un cable.</label>
+                    <label><input type="radio" name="q29" value="d"> d. Longitud y angulo de torsion de hilos que
+                        conforman un toron de una eslinga de cable.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q29', 'c', 'result29')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 29 -->
+                    <div id="result29"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 30 -->
+                    <h3>30) Que norma ASME hace referencia a la frecuencia de inspeccion de los accesorios de izaje:
+                    </h3>
+                    <label><input type="radio" name="q30" value="a"> a. B30.10.</label>
+                    <label><input type="radio" name="q30" value="b"> b. B30.5.</label>
+                    <label><input type="radio" name="q30" value="c"> c. B30.9.
+                    </label>
+                    <label><input type="radio" name="q30" value="d"> d. B30.26.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q30', 'd', 'result30')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 30 -->
+                    <div id="result30"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 31 -->
+                    <h3>31) Que norma ASME hace referencia a la inspeccion visual realizada por el usuario para
+                        determinar daños previo a cada uso o cada turno que es usada una eslinga sintetica, de cable o
+                        cadena:
+                    </h3>
+                    <label><input type="radio" name="q31" value="a"> a. B30.10.</label>
+                    <label><input type="radio" name="q31" value="b"> b. B30.5.</label>
+                    <label><input type="radio" name="q31" value="c"> c. B30.9.
+                    </label>
+                    <label><input type="radio" name="q31" value="d"> d. B30.26.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q31', 'c', 'result31')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 31 -->
+                    <div id="result31"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>
+
+</html>

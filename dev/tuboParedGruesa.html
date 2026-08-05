@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <title>Tubo Pared Gruesa</title>
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" alt="logo" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CILINDRO CONCRETO REFORZADO</h2>
+      <div class="inputs">
+        <label for="diametro1">Diámetro exterior</label>
+        <input
+          type="number"
+          id="diametro1"
+          step="any"
+          name="diametro"
+          placeholder="Ingresa diámetro exterior en mts"
+          required
+        />
+        <div id="diametro1Error" class="error-message"></div>
+
+        <label for="diametro2">Diámetro interior</label>
+        <input
+          type="number"
+          id="diametro2"
+          step="any"
+          name="diametro"
+          placeholder="Ingresa diámetro interior en mts"
+          required
+        />
+        <div id="diametro2Error" class="error-message"></div>
+
+        <label for="largo">Longitud</label>
+        <input
+          type="number"
+          id="largo"
+          step="any"
+          name="largo"
+          placeholder="Ingresa longitud en mts"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+
+        <label for="peso"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: hormigón = 2.4)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="peso"
+          step="any"
+          name="peso"
+          placeholder="Ingresa peso específico en Ton/m3"
+          required
+        />
+        <div id="pesoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularTuboParedConcreto()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Peso: <span id="calcularTuboConcreto"></span></p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/cilindro pared gruesa.png"
+        alt="imagen de tubo de pared gruesa"
+      />
+    </div>
+
+    <script src="../assest/js/tuboParedGruesa.js"></script>
+  </body>
+</html>

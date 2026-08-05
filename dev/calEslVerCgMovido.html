@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Tension Eslinga 90° CG Movido</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>TENSION DE ESLINGA 90° CG MOVIDO</h2>
+      <div class="inputs">
+        <label for="peso_carga">Peso</label>
+        <input
+          type="number"
+          id="peso_carga"
+          name="peso"
+          step="any"
+          placeholder="Ingresa peso en Kg"
+          required
+        />
+        <div id="peso_cargaError" class="error-message"></div>
+
+        <label for="diferencia_1"
+          >D1 (lado IZQUIERDO)<span class="descripcion"
+            ><br />Distancia desde el centro de la carga (CG) hasta el
+            punto de enganche izquierdo</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diferencia_1"
+          step="any"
+          name="diferencia_1"
+          placeholder="Ingresa D1"
+          required
+        />
+        <div id="diferenca_1Error" class="error-message"></div>
+
+        <label for="diferencia_2"
+          >D2 (lado DERECHO)<span class="descripcion"
+            ><br />Distancia desde el centro de la carga (CG) hasta el
+            punto de enganche derecho</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diferencia_2"
+          step="any"
+          name="diferencia_2"
+          placeholder="Ingresa D2"
+          required
+        />
+        <div id="diferencia_2Error" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calculoVerticalMovido()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Tensión Eslinga Izquierda:
+          <span id="tensionVertical1"></span>
+        </p>
+        <p>
+          Tensión Eslinga Derecha:
+          <span id="tensionVertical2"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoMovido" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/tension_eslinga_90ý_cg_movido-transformed.png"
+        alt="imagen altura de trabajo"
+      />
+    </div>
+
+    <script src="../assest/js/calEslVerCgMovido.js"></script>
+  </body>
+</html>

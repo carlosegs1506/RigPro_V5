@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>SWL Cable de Acero</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>SWL CABLE DE ACERO POR DIÁMETRO</h2>
+      <p class="nota-ayuda">
+        Busca la carga límite de trabajo (SWL) en la tabla real de cable de
+        acero 6x19 IWRC, eslinga de un ramal vertical (Coef. Seguridad 5:1).
+        Rango de la tabla: 1/4" a 2-1/4".
+      </p>
+      <div class="inputs">
+        <label for="diametro"
+          >Diámetro del Cable<span class="descripcion"
+            ><br />En pulgadas (ej: 7/8, 1 1/2, 2)</span
+          ></label
+        >
+        <input
+          type="text"
+          id="diametro"
+          name="diametro"
+          step="any"
+          placeholder="Ingresa pulgadas + fracción (ej: 7/8)"
+          required
+        />
+        <div id="diametroError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularSwlCable()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          SWL:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+
+    <script src="../assest/js/swlCableAcero.js"></script>
+  </body>
+</html>

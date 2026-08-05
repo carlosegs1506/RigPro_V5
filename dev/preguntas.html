@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./index_es.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul>
+                <li>
+                    <!-- Pregunta 1 -->
+                    <h3>1) Cuando se realiza un izaje con una eslinga de 4 ramales y cuando se trabaja con un Angulo de
+                        60º, se debe considerar una capacidad:</h3>
+                    <label><input type="radio" name="q1" value="a"> a. 1 Eslinga.</label>
+                    <label><input type="radio" name="q1" value="b"> b. 2 Eslinga.</label>
+                    <label><input type="radio" name="q1" value="c"> c. Las cuatro eslingas con carga uniformemente
+                        distribuida.</label>
+                    <label><input type="radio" name="q1" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q1', 'b', 'result1')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 1 -->
+                    <div id="result1"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 2 -->
+                    <h3>2) En caso de presentarse una emergencia en la operación de levante, quien está autorizado a
+                        presionar la parada de emergencia del
+                        camión o equipo de levante:
+                    </h3>
+                    <label><input type="radio" name="q2" value="a"> a. El prevencioncita de riesgo.</label>
+                    <label><input type="radio" name="q2" value="b"> b. Cualquier persona que participe en la maniobra de
+                        izaje.</label>
+                    <label><input type="radio" name="q2" value="c"> c. Sólo el rigger.</label>
+                    <label><input type="radio" name="q2" value="d"> d. Sólo el operador.</label>
+                    <label><input type="radio" name="q2" value="e"> e. Ninguno de los anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q2', 'b', 'result2')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 2 -->
+                    <div id="result2"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 3 -->
+                    <h3>3) Tres formas de enganche simple en un izaje son:
+                    </h3>
+                    <label><input type="radio" name="q3" value="a"> a. Lazo simple, canasta doble, axial.</label>
+                    <label><input type="radio" name="q3" value="b"> b. Canasta simple, lazo, axial.</label>
+                    <label><input type="radio" name="q3" value="c"> c. Lazo, canasta, axial.</label>
+                    <label><input type="radio" name="q3" value="d"> d. Todas las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q3', 'c', 'result3')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 3 -->
+                    <div id="result3"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 4 -->
+                    <h3>4) 12 pies equivalen a:
+                    </h3>
+                    <label><input type="radio" name="q4" value="a"> a. 30.48 cms.</label>
+                    <label><input type="radio" name="q4" value="b"> b. 3.048 cms.</label>
+                    <label><input type="radio" name="q4" value="c"> c. 304.8 mts.</label>
+                    <label><input type="radio" name="q4" value="d"> d. 3.6576 mts.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q4', 'd', 'result4')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 4 -->
+                    <div id="result4"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 5 -->
+                    <h3>5) La carga límite de trabajo (WLL) es:
+                    </h3>
+                    <label><input type="radio" name="q5" value="a"> a. Cuando fallan los accesorios de izaje.</label>
+                    <label><input type="radio" name="q5" value="b"> b. Máxima carga permitida que un producto está
+                        autorizado a sostener.</label>
+                    <label><input type="radio" name="q5" value="c"> c. Capacidad de reserva teórica.</label>
+                    <label><input type="radio" name="q5" value="d"> d. Una carga de prueba que se le puede aplicar para
+                        comprobar los materiales o la fabricación.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q5', 'b', 'result5')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 3 -->
+                    <div id="result5"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 6 -->
+                    <h3>6) Cuál alternativa corresponde a riesgos asociados durante lo operación de
+                        levante o izaje:
+                    </h3>
+                    <label><input type="radio" name="q6" value="a"> a. Volcamiento, atrapamiento.</label>
+                    <label><input type="radio" name="q6" value="b"> b. Atropello, golpeado por.</label>
+                    <label><input type="radio" name="q6" value="c"> c. Caida distinto nivel.</label>
+                    <label><input type="radio" name="q6" value="d"> d. Atrapamiento.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q6', 'a', 'result6')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 3 -->
+                    <div id="result6"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 7 -->
+                    <h3>7) Cuando se estroba con eslingas. Cual es el angulo mínimo con respecto al eje vertical con el
+                        cual se puede trabajar:
+                    </h3>
+                    <label><input type="radio" name="q7" value="a"> a. 45°.</label>
+                    <label><input type="radio" name="q7" value="b"> b. 90°.</label>
+                    <label><input type="radio" name="q7" value="c"> c. 60°.</label>
+                    <label><input type="radio" name="q7" value="d"> d. 30°.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q7', 'd', 'result7')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 3 -->
+                    <div id="result7"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 8 -->
+                    <h3>8) Qué es un levante complejo:
+                    </h3>
+                    <label><input type="radio" name="q8" value="a"> a. Cuando la carga a levantar bordea el 90% de
+                        capacidad nominal del equipo.</label>
+                    <label><input type="radio" name="q8" value="b"> b. Cuando se superan las 10 toneladas de carga a
+                        izar.</label>
+                    <label><input type="radio" name="q8" value="c"> c. Cuando se involucren arreglos de aparejos no
+                        rutinarios o técnicamente difíciles.</label>
+                    <label><input type="radio" name="q8" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q8', 'a', 'result8')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 3 -->
+                    <div id="result8"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 9 -->
+                    <h3>9) Cuando el rigger puede tener contacto con la carga:
+                    </h3>
+                    <label><input type="radio" name="q9" value="a"> a. Cuando la carga está a menos de un metro del
+                        piso.</label>
+                    <label><input type="radio" name="q9" value="b"> b. Cuando la carga está cerca del piso.</label>
+                    <label><input type="radio" name="q9" value="c"> c. Nunca puede tener contacto con la carga.</label>
+                    <label><input type="radio" name="q9" value="d"> d. Cunado la carga está oscilando.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q9', 'c', 'result9')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 3 -->
+                    <div id="result9"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 10 -->
+                    <h3>10) Qué es un riesgo material:
+                    </h3>
+                    <label><input type="radio" name="q10" value="a"> a. Es todo riesgo que provoca daños a los equipos e
+                        instalaciones.</label>
+                    <label><input type="radio" name="q10" value="b"> b. Es todo riesgo que provoca lesiones leves al
+                        operador.</label>
+                    <label><input type="radio" name="q10" value="c"> c. Es todo riesgo que provoca una fatalidad.
+                    </label>
+                    <label><input type="radio" name="q10" value="d"> d. Todo riesgo que provoca la desvinculación de un
+                        trabajador.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q10', 'c', 'result10')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 3 -->
+                    <div id="result10"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div class="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>
+
+</html>

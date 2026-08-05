@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Capacidad Grilletes</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CAPACIDAD GRILLETES</h2>
+      <div class="inputs">
+        <label for="capacidad"
+          >Diámetro del Perno<span class="descripcion"
+            ><br />En pulgadas (ej: 7/8, 1 1/2, 2)</span
+          ></label
+        >
+        <input
+          type="text"
+          id="capacidad"
+          name="capacidad"
+          step="any"
+          placeholder="Ingresa pulgadas + fraccion"
+          required
+        />
+        <div id="capacidadError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularCapacidad()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Capacidad:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+
+    <script src="../assest/js/grilletes.js"></script>
+  </body>
+</html>

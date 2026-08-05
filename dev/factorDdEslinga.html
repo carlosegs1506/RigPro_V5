@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Factor de Eficiencia D/d</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>FACTOR DE EFICIENCIA POR RELACIÓN D/d</h2>
+      <p class="nota-ayuda">
+        Al doblar una eslinga o estrobo alrededor de un pasador, grillete o
+        gancho pequeño, pierde capacidad. Esta calculadora estima cuánta,
+        según la relación entre el diámetro del objeto (D) y el diámetro de
+        la eslinga (d).
+      </p>
+      <div class="inputs">
+        <label for="dObjeto"
+          >Diámetro del Objeto (D)<span class="descripcion"
+            ><br />Pasador, grillete o gancho sobre el que se dobla la eslinga (ej: 4)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="dObjeto"
+          step="any"
+          placeholder="Ingresa D (ej: 4)"
+          required
+        />
+        <div id="dObjetoError" class="error-message"></div>
+
+        <label for="dEslinga"
+          >Diámetro de la Eslinga/Cable (d)<span class="descripcion"
+            ><br />Misma unidad que D (ej: 1)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="dEslinga"
+          step="any"
+          placeholder="Ingresa d (ej: 1)"
+          required
+        />
+        <div id="dEslingaError" class="error-message"></div>
+
+        <label for="capacidadNominal"
+          >Capacidad Nominal (opcional)<span class="descripcion"
+            ><br />Si la ingresas, te muestra la capacidad reducida (misma unidad, ej: Kg o Ton)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="capacidadNominal"
+          step="any"
+          placeholder="Ingresa capacidad nominal (opcional)"
+        />
+        <div id="capacidadNominalError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularFactorDd()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Relación D/d: <span id="resultadoRatio"></span></p>
+        <p>Eficiencia: <span id="resultadoEficiencia"></span></p>
+        <p>Capacidad Real: <span id="resultadoCapacidad"></span></p>
+      </div>
+    </div>
+
+    <div id="procesoDd" class="proceso"></div>
+
+    <script src="../assest/js/factorDdEslinga.js"></script>
+  </body>
+</html>

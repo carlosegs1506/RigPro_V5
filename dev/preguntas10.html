@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 111 -->
+                    <h3>111) que es centro de gravedad de la carga:</h3>
+                    <label><input type="radio" name="q111" value="a"> a. Centro de la carga.</label>
+                    <label><input type="radio" name="q111" value="b"> b. Equilibrio de la carga.</label>
+                    <label><input type="radio" name="q111" value="c"> c. Peso concentrado de la carga.</label>
+                    <label><input type="radio" name="q111" value="d"> d. B y C.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q111', 'c', 'result111')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 111 -->
+                    <div id="result111"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 112 -->
+                    <h3>112) En que ocacion se deben usar las almohadillas:
+                    </h3>
+                    <label><input type="radio" name="q112" value="a"> a. Terreno a desnivel.</label>
+                    <label><input type="radio" name="q112" value="b"> b. Terreno fangoso.</label>
+                    <label><input type="radio" name="q112" value="c"> c. Nunca.</label>
+                    <label><input type="radio" name="q112" value="d"> d. Siempre.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q112', 'c', 'result112')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 112 -->
+                    <div id="result112"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 113 -->
+                    <h3>113) Cual es la diferencia que existe en fijar el terminal del cable (Perra) en el cabezal
+                        de la pluma o en el gancho:
+                    </h3>
+                    <label><input type="radio" name="q113" value="a"> a. No existe diferencia.</label>
+                    <label><input type="radio" name="q113" value="b"> b. Aumenta la capacidad de la carga.</label>
+                    <label><input type="radio" name="q113" value="c"> c. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q113', 'b', 'result113')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 113 -->
+                    <div id="result113"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 114 -->
+                    <h3>114) Para que sirve el grafico de angulos:
+                    </h3>
+                    <label><input type="radio" name="q114" value="a"> a. Para determinar el peso.</label>
+                    <label><input type="radio" name="q114" value="b"> b. Para determinar el angulo.</label>
+                    <label><input type="radio" name="q114" value="c"> c. Para determinar radio.</label>
+                    <label><input type="radio" name="q114" value="d"> d. Todas la anteriores.</label>
+                    <label><input type="radio" name="q114" value="e"> e. B,C y D.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q114', 'e', 'result114')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 114 -->
+                    <div id="result114"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 115 -->
+                    <h3>115) Si existe carga suspendida el rigger solo debe tocar el silbato:
+                    </h3>
+                    <label><input type="radio" name="q115" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q115" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q115', 'b', 'result115')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 115 -->
+                    <div id="result115"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 1116 -->
+                    <h3>116) Se puede extrapolar valores en la tabla de carga:
+                    </h3>
+                    <label><input type="radio" name="q116" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q116" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q116', 'b', 'result116')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 116 -->
+                    <div id="result116"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 117 -->
+                    <h3>117) Si voy a izar carga sobre el costaddo derecho del equipo, solo debo utilizar los estabilizadores 
+                        de ese costado:
+                    </h3>
+                    <label><input type="radio" name="q117" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q117" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q117', 'b', 'result117')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 117 -->
+                    <div id="result117"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 118 -->
+                    <h3>118) Al estrobar la distancia horizontal entre los puntos de amarre de la carga puede ser
+                        mayor que el largo de las eslingas:
+                    </h3>
+                    <label><input type="radio" name="q118" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q118" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q118', 'b', 'result118')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 118 -->
+                    <div id="result118"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 119 -->
+                    <h3>119) Que pasa con la capacidad de una eslinga simple, la cual puede izar 20 toneladas,
+                        cuando una de sus puntas se pasa por uno de sus ojales, ahorcando la carga:
+                    </h3>
+                    <label><input type="radio" name="q119" value="a"> a. Aumenta la capacidad.</label>
+                    <label><input type="radio" name="q119" value="b"> b. Disminuye la capacidad.</label>
+                    <label><input type="radio" name="q119" value="c"> c. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q119', 'b', 'result119')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 119 -->
+                    <div id="result119"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 120 -->
+                    <h3>120) No es necesario que una carga se apoye en la concavidad del gancho:
+                    </h3>
+                    <label><input type="radio" name="q120" value="a"> a. Verdadero. </label>
+                    <label><input type="radio" name="q120" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q120', 'b', 'result120')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 120 -->
+                    <div id="result120"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 121 -->
+                    <h3>121) Cual es la posicion ideal de un grillete para tomar una carga:
+                    </h3>
+                    <label><input type="radio" name="q121" value="a"> a. En el pasador.</label>
+                    <label><input type="radio" name="q121" value="b"> b. En la concavidad.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q121', 'a', 'result121')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 121 -->
+                    <div id="result121"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>
+</html>

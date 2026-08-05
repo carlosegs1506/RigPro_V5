@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Ángulo Crítico de Eslinga</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>ÁNGULO CRÍTICO DE ESLINGA</h2>
+      <div class="inputs">
+        <label for="numeroRamales"
+          >Número de Ramales de la Eslinga<span class="descripcion"
+            ><br />Cantidad de brazos/ramales de la maniobra (ej: 2, 3, 4)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="numeroRamales"
+          name="numeroRamales"
+          step="1"
+          min="1"
+          placeholder="Ingresa número de ramales"
+          required
+        />
+        <div id="numeroRamalesError" class="error-message"></div>
+
+        <label for="anguloReal"
+          >Ángulo Real de la Eslinga (opcional)<span class="descripcion"
+            ><br />Medido desde la horizontal de la carga, para comparar contra
+            el crítico</span
+          ></label
+        >
+        <input
+          type="number"
+          id="anguloReal"
+          name="anguloReal"
+          step="any"
+          placeholder="Ingresa ángulo real en grados"
+        />
+        <div id="anguloRealError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularAnguloCritico()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Ángulo Crítico:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+
+    <script src="../assest/js/anguloCriticoEslinga.js"></script>
+  </body>
+</html>

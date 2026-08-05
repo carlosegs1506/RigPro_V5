@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 65 -->
+                    <h3>65) Quien determina la capacidad de carga de una grúa:</h3>
+                    <label><input type="radio" name="q65" value="a"> a. El rigger.</label>
+                    <label><input type="radio" name="q65" value="b"> b. El operador.</label>
+                    <label><input type="radio" name="q65" value="c"> c. El propietario.</label>
+                    <label><input type="radio" name="q65" value="d"> d. El fabricante.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q65', 'd', 'result65')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 65 -->
+                    <div id="result65"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 66 -->
+                    <h3>66) Que afecta la estabilidad de una grúa:
+                    </h3>
+                    <label><input type="radio" name="q66" value="a"> a. Soltar una carga en forma repentina</label>
+                    <label><input type="radio" name="q66" value="b"> b. Sacar pluma o bajar pluma.</label>
+                    <label><input type="radio" name="q66" value="c"> c. Presión del viento.
+                    </label>
+                    <label><input type="radio" name="q66" value="d"> d. Todas las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q66', 'd', 'result66')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 66 -->
+                    <div id="result66"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 67 -->
+                    <h3>67) Si el equipo tiene carga suspendida, se puede extender pluma:
+                    </h3>
+                    <label><input type="radio" name="q67" value="a"> a. Se puede, pero no se debe.</label>
+                    <label><input type="radio" name="q67" value="b"> b. No se puede.</label>
+                    <label><input type="radio" name="q67" value="c"> c. Se puede.</label>
+                    <label><input type="radio" name="q67" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q67', 'b', 'result67')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 67 -->
+                    <div id="result67"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 68 -->
+                    <h3>68) Si tenemos un bloque de 5 poleas de ¾” y un cable de 19 mm con capacidad de 6 ton, por
+                        línea, cuál será la capacidad máxima del bloque:
+                    </h3>
+                    <label><input type="radio" name="q68" value="a"> a. 50 ton.</label>
+                    <label><input type="radio" name="q68" value="b"> b. 55 ton.</label>
+                    <label><input type="radio" name="q68" value="c"> c. 60 ton.</label>
+                    <label><input type="radio" name="q68" value="d"> d. 65 ton.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q68', 'c', 'result68')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta68 -->
+                    <div id="result68"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 69 -->
+                    <h3>69) Las diferencias entre huinche principal y auxiliar es:
+                    </h3>
+                    <label><input type="radio" name="q69" value="a"> a. La velocidad del trabajo.</label>
+                    <label><input type="radio" name="q69" value="b"> b. La capacidad.</label>
+                    <label><input type="radio" name="q69" value="c"> c. No existe diferencia.</label>
+                    <label><input type="radio" name="q69" value="d"> d. Solo A y B.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q69', 'd', 'result69')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 69 -->
+                    <div id="result69"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 70 -->
+                    <h3>70) A qué porcentaje de desnivel puede estar una grúa para que los valores de la tabla
+                        de carga sean válidos:
+                    </h3>
+                    <label><input type="radio" name="q70" value="a"> a. 1%.</label>
+                    <label><input type="radio" name="q70" value="b"> b. 2%.</label>
+                    <label><input type="radio" name="q70" value="c"> c. 3%.</label>
+                    <label><input type="radio" name="q70" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q70', 'd', 'result70')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 70 -->
+                    <div id="result70"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 71 -->
+                    <h3>71) Todas las grúas tienen la misma capacidad de carga en los 360° de giro:
+                    </h3>
+                    <label><input type="radio" name="q71" value="a"> a. Solo las gruas sobre-camion.</label>
+                    <label><input type="radio" name="q71" value="b"> b. Solo las gruas RT.</label>
+                    <label><input type="radio" name="q71" value="c"> c. Ambas.</label>
+                    <label><input type="radio" name="q71" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q71', 'b', 'result71')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta71 -->
+                    <div id="result71"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 72 -->
+                    <h3>72) Que es el efecto “Caña de pescar” en las plumas hidráulicas:
+                    </h3>
+                    <label><input type="radio" name="q72" value="a"> a. Flexión de la pluma.</label>
+                    <label><input type="radio" name="q72" value="b"> b. Torsion de la pluma.</label>
+                    <label><input type="radio" name="q72" value="c"> c. Todas las anteriores. </label>
+                    <label><input type="radio" name="q72" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q72', 'a', 'result72')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 72 -->
+                    <div id="result72"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 73 -->
+                    <h3>73) El indicador de burbuja, sirve para:
+                    </h3>
+                    <label><input type="radio" name="q73" value="a"> a. Nivelar la cabina del operador.</label>
+                    <label><input type="radio" name="q73" value="b"> b. Nivelar la grua.</label>
+                    <label><input type="radio" name="q73" value="c"> c. Nivelar la pluma. </label>
+                    <label><input type="radio" name="q73" value="d"> d. Ninguna de las anteriores</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q73', 'b', 'result73')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 73 -->
+                    <div id="result73"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 74 -->
+                    <h3>74) Antes de realizar un izaje que es lo que debe conocer el operador:
+                    </h3>
+                    <label><input type="radio" name="q74" value="a"> a. Cual es la carga a izar.</label>
+                    <label><input type="radio" name="q74" value="b"> Cual es el radio de operacion.</label>
+                    <label><input type="radio" name="q74" value="c"> c. El peso exacto a levantar.
+                    </label>
+                    <label><input type="radio" name="q74" value="d"> d. El plan rigging o PST (plan seguro de
+                        trabajo).</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q74', 'd', 'result74')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 74 -->
+                    <div id="result74"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>

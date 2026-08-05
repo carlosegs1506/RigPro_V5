@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Calculo de Volumen y Peso de un Cono</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CALCULO DEL VOLUMEN Y PESO DE UN CONO</h2>
+      <div class="inputs">
+        <label for="diametro">Ingrese el diámetro (mts)</label>
+        <input
+          type="number"
+          id="diametro"
+          name="diametro"
+          step="any"
+          placeholder="Ingresa diámetro en mts"
+          required
+        />
+        <div id="diametroError" class="error-message"></div>
+
+        <label for="altura">Ingrese la altura (mts)</label>
+        <input
+          type="number"
+          id="altura"
+          name="altura"
+          step="any"
+          placeholder="Ingresa altura en mts"
+          required
+        />
+        <div id="alturaError" class="error-message"></div>
+
+        <label for="pesoEspecifico"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: acero = 7.85)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="pesoEspecifico"
+          name="pesoEspecifico"
+          step="any"
+          placeholder="Ingresa peso específico en Ton/m3"
+          required
+        />
+        <div id="pesoEspecificoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularVolumenYPeso()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Volumen:
+          <span id="volumenResultado"></span>
+        </p>
+        <p>
+          Peso:
+          <span id="pesoResultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoCono" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/Cono Picudo.png" alt="imagen cono picudo" />
+    </div>
+
+    <script src="../assest/js/pesoCono.js"></script>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Cálculo Líneas de Carga</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CÁLCULO DE LÍNEAS DE CARGA (APAREJO DE POLEAS)</h2>
+      <p class="nota-ayuda">
+        Calcula cuántas líneas (partes de cable) se necesitan para levantar
+        una carga con un aparejo de poleas de rodamiento, considerando la
+        pérdida por fricción del 3% en cada polea (tabla de abajo).
+      </p>
+
+      <div class="inputs">
+        <label for="carga"
+          >Carga (kg)<span class="descripcion"
+            ><br />Peso total a levantar (ej: 10000)</span
+          ></label
+        >
+        <input type="number" id="carga" placeholder="Ingrese la carga en Kg (ej: 10000)" />
+        <div id="cargaError" class="error-message"></div>
+
+        <label for="capacidad"
+          >Capacidad del cable (kg)<span class="descripcion"
+            ><br />Carga límite de trabajo (WLL) de una sola línea de cable, en Kg (ej: 2000)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="capacidad"
+          placeholder="Ingrese la capacidad del cable en Kg (ej: 2000)"
+        />
+        <div id="capacidadError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularLineasCarga()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Líneas de Carga:
+          <span id="result"></span>
+        </p>
+      </div>
+
+      <div class="inputs">
+        <label>Tabla de Factor de Fricción al 3%</label>
+        <table border="1">
+          <tr>
+            <th>N°</th>
+            <th>Factor de Fricción</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0.97</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>1.91</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>2.83</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>3.72</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>4.58</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>5.42</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>6.23</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>7.02</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>7.79</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>8.53</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>9.25</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>9.95</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="procesoPoleas" class="proceso"></div>
+    <script src="../assest/js/cargaPoleas.js"></script>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 132 -->
+                    <h3>132) No es necesario nivelar la suspension de la grua al momento de comenzar el 
+                        traslado del equipo:</h3>
+                    <label><input type="radio" name="q132" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q132" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q132', 'b', 'result132')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 132 -->
+                    <div id="result132"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul style="list-style: none;">
+                 <!-- Pregunta 133 -->
+                <li>
+                    <h3>133) La distancia segura para posicionar la pata de la grua ante un talud de 1mt de profundidad
+                    es de 0.5mts:
+                    </h3>
+                    <label><input type="radio" name="q133" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q133" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q133', 'b', 'result133')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 133 -->
+                    <div id="result133"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 134 -->
+                    <h3>134) En traslados cortos, se requiere guardar las calzas o platos del estabilizador en su posicion
+                        de traslado:</h3>
+                    <label><input type="radio" name="q134" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q134" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q134', 'a', 'result134')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 134 -->
+                    <div id="result134"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 135 -->
+                    <h3>135) La vuelta preoperacional tambien la puede realizar el supervisor:</h3>
+                    <label><input type="radio" name="q135" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q135" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q135', 'a', 'result135')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 135 -->
+                    <div id="result135"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 136 -->
+                    <h3>136) La tabla de carga ya considera el peso del gancho:
+                    </h3>
+                    <label><input type="radio" name="q136" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q136" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q136', 'b', 'result136')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 136 -->
+                    <div id="result136"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 1137 -->
+                    <h3>137) Siempre que la grua exceda su capacidad de carga, el equipo se puede volcar:
+                    </h3>
+                    <label><input type="radio" name="q137" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q137" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q137', 'b', 'result137')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 137 -->
+                    <div id="result137"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 138 -->
+                    <h3>138) Que el cable presente torceduras o cocas no es limitante para realizar izajes:</h3>
+                    <label><input type="radio" name="q138" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q138" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q138', 'b', 'result138')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 138 -->
+                    <div id="result138"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 139 -->
+                    <h3>139) En las distancias de seguridad es necesario realizar doble segregacion:
+                    </h3>
+                    <label><input type="radio" name="q139" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q139" value="b"> b. 1Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q139', 'a', 'result139')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 139 -->
+                    <div id="result139"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 140 -->
+                    <h3>140) No es necesario que el operador bloquee su equipo cuando va al baño:
+                    </h3>
+                    <label><input type="radio" name="q140" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q140" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q140', 'b', 'result140')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 140 -->
+                    <div id="result140"></div>
+                </li>
+            </ul>  
+        </form>
+    </div>
+
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>
+</html>

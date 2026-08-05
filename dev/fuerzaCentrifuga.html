@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <title>Cálculo Fuerza Centrífuga</title>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CÁLCULO FUERZA CENTRÍFUGA</h2>
+
+      <div class="inputs">
+        <label for="peso"
+          >Peso de la carga (kg)<span class="descripcion"
+            ><br />Masa de la carga que gira (ej: 1000)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="peso"
+          name="peso"
+          placeholder="Ingresa el peso en Kg (ej: 1000)"
+        />
+        <div id="pesoError" class="error-message"></div>
+
+        <label for="radio"
+          >Radio (m)<span class="descripcion"
+            ><br />Distancia horizontal desde el eje de giro hasta la carga (ej: 5)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="radio"
+          name="radio"
+          placeholder="Ingresa el radio en mts (ej: 5)"
+        />
+        <div id="radioError" class="error-message"></div>
+
+        <label for="numero"
+          >Velocidad de Rotación (RPM)<span class="descripcion"
+            ><br />Revoluciones por minuto del giro (ej: 10)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="numero"
+          name="numero"
+          placeholder="Ingresa las RPM (ej: 10)"
+        />
+        <div id="numeroError" class="error-message"></div>
+
+        <label for="altura"
+          >Altura (m)<span class="descripcion"
+            ><br />Distancia vertical desde el punto de giro hasta la carga</span
+          ></label
+        >
+        <input
+          type="number"
+          id="altura"
+          name="altura"
+          placeholder="Ingresa la altura en mts"
+        />
+        <div id="alturaError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularFuerzaCentrifuga()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          <span id="result"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoFuerza" class="proceso"></div>
+    <script src="../assest/js/FuerzaCentrifuga.js"></script>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <title>Cálculo Carga Lateral</title>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CARGA LATERAL DEBIDO AL VIENTO</h2>
+
+      <div class="inputs">
+        <label for="densidad"
+          >Densidad del Viento (kg/m³)<span class="descripcion"
+            ><br />Ej: 1.225 (aire a nivel del mar, 15°C)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="densidad"
+          name="densidad"
+          placeholder="Ingresa densidad (ej: 1.225)"
+        />
+        <div id="densidadError" class="error-message"></div>
+
+        <label for="area"
+          >Área de Referencia (m²)<span class="descripcion"
+            ><br />Área de la carga expuesta al viento (ej: 10)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="area"
+          name="area"
+          placeholder="Ingresa área en m² (ej: 10)"
+        />
+        <div id="areaError" class="error-message"></div>
+
+        <label for="coeficiente"
+          >Coeficiente de Arrastre<span class="descripcion"
+            ><br />Valor adimensional según la forma de la carga (ej: 1.2 para una placa plana)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="coeficiente"
+          name="coeficiente"
+          placeholder="Ingresa coeficiente (ej: 1.2)"
+        />
+        <div id="coeficienteError" class="error-message"></div>
+
+        <label for="velocidad"
+          >Velocidad del Viento (m/s)<span class="descripcion"
+            ><br />Ej: 20</span
+          ></label
+        >
+        <input
+          type="number"
+          id="velocidad"
+          name="velocidad"
+          placeholder="Ingresa velocidad en m/s (ej: 20)"
+        />
+        <div id="velocidadError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularCargaLateral()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Carga Lateral:
+          <span id="result"></span>
+        </p>
+      </div>
+
+      <div class="inputs" style="font-family: 'Nunito Sans', sans-serif; font-size: 3vw; line-height: 1.4; color: hsl(200, 18%, 15%); text-align: left;">
+        <h3 style="font-size: 3.6vw; margin-bottom: 8px;">Definiciones:</h3>
+        <p>
+          <strong>Densidad del Viento:</strong> Densidad del aire
+          (aproximadamente 1.225 kg/m³ a nivel del mar a 15 °C).
+        </p>
+        <p><strong>Área de Referencia:</strong> Área expuesta al viento.</p>
+        <p>
+          <strong>Coeficiente de Arrastre:</strong> Valor adimensional que
+          depende de la forma y la orientación de la carga (puede variar entre 0
+          y 2, dependiendo de la forma de la carga).
+        </p>
+        <p>
+          <strong>Velocidad del Viento:</strong> Velocidad del viento incidente
+          sobre la carga.
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoLateral" class="proceso"></div>
+    <script src="../assest/js/cargaLateral.js"></script>
+  </body>
+</html>

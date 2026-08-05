@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Oreja de Izaje - Verificación Detallada</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <p style="text-align:center; max-width: 600px; margin: 10px auto; font-family: 'Nunito Sans', sans-serif; font-size: 3vw; line-height: 1.4; color: hsl(200, 18%, 15%); padding: 0 10px;">
+      Verificación estructural detallada de una oreja de izaje (acero ASTM A36,
+      pernos A325). Complementa la calculadora simple de "Capacidad Oreja
+      Montaje" con los 3 puntos de falla que exige revisar el manual del
+      rigger: corte del gramil, aplastamiento de la perforación y corte de
+      los pernos.
+    </p>
+
+    <div class="container_todos">
+      <h2>1. CORTE DEL GRAMIL</h2>
+      <div class="inputs">
+        <label for="gramilCorte"
+          >Gramil (mm)<span class="descripcion"
+            ><br />Ancho del gramil de la oreja (ej: 80 → con espesor 25, resultado ≈ 20.387 Kg)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="gramilCorte"
+          step="any"
+          placeholder="Ingresa gramil en mm (ej: 80)"
+          required
+        />
+        <div id="gramilCorteError" class="error-message"></div>
+
+        <label for="espesorCorte"
+          >Espesor (mm)<span class="descripcion"><br />Ej: 25</span></label
+        >
+        <input
+          type="number"
+          id="espesorCorte"
+          step="any"
+          placeholder="Ingresa espesor en mm (ej: 25)"
+          required
+        />
+        <div id="espesorCorteError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularCorteGramil()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Resistencia al Corte: <span id="resultadoCorte"></span></p>
+      </div>
+      <div id="procesoCorte" class="proceso"></div>
+    </div>
+
+    <div class="container_todos">
+      <h2>2. APLASTAMIENTO DE LA PERFORACIÓN</h2>
+      <div class="inputs">
+        <label for="diametroPerf"
+          >Diámetro de la Perforación (mm)<span class="descripcion"
+            ><br />Ej: 40 → con espesor 25, resultado ≈ 15.291 Kg</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diametroPerf"
+          step="any"
+          placeholder="Ingresa diámetro en mm"
+          required
+        />
+        <div id="diametroPerfError" class="error-message"></div>
+
+        <label for="espesorAplastamiento">Espesor (mm)</label>
+        <input
+          type="number"
+          id="espesorAplastamiento"
+          step="any"
+          placeholder="Ingresa espesor en mm"
+          required
+        />
+        <div id="espesorAplastamientoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularAplastamiento()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Resistencia al Aplastamiento: <span id="resultadoAplastamiento"></span></p>
+      </div>
+      <div id="procesoAplastamiento" class="proceso"></div>
+    </div>
+
+    <div class="container_todos">
+      <h2>3. PERNOS AL CORTE</h2>
+      <div class="inputs">
+        <label for="diametroPerno"
+          >Diámetro del Perno (mm)<span class="descripcion"
+            ><br />Ej: 32 → resultado ≈ 16.724 Kg por perno</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diametroPerno"
+          step="any"
+          placeholder="Ingresa diámetro en mm"
+          required
+        />
+        <div id="diametroPernoError" class="error-message"></div>
+
+        <label for="cantidadPernos">Cantidad de Pernos</label>
+        <input
+          type="number"
+          id="cantidadPernos"
+          step="1"
+          min="1"
+          placeholder="Ingresa cantidad de pernos"
+          required
+        />
+        <div id="cantidadPernosError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularPernosCorte()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>Resistencia: <span id="resultadoPernos"></span></p>
+      </div>
+      <div id="procesoPernos" class="proceso"></div>
+    </div>
+
+    <script src="../assest/js/orejaIzajeDetallada.js"></script>
+  </body>
+</html>

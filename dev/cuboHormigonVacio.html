@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Cubo Hormigón Vacío</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CUBO DE HORMIGÓN VACÍO EN SU INTERIOR</h2>
+      <div class="inputs">
+        <label for="tipoHueco"
+          >Tipo de Hueco<span class="descripcion"
+            ><br />Elige si el hueco pasa de un lado a otro, o si el objeto
+            tiene una base sólida cerrada por abajo</span
+          ></label
+        >
+        <select id="tipoHueco">
+          <option value="atraviesa">Atraviesa completo</option>
+          <option value="fondo">Con fondo sólido</option>
+        </select>
+
+        <label for="largo1"
+          >Largo Exterior (mts)<span class="descripcion"
+            ><br />Medida exterior del bloque</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo1"
+          name="largo1"
+          step="any"
+          placeholder="Ingresa largo exterior en mts"
+          required
+        />
+        <div id="largo1Error" class="error-message"></div>
+
+        <label for="largo2"
+          >Largo Interior (mts)<span class="descripcion"
+            ><br />Medida del hueco, en el mismo sentido que el Largo
+            Exterior</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo2"
+          name="largo2"
+          step="any"
+          placeholder="Ingresa largo interior en mts"
+          required
+        />
+        <div id="largo2Error" class="error-message"></div>
+
+        <label for="ancho1"
+          >Ancho Exterior (mts)<span class="descripcion"
+            ><br />Medida exterior del bloque</span
+          ></label
+        >
+        <input
+          type="number"
+          id="ancho1"
+          name="ancho1"
+          step="any"
+          placeholder="Ingresa ancho exterior en mts"
+          required
+        />
+        <div id="ancho1Error" class="error-message"></div>
+
+        <label for="ancho2"
+          >Ancho Interior (mts)<span class="descripcion"
+            ><br />Medida del hueco, en el mismo sentido que el Ancho
+            Exterior</span
+          ></label
+        >
+        <input
+          type="number"
+          id="ancho2"
+          name="ancho2"
+          step="any"
+          placeholder="Ingresa ancho interior en mts"
+          required
+        />
+        <div id="ancho2Error" class="error-message"></div>
+
+        <label for="alto">Alto Exterior (mts)</label>
+        <input
+          type="number"
+          id="alto"
+          name="alto"
+          step="any"
+          placeholder="Ingresa alto en mts"
+          required
+        />
+        <div id="altoError" class="error-message"></div>
+
+        <div id="campoAltoInterior" style="display: none">
+          <label for="altoInterior"
+            >Alto Interior / Profundidad del Hueco (mts)<span
+              class="descripcion"
+              ><br />Debe ser menor que el Alto Exterior. La diferencia es
+              el espesor del fondo sólido</span
+            ></label
+          >
+          <input
+            type="number"
+            id="altoInterior"
+            name="altoInterior"
+            step="any"
+            placeholder="Ingresa profundidad del hueco en mts"
+          />
+          <div id="altoInteriorError" class="error-message"></div>
+        </div>
+
+        <label for="peso"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: hormigón = 2.4)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="peso"
+          name="peso"
+          step="any"
+          placeholder="Ingresa peso específico en Ton/m3"
+          required
+        />
+        <div id="pesoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calculoCubo()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Peso:
+          <span id="cubo"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoCubo" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/cubo hueco.png" alt="cubo vacío" />
+    </div>
+
+    <script src="../assest/js/cuboHormigonVacio.js"></script>
+  </body>
+</html>

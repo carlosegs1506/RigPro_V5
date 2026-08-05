@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Cañeria HDP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>UNIDADES DE MEDIDA Y PESO</h2>
+      <br />
+      <div class="inputs">
+        <label for="unidadesOrigen">Seleccione la unidad de origen:</label>
+        <select id="unidadesOrigen" title="Unidad de Origen">
+          <option value="milimetros">Milímetros</option>
+          <option value="centimetros">Centímetros</option>
+          <option value="metros">Metros</option>
+          <option value="pies">Pies</option>
+          <option value="pulgadas">Pulgadas</option>
+          <option value="libras">Libras</option>
+          <option value="kilogramos">Kilogramos</option>
+        </select>
+        <br />
+        <label for="valor">Ingrese el valor a convertir:</label>
+        <input
+          type="number"
+          id="valor"
+          name="valor"
+          placeholder="Ingrese el valor"
+          step="any"
+          required
+          title="Valor a convertir"
+        />
+        <div id="valorError" class="error-message"></div>
+        <br />
+        <label for="unidadesDestino">Seleccione la unidad de destino:</label>
+        <select id="unidadesDestino" title="Unidad de Destino">
+          <option value="metros">Metros</option>
+          <option value="milimetros">Milímetros</option>
+          <option value="centimetros">Centímetros</option>
+          <option value="pies">Pies</option>
+          <option value="libras">Libras</option>
+          <option value="pulgadas">Pulgadas</option>
+          <option value="kilogramos">Kilogramos</option>
+          <option value="toneladas">Toneladas</option>
+        </select>
+        <br />
+        <label for="resultado">Resultado:</label>
+        <input type="text" id="resultado" readonly title="Resultado" />
+      </div>
+
+      <button class="enviar" onclick="convertirUnidades()">
+        <span class="span">Convertir</span>
+      </button>
+    </div>
+
+    <div class="container_todos">
+      <h2>CAÑERIA HDP:</h2>
+      <div class="inputs">
+        <label for="diametro"
+          >Diámetro (mm)<span class="descripcion"
+            ><br />Diámetro exterior en milímetros (ej: 24" = 609.6 mm)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="diametro"
+          placeholder="Ingresa diámetro en mm (ej: 609.6)"
+          name="diametro"
+          required
+        />
+        <div id="diametroError" class="error-message"></div>
+
+        <label for="espesor"
+          >Espesor (mm)<span class="descripcion"
+            ><br />Espesor de la pared de la cañería, en milímetros</span
+          ></label
+        >
+        <input
+          type="number"
+          id="espesor"
+          placeholder="Ingresa espesor en mm (ej: 20)"
+          name="espesor"
+          required
+        />
+        <div id="espesorError" class="error-message"></div>
+
+        <label for="largo"
+          >Largo (mts)<span class="descripcion"
+            ><br />Largo total de la cañería, en metros (ej: D=609.6mm, E=20mm, L=6mts → 239.6 Kg)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo"
+          placeholder="Ingresa largo en mts (ej: 6)"
+          name="largo"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calculoCañeriaHdp()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Peso:
+          <span id="cañeriaHdp"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoHdp" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/cañeria_hdp-transformed.png"
+        alt="imagen oreja de montaje"
+      />
+    </div>
+
+    <script src="../assest/js/unidadesMasaYPeso.js"></script>
+    <script src="../assest/js/cañeriaHdp.js"></script>
+  </body>
+</html>

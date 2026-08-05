@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Empty Concrete Cube</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario_en.html">Go Back</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>EMPTY CONCRETE CUBE</h2>
+      <div class="inputs">
+        <label for="tipoHueco"
+          >Hollow Type<span class="descripcion"
+            ><br />Choose whether the hollow goes all the way through, or if
+            the object has a solid closed base at the bottom</span
+          ></label
+        >
+        <select id="tipoHueco">
+          <option value="atraviesa">Goes all the way through</option>
+          <option value="fondo">Solid bottom</option>
+        </select>
+
+        <label for="largo1">Outer Length</label>
+        <input
+          type="number"
+          id="largo1"
+          name="largo1"
+          step="any"
+          placeholder="Enter outer length in meters"
+          required
+        />
+        <div id="largo1Error" class="error-message"></div>
+
+        <label for="largo2">Inner Length</label>
+        <input
+          type="number"
+          id="largo2"
+          name="largo2"
+          step="any"
+          placeholder="Enter inner length in meters"
+          required
+        />
+        <div id="largo2Error" class="error-message"></div>
+
+        <label for="ancho1">Outer Width</label>
+        <input
+          type="number"
+          id="ancho1"
+          name="ancho1"
+          step="any"
+          placeholder="Enter outer width in meters"
+          required
+        />
+        <div id="ancho1Error" class="error-message"></div>
+
+        <label for="ancho2">Inner Width</label>
+        <input
+          type="number"
+          id="ancho2"
+          name="ancho2"
+          step="any"
+          placeholder="Enter inner width in meters"
+          required
+        />
+        <div id="ancho2Error" class="error-message"></div>
+
+        <label for="alto">Height</label>
+        <input
+          type="number"
+          id="alto"
+          name="alto"
+          step="any"
+          placeholder="Enter height in meters"
+          required
+        />
+        <div id="altoError" class="error-message"></div>
+
+        <div id="campoAltoInterior" style="display: none">
+          <label for="altoInterior"
+            >Inner Height / Hollow Depth (m)<span class="descripcion"
+              ><br />Must be less than the Outer Height. The difference is
+              the thickness of the solid bottom</span
+            ></label
+          >
+          <input
+            type="number"
+            id="altoInterior"
+            name="altoInterior"
+            step="any"
+            placeholder="Enter hollow depth in meters"
+          />
+          <div id="altoInteriorError" class="error-message"></div>
+        </div>
+
+        <label for="peso">Specific Weight</label>
+        <input
+          type="number"
+          id="peso"
+          name="peso"
+          step="any"
+          placeholder="Enter specific weight"
+          required
+        />
+        <div id="pesoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calculoCubo()">
+        <span class="span">Calculate</span>
+      </button>
+      <div class="result">
+        <p>
+          Weight:
+          <span id="cubo"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoCubo" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/cubo hueco.png" alt="empty cube" />
+    </div>
+
+    <script src="../assest/js/cuboHormigonVacio.js"></script>
+  </body>
+</html>

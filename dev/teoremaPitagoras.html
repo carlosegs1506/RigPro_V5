@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Teorema de Pitagoras</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CALCULADORA DE TRIÁNGULO</h2>
+      <form id="trianguloForm">
+        <div class="inputs">
+          <label
+            >Ingresa dos de los valores (largo, altura o radio) para calcular el
+            tercero:</label
+          >
+          <br />
+          <label for="largo">Largo:</label>
+          <input
+            type="number"
+            id="largo"
+            step="any"
+            placeholder="Ingresa largo"
+          />
+          <div id="largoError" class="error-message"></div>
+          <br />
+          <label for="radio">Radio:</label>
+          <input
+            type="number"
+            id="radio"
+            step="any"
+            placeholder="Ingresa radio"
+          />
+          <div id="radioError" class="error-message"></div>
+          <br />
+          <label for="altura">Altura:</label>
+          <input
+            type="number"
+            id="altura"
+            step="any"
+            placeholder="Ingresa altura"
+          />
+          <div id="alturaError" class="error-message"></div>
+          <br />
+          <div id="generalError" class="error-message"></div>
+        </div>
+        <button class="enviar" type="submit" value="calcular">
+          <span class="span">Calcular</span>
+        </button>
+        <div class="result">
+          <p>
+            <span id="resultado"></span>
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div id="mostrarProceso" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/alt_maniobra.png"
+        alt="imagen altura de trabajo"
+      />
+    </div>
+
+    <script src="../assest/js/teoremaPitagoras.js"></script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Calculo de Perímetro de un Rectángulo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/principal.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CALCULO PERÍMETRO DE UN RECTÁNGULO</h2>
+      <div class="inputs">
+        <label for="base">Ingrese la longitud de la base</label>
+        <input
+          type="number"
+          id="base"
+          name="base"
+          step="any"
+          placeholder="Ingresa longitud de la base"
+          required
+        />
+        <div id="baseError" class="error-message"></div>
+
+        <label for="altura">Ingrese la longitud de la altura</label>
+        <input
+          type="number"
+          id="altura"
+          name="altura"
+          step="any"
+          placeholder="Ingresa longitud de la altura"
+          required
+        />
+        <div id="alturaError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularPerimetro()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Perímetro:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/PerimetroRectangulo.png"
+        alt="perimetro rectangulo"
+      />
+    </div>
+
+    <script src="../assest/js/perimetroRectangulo.js"></script>
+  </body>
+</html>

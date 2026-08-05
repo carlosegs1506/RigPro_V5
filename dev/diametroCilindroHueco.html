@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Diámetro de Cilindro Hueco</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>DIÁMETRO DE CILINDRO HUECO</h2>
+      <p class="nota-ayuda">
+        Úsala cuando ya sabes cuánto pesa la pieza (ej: dato de fábrica o
+        pesaje en terreno) y necesitas averiguar su diámetro. Es la fórmula
+        inversa de "Peso Cilindro Hueco".
+      </p>
+      <div class="inputs">
+        <label for="peso">Peso (Ton)</label>
+        <input
+          type="number"
+          id="peso"
+          step="any"
+          placeholder="Ingresa peso en Ton"
+          name="peso"
+          required
+        />
+        <div id="pesoError" class="error-message"></div>
+
+        <label for="pesoEspecifico"
+          >Peso Específico del Material<span class="descripcion"
+            ><br />En Ton/m³ (ej: hormigón = 2.4)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="pesoEspecifico"
+          step="any"
+          placeholder="Ingresa peso específico en Ton/m3"
+          name="pesoEspecifico"
+          required
+        />
+        <div id="pesoEspecificoError" class="error-message"></div>
+
+        <label for="largo">Largo (mts)</label>
+        <input
+          type="number"
+          id="largo"
+          step="any"
+          placeholder="Ingresa largo en mts"
+          name="largo"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+
+        <label for="espesor">Espesor de la Pared (mts)</label>
+        <input
+          type="number"
+          id="espesor"
+          step="any"
+          placeholder="Ingresa espesor en mts"
+          name="espesor"
+          required
+        />
+        <div id="espesorError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularDiametro()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Diámetro:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoDesarrollo" class="proceso"></div>
+
+    <script src="../assest/js/diametroCilindroHueco.js"></script>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Presión de Apoyo sobre una Superficie</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>PRESIÓN DE APOYO SOBRE UNA SUPERFICIE</h2>
+      <p class="nota-ayuda">
+        Calcula la presión que ejerce una carga sobre la superficie donde se
+        apoya (ej: base de un gato, patín estabilizador, o la pieza apoyada en
+        el suelo), para verificar si esa superficie soporta el peso.
+      </p>
+      <div class="inputs">
+        <label for="fuerza"
+          >Fuerza (Ton)<span class="descripcion"
+            ><br />Peso apoyado sobre la superficie (ej: 12.5 Ton)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="fuerza"
+          step="any"
+          placeholder="Ingresa la fuerza en Ton (ej: 12.5)"
+          name="fuerza"
+          required
+        />
+        <div id="fuerzaError" class="error-message"></div>
+
+        <label for="ancho"
+          >Ancho de la Superficie de Apoyo (m)<span class="descripcion"
+            ><br />Ej: 2.5</span
+          ></label
+        >
+        <input
+          type="number"
+          id="ancho"
+          step="any"
+          placeholder="Ingresa ancho en mts (ej: 2.5)"
+          name="ancho"
+          required
+        />
+        <div id="anchoError" class="error-message"></div>
+
+        <label for="largo"
+          >Largo de la Superficie de Apoyo (m)<span class="descripcion"
+            ><br />Ej: 2.5 → con los valores de ejemplo, Presión = 2 Ton/m²</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo"
+          step="any"
+          placeholder="Ingresa largo en mts (ej: 2.5)"
+          name="largo"
+          required
+        />
+        <div id="largoError" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calculoPresion()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Presión:
+          <span id="resultado"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoPresion" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img src="../assest/img/presion.png" alt="imagen de cálculo de presión" />
+    </div>
+
+    <script src="../assest/js/presion.js"></script>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 101 -->
+                    <h3>101) Que caracteristica cataloga un levante basico:</h3>
+                    <label><input type="radio" name="q101" value="a"> a. Mas de 2 toneladas.</label>
+                    <label><input type="radio" name="q101" value="b"> b. Mas del 80% de capacidad de la grua.</label>
+                    <label><input type="radio" name="q101" value="c"> c. Levante multiples.</label>
+                    <label><input type="radio" name="q101" value="d"> d. Todas las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q101', 'a', 'result101')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 101 -->
+                    <div id="result101"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 102 -->
+                    <h3>102) Bajo que factor de seguridad se fabrican los tensores segun las norma ASME B30.26:
+                    </h3>
+                    <label><input type="radio" name="q102" value="a"> a. 25: 1.</label>
+                    <label><input type="radio" name="q102" value="b"> b. 10: 1.</label>
+                    <label><input type="radio" name="q102" value="c"> b. 6: 1.</label>
+                    <label><input type="radio" name="q102" value="d"> b. 4: 1.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q102', 'c', 'result102')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 102 -->
+                    <div id="result102"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 103 -->
+                    <h3>103) Bajo que factor de seguridad se fabrican los grilletes segun las norma ASME B30.26:
+                    </h3>
+                    <label><input type="radio" name="q103" value="a"> a. 5: 1.</label>
+                    <label><input type="radio" name="q103" value="b"> b. 4: 1.</label>
+                    <label><input type="radio" name="q103" value="c"> b. 6: 1.</label>
+                    <label><input type="radio" name="q103" value="d"> b. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q103', 'c', 'result103')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 103 -->
+                    <div id="result103"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 104 -->
+                    <h3>104) Como se controla la inestabilidad de las cargas al izarlas:
+                    </h3>
+                    <label><input type="radio" name="q104" value="a"> a. Con el uso de las manos tomando el cuenta el cuidado apropiado.</label>
+                    <label><input type="radio" name="q104" value="b"> b. Conociendo el centro de gravedad.</label>
+                    <label><input type="radio" name="q104" value="c"> b. Conociendo el centro de gravedad y el uso de los vientos.</label>
+                    <label><input type="radio" name="q104" value="d"> b. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q104', 'c', 'result104')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 104 -->
+                    <div id="result104"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 105 -->
+                    <h3>105) Que deben poseer todos los elementos de izaje como requerimiento minimo para poder ser utilizados:
+                    </h3>
+                    <label><input type="radio" name="q105" value="a"> a. Placa o etiqueta de capacidades .</label>
+                    <label><input type="radio" name="q105" value="b"> b. Lista de chequeo de pre-uso.</label>
+                    <label><input type="radio" name="q105" value="c"> b. Cinta de color del mes.</label>
+                    <label><input type="radio" name="q105" value="d"> b. Todas las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q105', 'd', 'result105')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 105 -->
+                    <div id="result105"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 106 -->
+                    <h3>106) Que efectividad tiene un grillete ocupado al 90%:
+                    </h3>
+                    <label><input type="radio" name="q106" value="a"> a. 100%.</label>
+                    <label><input type="radio" name="q106" value="b"> b. 70%.</label>
+                    <label><input type="radio" name="q106" value="c"> a. 60%.</label>
+                    <label><input type="radio" name="q106" value="d"> b. 50%.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q106', 'd', 'result106')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 106 -->
+                    <div id="result106"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 107 -->
+                    <h3>107) Si el centro de gravedad de una viga se encuentra a la misma distancia de sus puntos de izaje 
+                        el peso se distribuye:
+                    </h3>
+                    <label><input type="radio" name="q107" value="a"> a. Dependiendo del largo de la eslinga.</label>
+                    <label><input type="radio" name="q107" value="b"> b. Igualmente en ambos puntos.</label>
+                    <label><input type="radio" name="q107" value="c"> c. Uno cargara mas peso que el otro.</label>
+                    <label><input type="radio" name="q107" value="d"> d. Todas las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q107', 'b', 'result107')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 107 -->
+                    <div id="result107"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 108 -->
+                    <h3>108) Para que un amarre en U cumpla su efectividad del 200%, que se debe cumplir:
+                    </h3>
+                    <label><input type="radio" name="q108" value="a"> a. Que este en buen estado.</label>
+                    <label><input type="radio" name="q108" value="b"> b. Que tenga el mismo largo de trabajo.</label>
+                    <label><input type="radio" name="q108" value="c"> c. Que se genere un angulo de 90.</label>
+                    <label><input type="radio" name="q108" value="d"> d. Todas las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q108', 'd', 'result108')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 108 -->
+                    <div id="result108"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 109 -->
+                    <h3>109) Que se debe hacer para proteger los elementos de izaje de una carga con cantos filosos:
+                    </h3>
+                    <label><input type="radio" name="q109" value="a"> a. Ocupar el factor de seguridad.</label>
+                    <label><input type="radio" name="q109" value="b"> b. No se deben considerar.</label>
+                    <label><input type="radio" name="q109" value="c"> c. Revisarlos antes de la maniobra.</label>
+                    <label><input type="radio" name="q109" value="d"> d. Ocupar elementos como gomas y cueros.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q109', 'd', 'result109')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 109 -->
+                    <div id="result109"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 110 -->
+                    <h3>110) Cual es el maximo desgaste permitido en el elemento de izaje (Grillete):
+                    </h3>
+                    <label><input type="radio" name="q110" value="a"> a. 10%. </label>
+                    <label><input type="radio" name="q110" value="b"> b. 5%.</label>
+                    <label><input type="radio" name="q110" value="c"> c. 15%.</label>
+                    <label><input type="radio" name="q110" value="d"> d. 20%.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q110', 'a', 'result110')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 110 -->
+                    <div id="result110"></div>
+                </li>
+            </ul>
+            <hr>
+            </form>
+    </div>
+    
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Prueba de Conocimientos de Grúas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assest/css/style.css">
+
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./preguntas.html">Regresar</a></button>
+            <img class=" imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div class="container_todos">
+        <h2>CONOCIMIENTOS GENERALES</h2>
+    </div>
+    <div class="inputs">
+        <form id="quiz-form">
+            <ul style="list-style: none;">
+                <li>
+                    <!-- Pregunta 122 -->
+                    <h3>122) Que significa la sigla SWL:</h3>
+                    <label><input type="radio" name="q122" value="a"> a. Carga limite de trabajo.</label>
+                    <label><input type="radio" name="q122" value="b"> b. Carga excedente.</label>
+                    <label><input type="radio" name="q122" value="c"> c. Carga segura de trabajo.</label>
+                    <label><input type="radio" name="q122" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q122', 'c', 'result122')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 122 -->
+                    <div id="result122"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul style="list-style: none;">
+                 <!-- Pregunta 123 -->
+                <li>
+                    <h3>123) Que significa FD o FS y que aplicacion se le da sobre el elemento de izaje:
+                    </h3>
+                    <label><input type="radio" name="q123" value="a"> a. Fuerza simple y es la capacidad segun tipo de enganche.</label>
+                    <label><input type="radio" name="q123" value="b"> b. Factor de seguridad, capacidad de reserva teorica.</label>
+                    <label><input type="radio" name="q123" value="c"> c. Factor de diseño, capacidad de reserva teorica.</label>
+                    <label><input type="radio" name="q123" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q123', 'c', 'result123')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 123 -->
+                    <div id="result123"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 124 -->
+                    <h3>124) A que se refiere el termino de carga bruta:
+                    </h3>
+                    <label><input type="radio" name="q124" value="a"> a. Al peso de los accesorios de izaje.</label>
+                    <label><input type="radio" name="q124" value="b"> b. Al peso ded la carga.</label>
+                    <label><input type="radio" name="q124" value="c"> c. Al peso de la carga mas los accesorios.</label>
+                    <label><input type="radio" name="q124" value="d"> d. Ninguna de las anteriores.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q124', 'c', 'result124')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 124 -->
+                    <div id="result124"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 125 -->
+                    <h3>125) En un enganche realizado con dos eslingas en 60° sobre la horizontal, de la carga, Cual es la
+                        capacidad en % de la eslinga:</h3>
+                    <label><input type="radio" name="q125" value="a"> a. 86%.</label>
+                    <label><input type="radio" name="q125" value="b"> b. 78%.</label>
+                    <label><input type="radio" name="q125" value="c"> c. 100%.</label>
+                    <label><input type="radio" name="q125" value="d"> d. 80%.</label>
+                    <label><input type="radio" name="q125" value="e"> e. B,C y D.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q125', 'a', 'result125')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 125 -->
+                    <div id="result125"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 125-B -->
+                    <h3>125-B) Caul es la fraccion de disminucion aceptable para que una eslinga de cable por abrasion segun
+                        norma ASME B.30.9,:
+                    </h3>
+                    <label><input type="radio" name="q125b" value="a"> a. 15 alambres por trenza.</label>
+                    <label><input type="radio" name="q125b" value="b"> b. 20 alambres por trenza.</label>
+                    <label><input type="radio" name="q125b" value="c"> c. 25 alambres por trenza.</label>
+                    <label><input type="radio" name="q125b" value="d"> d. 30 alambres por trenza.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q125b', 'a', 'result125b')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 125-B -->
+                    <div id="result125b"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 1126 -->
+                    <h3>126) Caul es la fraccion de disminucion aceptable para que una eslinga de cable por abrasion segun 
+                        norma ASME B.30.9,:
+                    </h3>
+                    <label><input type="radio" name="q126" value="a"> a. Perdida en 25% de su diametro.</label>
+                    <label><input type="radio" name="q126" value="b"> b. Perdida en 30% de su diametro.</label>
+                    <label><input type="radio" name="q126" value="c"> c. Perdida en 50% de su diametro.</label>
+                    <label><input type="radio" name="q126" value="d"> d. Perdida en 10% de su diametro.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q126', 'a', 'result126')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 126 -->
+                    <div id="result126"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 127 -->
+                    <h3>127) Caul es el angulo incluido maximo cuano las eslingas se conectan a un grillete:</h3>
+                    <label><input type="radio" name="q127" value="a"> a. 30°.</label>
+                    <label><input type="radio" name="q127" value="b"> b. 45°.</label>
+                    <label><input type="radio" name="q127" value="c"> c. 80°.</label>
+                    <label><input type="radio" name="q127" value="d"> d. 120°.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q127', 'd', 'result127')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 127 -->
+                    <div id="result127"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 128 -->
+                    <h3>128) Bajo que factor de seguridad se fabrican los tensores segun ASME b.30.26:
+                    </h3>
+                    <label><input type="radio" name="q128" value="a"> a. 20:1.</label>
+                    <label><input type="radio" name="q128" value="b"> b. 10:1.</label>
+                    <label><input type="radio" name="q128" value="c"> c. 6:1.</label>
+                    <label><input type="radio" name="q128" value="d"> d. 5:1.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q128', 'c', 'result128')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 128 -->
+                    <div id="result128"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 129 -->
+                    <h3>129) No es necesario afianzar el gancho de la grua al chasis de la infraestructura:
+                    </h3>
+                    <label><input type="radio" name="q129" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q129" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q129', 'b', 'result129')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 129 -->
+                    <div id="result129"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 130 -->
+                    <h3>130) Se requiere apoyo del ayudane y rigger para el montaje del contrapeso:
+                    </h3>
+                    <label><input type="radio" name="q130" value="a"> a. Verdadero. </label>
+                    <label><input type="radio" name="q130" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q130', 'a', 'result130')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 130 -->
+                    <div id="result130"></div>
+                </li>
+            </ul>
+            <hr>
+            <ul>
+                <li>
+                    <!-- Pregunta 131 -->
+                    <h3>131) El factor de tension de una eslinga es la division del largo de la eslinga, por la altura de
+                        la maniobra:
+                    </h3>
+                    <label><input type="radio" name="q131" value="a"> a. Verdadero.</label>
+                    <label><input type="radio" name="q131" value="b"> b. Falso.</label>
+                    <button class="enviar" type="button" onclick="verificarRespuesta('q131', 'a', 'result131')"><span
+                            class="span">Verificar</span></button>
+                    <!-- Resultado de la Pregunta 131 -->
+                    <div id="result131"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+    <div id="results"></div>
+
+    <div class="otras_preguntas">
+        <button class="otras"><a href="./preguntas1.html">1</a></button>
+        <button class="otras"><a href="./preguntas2.html">2</a></button>
+        <button class="otras"><a href="./preguntas3.html">3</a></button>
+        <button class="otras"><a href="./preguntas4.html">4</a></button>
+        <button class="otras"><a href="./preguntas5.html">5</a></button>
+        <button class="otras"><a href="./preguntas6.html">6</a></button>
+        <button class="otras"><a href="./preguntas7.html">7</a></button>
+        <button class="otras"><a href="./preguntas8.html">8</a></button>
+        <button class="otras"><a href="./preguntas9.html">9</a></button>
+        <button class="otras"><a href="./preguntas10.html">10</a></button>
+        <button class="otras"><a href="./preguntas11.html">11</a></button>
+        <button class="otras"><a href="./preguntas12.html">12</a></button>
+    </div>
+
+    <script src="../assest/js/preguntas.js"></script>
+
+</body>
+</html>

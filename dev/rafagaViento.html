@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <title>Ráfaga de Viento</title>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>CÁLCULO RÁFAGA DE VIENTO</h2>
+      <p class="nota-ayuda">
+        Estima la velocidad real del viento a la altura de trabajo (ej: punta
+        de pluma), a partir de una medición tomada a 10 metros de altura.
+      </p>
+
+      <div class="inputs">
+        <label for="viento"
+          >Velocidad del Viento a 10 metros (m/s)<span class="descripcion"
+            ><br />Medición de referencia, tomada con anemómetro a nivel de suelo (ej: 10)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="viento"
+          name="viento"
+          placeholder="Ingresa velocidad en m/s"
+        />
+        <div id="vientoError" class="error-message"></div>
+
+        <label for="altura"
+          >Altura de Trabajo (metros)<span class="descripcion"
+            ><br />Altura real donde se necesita la velocidad del viento (ej: 47)</span
+          ></label
+        >
+        <input
+          type="number"
+          id="altura"
+          name="altura"
+          placeholder="Ingresa altura en mts"
+        />
+        <div id="alturaError" class="error-message"></div>
+      </div>
+
+      <button class="enviar" onclick="calcularRafaga()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Velocidad:
+          <span id="result"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoViento" class="proceso"></div>
+    <script src="../assest/js/rafagaViento.js"></script>
+  </body>
+</html>

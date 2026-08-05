@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Tensión de Eslinga CG Desplazado</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="../dev/segundario.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div class="container_todos">
+      <h2>TENSIÓN DE ESLINGA CG DESPLAZADO</h2>
+      <p class="nota-ayuda">
+        Úsala cuando el centro de gravedad (CG) de la carga NO está justo al
+        medio entre las dos eslingas. Mide siempre del mismo lado: todo lo
+        que digas "izquierda" (D1, E1) debe ser el mismo lado, e igual con
+        "derecha" (D2, E2). Guíate con el dibujo de abajo.
+      </p>
+      <div class="inputs">
+        <label for="peso">Peso de la Carga</label>
+        <input
+          type="number"
+          id="peso"
+          name="peso"
+          step="any"
+          placeholder="Ingresa peso en Kg"
+          required
+        />
+        <div id="pesoError" class="error-message"></div>
+
+        <label for="altura"
+          >Altura de Maniobra (H)<span class="descripcion"
+            ><br />Distancia vertical desde el gancho hasta la carga</span
+          ></label
+        >
+        <input
+          type="number"
+          id="altura"
+          name="altura"
+          step="any"
+          placeholder="Ingresa altura (H)"
+          required
+        />
+        <div id="alturaError" class="error-message"></div>
+
+        <label for="dif1"
+          >Distancia D1 (lado IZQUIERDO)<span class="descripcion"
+            ><br />Desde el centro de la carga (CG) hasta el punto de
+            enganche izquierdo</span
+          ></label
+        >
+        <input
+          type="number"
+          id="dif1"
+          name="dif1"
+          step="any"
+          placeholder="Ingresa D1"
+          required
+        />
+        <div id="dif1Error" class="error-message"></div>
+
+        <label for="dif2"
+          >Distancia D2 (lado DERECHO)<span class="descripcion"
+            ><br />Desde el centro de la carga (CG) hasta el punto de
+            enganche derecho</span
+          ></label
+        >
+        <input
+          type="number"
+          id="dif2"
+          name="dif2"
+          step="any"
+          placeholder="Ingresa D2"
+          required
+        />
+        <div id="dif2Error" class="error-message"></div>
+
+        <label for="largo1"
+          >Largo Eslinga IZQUIERDA (E1)<span class="descripcion"
+            ><br />La eslinga del mismo lado que D1</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo1"
+          name="largo1"
+          step="any"
+          placeholder="Ingresa largo E1"
+          required
+        />
+        <div id="largo1Error" class="error-message"></div>
+
+        <label for="largo2"
+          >Largo Eslinga DERECHA (E2)<span class="descripcion"
+            ><br />La eslinga del mismo lado que D2</span
+          ></label
+        >
+        <input
+          type="number"
+          id="largo2"
+          name="largo2"
+          step="any"
+          placeholder="Ingresa largo E2"
+          required
+        />
+        <div id="largo2Error" class="error-message"></div>
+      </div>
+      <button class="enviar" onclick="calcularTensionCentroMovido()">
+        <span class="span">Calcular</span>
+      </button>
+      <div class="result">
+        <p>
+          Tensión Eslinga Izquierda (E1):
+          <span id="tensionMovida1"></span>
+        </p>
+        <p>
+          Tensión Eslinga Derecha (E2):
+          <span id="tensionMovida2"></span>
+        </p>
+      </div>
+    </div>
+
+    <div id="procesoMovido" class="proceso"></div>
+    <div id="imagenProceso" class="imagen-proceso" style="display: none">
+      <img
+        src="../assest/img/tension de eslinga cg desplazado anguada.png"
+        alt="imagen altura de trabajo"
+      />
+    </div>
+
+    <script src="../assest/js/calTenEslCgDesplazado.js"></script>
+  </body>
+</html>

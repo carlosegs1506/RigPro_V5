@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="../assest/img/logo1.png" />
+    <!-- Optimización para motores de búsqueda-->
+    <title>Calculadora Científica</title>
+    <link rel="stylesheet" href="../assest/css/style.css">
+</head>
+
+<body>
+
+    <ul class="ul_principal_segundario">
+        <li>
+            <button class="button_principal_segundario"><a href="./index_es.html">Regresar</a></button>
+            <img class="imagen" src="../assest/img/logo1.png">
+        </li>
+    </ul>
+
+    <div id="sciout">
+        <div>
+            <div id="sciInPut">&nbsp;</div>
+            <div id="sciOutPut">0</div>
+        </div>
+        <div class="row">
+            <div class="scien" id="sciinfofunckeys">
+                <div>
+                    <span onclick="r('sin')" class="scifunc">sin</span>
+                    <span onclick="r('cos')" class="scifunc">cos</span>
+                    <span onclick="r('tan')" class="scifunc">tan</span>
+                    <span class="scird">
+                        <label for="scirdsettingd">
+                            <input id="scirdsettingd" type="radio" name="scirdsetting" value="deg"
+                                onclick="cnDegreeRadians='degree';" checked="">Deg</label>
+                        <label for="scirdsettingr"><input id="scirdsettingr" type="radio" name="scirdsetting"
+                                value="rad" onclick="cnDegreeRadians='radians';">Rad</label>
+                    </span>
+                </div>
+                <div><span onclick="r('asin')" class="scifunc">sin<sup>-1</sup></span><span onclick="r('acos')"
+                        class="scifunc">cos<sup>-1</sup></span><span onclick="r('atan')"
+                        class="scifunc">tan<sup>-1</sup></span><span onclick="r('PI')" class="scifunc">π</span><span
+                        onclick="r('exp')" class="scifunc">e</span></div>
+                <div><span onclick="r('pow')" class="scifunc">x<sup>y</sup></span><span onclick="r('x3')"
+                        class="scifunc">x<sup>3</sup></span><span onclick="r('x2')"
+                        class="scifunc">x<sup>2</sup></span><span onclick="r('ex')"
+                        class="scifunc">e<sup>x</sup></span><span onclick="r('10x')"
+                        class="scifunc">10<sup>x</sup></span></div>
+                <div><span onclick="r('apow')" class="scifunc"><sup>y</sup>√x</span><span onclick="r('3x')"
+                        class="scifunc"><sup>3</sup>√x</span><span onclick="r('sqrt')" class="scifunc">√x</span><span
+                        onclick="r('ln')" class="scifunc">ln</span><span onclick="r('log')" class="scifunc">log</span>
+                </div>
+                <div><span onclick="r('(')" class="scifunc">(</span><span onclick="r(')')" class="scifunc">)</span><span
+                        onclick="r('1/x')" class="scifunc">1/x</span><span onclick="r('pc')"
+                        class="scifunc">%</span><span onclick="r('!')" class="scifunc">n!</span></div>
+            </div>
+            <div id="number">
+                <div>
+                    <span onclick="r(7)" class="scinm">7</span>
+                    <span onclick="r(8)" class="scinm">8</span>
+                    <span onclick="r(9)" class="scinm">9</span>
+                    <span onclick="r('+')" class="sciop">+</span>
+                    <span onclick="r('bk')" class="sciop">Back</span>
+                </div>
+                <div>
+                    <span onclick="r(4)" class="scinm">4</span>
+                    <span onclick="r(5)" class="scinm">5</span>
+                    <span onclick="r(6)" class="scinm">6</span>
+                    <span onclick="r('-')" class="sciop">–</span>
+                    <span onclick="r('ans')" class="sciop">Ans</span>
+                </div>
+                <div>
+                    <span onclick="r(1)" class="scinm">1</span>
+                    <span onclick="r(2)" class="scinm">2</span>
+                    <span onclick="r(3)" class="scinm">3</span>
+                    <span onclick="r('*')" class="sciop">×</span>
+                    <span onclick="r('M+')" class="sciop">M+</span>
+                </div>
+                <div>
+                    <span onclick="r(0)" class="scinm">0</span>
+                    <span onclick="r('.')" class="scinm">.</span>
+                    <span onclick="r('EXP')" class="sciop">EXP</span>
+                    <span onclick="r('/')" class="sciop">/</span>
+                    <span onclick="r('M-')" class="sciop">M-</span>
+                </div>
+                <div>
+                    <span onclick="r('+/-')" class="sciop">±</span>
+                    <span onclick="r('RND')" class="sciop">RND</span>
+                    <span onclick="r('C')" class="scieq scinm ">AC</span>
+                    <span onclick="r('=')" class="scieq scinm">=</span>
+                    <span onclick="r('MR')" class="sciop" id="scimrc">MR</span>
+                </div>
+            </div>
+        </div>
+        <div id="scihistory"></div>
+    </div>
+    <script src="../assest/js/calculadora.js"></script>
+
+</body>
+
+</html>
