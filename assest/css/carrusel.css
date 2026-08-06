@@ -1,6 +1,13 @@
+/* Variables propias del carrusel (las de marca -secondary, secondary-ink-
+   ya vienen de style.css; estas son solo para el "flashcard" blanco) */
 :root {
     --text-color: #1f2937;
 }
+
+/* NOTA: body, .ul_principal_segundario, .button_principal_segundario,
+   .titulo y .container_todos ya no se definen aqui: vienen de style.css,
+   que ahora se carga antes que este archivo, para que toda la app
+   comparta el mismo color/tipografia de marca. */
 
 .carousel-container {
     width: 90%;

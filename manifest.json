@@ -11,6 +11,54 @@
   "theme_color": "#050503",
   "lang": "es",
   "dir": "ltr",
+  "categories": ["utilities", "education", "business"],
+  "prefer_related_applications": false,
+  "screenshots": [
+    {
+      "src": "assest/img/screenshots/menu.png",
+      "sizes": "824x1830",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Menú principal de RigPro"
+    },
+    {
+      "src": "assest/img/screenshots/calculadora.png",
+      "sizes": "824x1830",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Calculadora de ángulo de trabajo y unidades"
+    },
+    {
+      "src": "assest/img/screenshots/glosario.png",
+      "sizes": "824x1830",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Glosario de términos de rigging"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ángulo de Trabajo",
+      "short_name": "Ángulo",
+      "description": "Calcular el ángulo de trabajo de una maniobra",
+      "url": "./dev/angulo.html",
+      "icons": [{ "src": "assest/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Capacidad de Grilletes",
+      "short_name": "Grilletes",
+      "description": "Calcular la capacidad de un grillete por su diámetro",
+      "url": "./dev/grilletes.html",
+      "icons": [{ "src": "assest/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Capacidad de Estrobos",
+      "short_name": "Estrobos",
+      "description": "Calcular la capacidad de un estrobo",
+      "url": "./dev/capEstrobos.html",
+      "icons": [{ "src": "assest/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
   "icons": [
     { "src": "assest/icons/icon-48.png", "sizes": "48x48", "type": "image/png", "purpose": "any" },
     { "src": "assest/icons/icon-72.png", "sizes": "72x72", "type": "image/png", "purpose": "any" },
