@@ -169,7 +169,7 @@ h1 {
 }
 
 .container .principal img{
-  height: 50vh;
+  max-height: 50vh;
   opacity: 1;
   /* grua1_negro.png ya viene coloreada en amarillo/negro con fondo negro
      sólido: sin filtro ni overlay. width:auto conserva su proporción. */
@@ -215,8 +215,8 @@ html, body {
 /* Logo de RigPro destacado en la portada (index_es.html): logo1.png ya
    viene coloreado en amarillo/negro, sin filtro ni overlay. */
 .container .primero img {
-  height: 40vh;
-  max-height: 30vh;
+  max-width: 40vh;
+  max-height: 40vh;
 }
 
 /* Ajusta el ancho del botón para que se vea bien con la imagen */
