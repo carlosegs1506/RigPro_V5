@@ -32,7 +32,7 @@ body {
   padding: 0.5rem;
   position: sticky;
   top: 0;
-  height: 15vh;
+  height: 10vh;
   width: 100%;
   box-sizing: border-box;
   z-index: 2;
@@ -307,7 +307,7 @@ html, body {
 
 .button_principal_segundario,
 .tanden {
-  width: 15vh;
+  width: 20vh;
   height: 50px;
 }
 
@@ -465,7 +465,7 @@ main {
 
 /* Estilos de las paginas formulas mas usadas y otras formulas */
 .container_todos {
-  background-color: #050503;
+  background-color:  #050503;
   border: 3px solid var(--steel);
   border-radius: 10px;
   text-align: center;
@@ -665,7 +665,7 @@ h2 {
 }
 
 #quiz-form button {
-  background-color: #1a1b24;
+  background-color:  #050503;
   border-radius: 10px;
   margin: 10px 0px;
   min-height: 48px;
@@ -696,7 +696,7 @@ hr {
 }
 
 .otras_preguntas button {
-  background-color: #1a1b24;
+  background-color:  #050503;
   border-radius: 5px;
   min-height: 48px;
   min-width: 48px;
@@ -943,51 +943,11 @@ select {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
- /* Estilos para animaciones */
- .carousel-item {
-  opacity: 0;
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.carousel-item.active {
-  opacity: 1;
-  transform: scale(1.05); /* Efecto de zoom in */
-}
-
-h4, p {
-  transition: transform 0.8s ease, opacity 0.8s ease;
-}
-
-h4 {
-  transform: translateY(-10px); /* Movimiento hacia arriba */
-  opacity: 0;
-}
-
-.carousel-item.active h4 {
-  transform: translateY(0); /* Restaura la posición */
-  opacity: 1; /* Hace visible el texto */
-}
-
-p {
-  transform: translateY(10px); /* Movimiento hacia abajo */
-  /* opacity: 0; */
-}
-
-.carousel-item.active p {
-  transform: translateY(0); /* Restaura la posición */
-  opacity: 1; /* Hace visible el texto */
-}
-
 /* Clase activa para mostrar el resultado */
 .show-result {
   opacity: 1;
   transform: scale(1);
 }
-
-/* Codigo Nuevo */
-
-/* Fin codigo Nuevo */
-
 
 @media print {
   select option {
@@ -1131,26 +1091,3 @@ p {
   }
 }
 
-/* carrusel */
-
-.carousel-item {
-  height: 20%;
-  background-color: #1a1b24;
-  border-radius: 20px;
-}
-
-.carousel-item > p {
-  color: hsl(0, 0%, 100%);
-  padding: 20px;
-  font-family: "Bahnschrift", "Arial Narrow", sans-serif;
-  font-size: 3.5vw;
-  text-align: justify;
-  text-indent: 15px;
-}
-
-.carousel-item > h4 {
-  color: hsl(0, 0%, 100%);
-  margin-top: 20px;
-  text-align: center;
-  font-family: "Bahnschrift", "Arial Narrow", sans-serif;
-}
