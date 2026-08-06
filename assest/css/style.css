@@ -169,7 +169,8 @@ h1 {
 }
 
 .container .principal img{
-  max-height: 50vh;
+  height: 50vh;
+  max-height: 90vh;
   opacity: 1;
   /* grua1_negro.png ya viene coloreada en amarillo/negro con fondo negro
      sólido: sin filtro ni overlay. width:auto conserva su proporción. */
