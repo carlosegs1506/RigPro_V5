@@ -173,8 +173,8 @@ h1 {
   opacity: 1;
   /* grua1_negro.png ya viene coloreada en amarillo/negro con fondo negro
      sólido: sin filtro ni overlay. width:auto conserva su proporción. */
-  width: auto;
   max-width: 110%;
+  max-width: 42vh;
 }
 
 .container .button img {
