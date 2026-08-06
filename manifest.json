@@ -15,6 +15,13 @@
   "prefer_related_applications": false,
   "screenshots": [
     {
+      "src": "assest/img/screenshots/menu_wide.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Menú principal de RigPro"
+    },
+    {
       "src": "assest/img/screenshots/menu.png",
       "sizes": "824x1830",
       "type": "image/png",
