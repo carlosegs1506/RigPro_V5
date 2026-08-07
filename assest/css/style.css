@@ -218,6 +218,7 @@ html, body {
 .container .primero img {
   height: 40vh;
   max-height: 30vh;
+  max-width: 40vh;
 }
 
 /* Ajusta el ancho del botón para que se vea bien con la imagen */
