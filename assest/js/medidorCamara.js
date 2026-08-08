@@ -74,6 +74,9 @@
 
   // --- 2. Iniciar sesion AR ---
   async function iniciarAR() {
+    elBtnIniciarAR.disabled = true;
+    elBtnIniciarAR.textContent = "Iniciando cámara…";
+
     try {
       xrSession = await navigator.xr.requestSession("immersive-ar", {
         requiredFeatures: ["hit-test"],
@@ -86,6 +89,8 @@
           error.message +
           "\n\nVuelve a intentarlo, o revisa que le hayas dado permiso de cámara a la app."
       );
+      elBtnIniciarAR.disabled = false;
+      elBtnIniciarAR.textContent = "Iniciar medición AR";
       return;
     }
 
@@ -94,12 +99,25 @@
     xrSession.addEventListener("end", finalizarAR);
     xrSession.addEventListener("select", alTocarPantalla);
 
-    xrRefSpace = await xrSession.requestReferenceSpace("local");
-    const viewerSpace = await xrSession.requestReferenceSpace("viewer");
-    hitTestSource = await xrSession.requestHitTestSource({ space: viewerSpace });
+    try {
+      const viewerSpace = await xrSession.requestReferenceSpace("viewer");
+      hitTestSource = await xrSession.requestHitTestSource({ space: viewerSpace });
 
-    renderer.xr.setReferenceSpaceType("local");
-    await renderer.xr.setSession(xrSession);
+      renderer.xr.setReferenceSpaceType("local");
+      await renderer.xr.setSession(xrSession);
+      // Usamos el mismo reference space que ya maneja Three.js internamente
+      // en vez de pedir uno propio por separado (redundante, y evita
+      // conflictos entre dos referencias "local" pedidas de forma distinta).
+      xrRefSpace = renderer.xr.getReferenceSpace();
+    } catch (error) {
+      alert(
+        "Ocurrió un problema iniciando la medición AR: " +
+          error.message +
+          "\n\nSe va a cerrar la sesión. Vuelve a intentarlo."
+      );
+      await xrSession.end();
+      return;
+    }
 
     elArCanvasContainer.classList.add("activo");
     elArOverlay.classList.add("activo");
@@ -116,8 +134,12 @@
     const luz = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
     scene.add(luz);
 
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
+    // Pixel ratio limitado a 2: en celulares con pantalla muy densa
+    // (devicePixelRatio 3 o mas), renderizar sin tope aca sumado a la
+    // sesion AR puede sobrecargar la GPU justo cuando arranca la camara,
+    // llegando a colgar el dispositivo por completo.
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.xr.enabled = true;
     elArCanvasContainer.innerHTML = "";
@@ -244,6 +266,8 @@
     elArOverlay.classList.remove("activo");
     xrSession = null;
     hitTestSource = null;
+    elBtnIniciarAR.disabled = false;
+    elBtnIniciarAR.textContent = "Iniciar medición AR";
   }
 
   // --- 6. Historial de mediciones (guardado local en el dispositivo) ---
