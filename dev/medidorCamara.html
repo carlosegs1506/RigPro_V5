@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Medidor con Cámara</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <style>
+      /* Estilos propios de esta pagina. Se usa el mismo lenguaje visual
+         (negro + amarillo) que el resto de RigPro, pero esta pantalla
+         necesita su propio layout de pantalla completa para la camara. */
+      #medidorRoot {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .medidor-estado {
+        background-color: #050503;
+        border: 3px solid var(--steel);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px auto;
+        width: 95%;
+        text-align: center;
+        color: #fff;
+      }
+
+      .medidor-estado p {
+        margin: 8px 0;
+        line-height: 1.5;
+      }
+
+      .medidor-boton-ar {
+        display: block;
+        width: 90%;
+        margin: 15px auto;
+        padding: 16px;
+        background-color: var(--secondary);
+        color: var(--secondary-ink);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .medidor-boton-ar:disabled {
+        background-color: #555;
+        color: #999;
+        cursor: not-allowed;
+      }
+
+      .medidor-boton-secundario {
+        display: block;
+        width: 90%;
+        margin: 8px auto;
+        padding: 12px;
+        background-color: transparent;
+        color: var(--secondary);
+        border: 2px solid var(--secondary);
+        border-radius: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .medidor-aviso {
+        background-color: #fff8e6;
+        border-left: 4px solid #e6a817;
+        padding: 10px 14px;
+        margin: 15px auto;
+        width: 88%;
+        font-size: 0.9em;
+        line-height: 1.4;
+        text-align: left;
+        color: #1a1400;
+      }
+
+      /* --- Overlay que se muestra DURANTE la sesion de AR --- */
+      #arOverlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        font-family: "Nunito Sans", sans-serif;
+      }
+
+      #arOverlay.activo {
+        display: block;
+      }
+
+      .ar-panel-superior {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(rgba(0,0,0,0.75), transparent);
+        padding: 16px 16px 30px 16px;
+        text-align: center;
+        color: #fff;
+        pointer-events: none;
+      }
+
+      .ar-panel-superior p {
+        margin: 0;
+        font-size: 1.05em;
+      }
+
+      .ar-distancia {
+        font-size: 1.6em;
+        font-weight: bold;
+        color: var(--secondary);
+        margin-top: 4px !important;
+      }
+
+      .ar-panel-inferior {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.85));
+        padding: 30px 16px 24px 16px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        pointer-events: auto;
+      }
+
+      .ar-panel-inferior button {
+        flex: 1;
+        max-width: 160px;
+        padding: 14px 10px;
+        border-radius: 8px;
+        border: none;
+        font-weight: bold;
+        font-size: 0.95em;
+      }
+
+      #btnNuevaMedicion {
+        background-color: var(--secondary);
+        color: var(--secondary-ink);
+      }
+
+      #btnSalirAR {
+        background-color: rgba(255,255,255,0.15);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.4) !important;
+      }
+
+      #btnDeshacerPunto {
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.4) !important;
+      }
+
+      #arCanvasContainer {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        display: none;
+      }
+
+      #arCanvasContainer.activo {
+        display: block;
+      }
+
+      #listaMediciones {
+        text-align: left;
+        margin: 10px auto;
+        width: 90%;
+        color: #fff;
+      }
+
+      #listaMediciones li {
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
+      }
+    </style>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="./index_es.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div id="medidorRoot">
+      <div class="container_todos">
+        <h2>MEDIDOR CON CÁMARA (AR)</h2>
+
+        <div class="medidor-estado" id="estadoInicial">
+          <p id="mensajeCompatibilidad">Comprobando si tu dispositivo soporta medición con cámara…</p>
+        </div>
+
+        <button class="medidor-boton-ar" id="btnIniciarAR" disabled>
+          Iniciar medición AR
+        </button>
+
+        <div class="medidor-aviso">
+          <strong>Importante:</strong> esta medición es una <strong>referencia
+          aproximada</strong>, no reemplaza una huincha de medir. La precisión
+          baja en superficies metálicas, muy pulidas o con poca luz —
+          comunes en componentes de equipos mineros. Verifica siempre con una
+          medición física antes de usar este dato para una maniobra real.
+        </div>
+
+        <h3 style="color:#fff; text-align:center; margin-top:20px;">Mediciones guardadas</h3>
+        <ul id="listaMediciones"></ul>
+      </div>
+    </div>
+
+    <!-- Contenedor donde se monta el canvas de WebGL/Three.js durante la sesion AR -->
+    <div id="arCanvasContainer"></div>
+
+    <!-- Overlay HTML visible ENCIMA de la camara durante la sesion AR -->
+    <div id="arOverlay">
+      <div class="ar-panel-superior">
+        <p id="arInstruccion">Apunta al primer punto y toca la pantalla</p>
+        <p class="ar-distancia" id="arDistancia" style="display:none;"></p>
+      </div>
+      <div class="ar-panel-inferior">
+        <button id="btnDeshacerPunto">Deshacer</button>
+        <button id="btnNuevaMedicion">Nueva medición</button>
+        <button id="btnSalirAR">Salir</button>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160.0/three.min.js"></script>
+    <script src="../assest/js/medidorCamara.js"></script>
+  </body>
+</html>
