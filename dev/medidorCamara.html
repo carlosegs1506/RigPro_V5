@@ -207,6 +207,23 @@
           Iniciar medición AR
         </button>
 
+        <p id="linkInstalarArcorePrevio" style="text-align:center; display:none;">
+          <a href="https://play.google.com/store/apps/details?id=com.google.ar.core"
+             target="_blank" rel="noopener" style="color: var(--secondary);">
+            ¿Primera vez? Instala/actualiza "Servicios de Google Play para RA" aquí
+          </a>
+        </p>
+
+        <div class="medidor-estado" id="panelErrorAR" style="display:none; border-color:#e6a817;">
+          <p id="mensajeErrorAR"></p>
+          <a class="medidor-boton-ar" id="btnInstalarArcore"
+             href="https://play.google.com/store/apps/details?id=com.google.ar.core"
+             target="_blank" rel="noopener" style="text-decoration:none; display:block;">
+            Instalar / actualizar ARCore
+          </a>
+          <button class="medidor-boton-secundario" id="btnCerrarPanelError">Cerrar</button>
+        </div>
+
         <div class="medidor-aviso">
           <strong>Importante:</strong> esta medición es una <strong>referencia
           aproximada</strong>, no reemplaza una huincha de medir. La precisión

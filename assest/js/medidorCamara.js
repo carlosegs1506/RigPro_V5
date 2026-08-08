@@ -35,6 +35,18 @@
   const elBtnSalirAR = document.getElementById("btnSalirAR");
   const elBtnDeshacerPunto = document.getElementById("btnDeshacerPunto");
   const elListaMediciones = document.getElementById("listaMediciones");
+  const elPanelErrorAR = document.getElementById("panelErrorAR");
+  const elMensajeErrorAR = document.getElementById("mensajeErrorAR");
+  const elBtnCerrarPanelError = document.getElementById("btnCerrarPanelError");
+
+  function mostrarPanelError(mensaje) {
+    elMensajeErrorAR.textContent = mensaje;
+    elPanelErrorAR.style.display = "block";
+  }
+
+  elBtnCerrarPanelError.addEventListener("click", () => {
+    elPanelErrorAR.style.display = "none";
+  });
 
   // --- 1. Comprobar compatibilidad al cargar la pagina ---
   async function comprobarCompatibilidad() {
@@ -58,6 +70,7 @@
       elMensajeCompatibilidad.textContent =
         "Tu dispositivo es compatible. Toca el botón para empezar a medir.";
       elBtnIniciarAR.disabled = false;
+      document.getElementById("linkInstalarArcorePrevio").style.display = "block";
     } catch (error) {
       mostrarNoCompatible(
         "No se pudo comprobar la compatibilidad AR de tu dispositivo. (" +
@@ -77,6 +90,24 @@
     elBtnIniciarAR.disabled = true;
     elBtnIniciarAR.textContent = "Iniciando cámara…";
 
+    // Si requestSession no responde en un tiempo razonable, lo mas probable
+    // es que falte "Google Play Services para RA" (ARCore) instalado en el
+    // dispositivo -- Chrome no siempre avisa esto con un error claro, se
+    // queda esperando indefinidamente. Con este timeout evitamos que la
+    // pantalla quede pegada sin ninguna explicacion.
+    const tiempoLimiteMs = 15000;
+    let seAgotoElTiempo = false;
+    const timeoutId = setTimeout(() => {
+      seAgotoElTiempo = true;
+      elBtnIniciarAR.disabled = false;
+      elBtnIniciarAR.textContent = "Iniciar medición AR";
+      mostrarPanelError(
+        "La cámara AR está tardando demasiado en iniciar. Es probable que " +
+          "falte instalar o actualizar \"Google Play Services para RA\" " +
+          "(ARCore) en tu dispositivo."
+      );
+    }, tiempoLimiteMs);
+
     try {
       xrSession = await navigator.xr.requestSession("immersive-ar", {
         requiredFeatures: ["hit-test"],
@@ -84,13 +115,26 @@
         domOverlay: { root: elArOverlay },
       });
     } catch (error) {
-      alert(
-        "No se pudo iniciar la sesión de AR: " +
-          error.message +
-          "\n\nVuelve a intentarlo, o revisa que le hayas dado permiso de cámara a la app."
-      );
-      elBtnIniciarAR.disabled = false;
-      elBtnIniciarAR.textContent = "Iniciar medición AR";
+      clearTimeout(timeoutId);
+      if (!seAgotoElTiempo) {
+        mostrarPanelError(
+          "No se pudo iniciar la sesión de AR: " +
+            error.message +
+            ". Revisa que le hayas dado permiso de cámara a la app, o que " +
+            "tengas ARCore instalado y actualizado."
+        );
+        elBtnIniciarAR.disabled = false;
+        elBtnIniciarAR.textContent = "Iniciar medición AR";
+      }
+      return;
+    }
+
+    clearTimeout(timeoutId);
+    if (seAgotoElTiempo) {
+      // El timeout ya disparo su propia alerta y restauro el boton; si la
+      // sesion igual llega a resolver tarde, la cerramos para no quedar en
+      // un estado inconsistente.
+      await xrSession.end();
       return;
     }
 
@@ -110,10 +154,10 @@
       // conflictos entre dos referencias "local" pedidas de forma distinta).
       xrRefSpace = renderer.xr.getReferenceSpace();
     } catch (error) {
-      alert(
+      mostrarPanelError(
         "Ocurrió un problema iniciando la medición AR: " +
           error.message +
-          "\n\nSe va a cerrar la sesión. Vuelve a intentarlo."
+          ". Se va a cerrar la sesión, vuelve a intentarlo."
       );
       await xrSession.end();
       return;
