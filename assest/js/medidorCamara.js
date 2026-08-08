@@ -108,6 +108,14 @@
       );
     }, tiempoLimiteMs);
 
+    // El elemento del dom-overlay debe estar visible ANTES de pedir la
+    // sesion -- si sigue en display:none al momento de requestSession(),
+    // Chrome puede quedarse esperando indefinidamente en vez de completar
+    // el inicio de la sesion. Por eso se activa aca, antes del try/catch,
+    // y se revierte si algo falla.
+    elArCanvasContainer.classList.add("activo");
+    elArOverlay.classList.add("activo");
+
     try {
       xrSession = await navigator.xr.requestSession("immersive-ar", {
         requiredFeatures: ["hit-test"],
@@ -116,6 +124,8 @@
       });
     } catch (error) {
       clearTimeout(timeoutId);
+      elArCanvasContainer.classList.remove("activo");
+      elArOverlay.classList.remove("activo");
       if (!seAgotoElTiempo) {
         mostrarPanelError(
           "No se pudo iniciar la sesión de AR: " +
@@ -134,6 +144,8 @@
       // El timeout ya disparo su propia alerta y restauro el boton; si la
       // sesion igual llega a resolver tarde, la cerramos para no quedar en
       // un estado inconsistente.
+      elArCanvasContainer.classList.remove("activo");
+      elArOverlay.classList.remove("activo");
       await xrSession.end();
       return;
     }
@@ -163,8 +175,6 @@
       return;
     }
 
-    elArCanvasContainer.classList.add("activo");
-    elArOverlay.classList.add("activo");
     reiniciarMedicionActual();
 
     renderer.setAnimationLoop(renderizarFrame);
