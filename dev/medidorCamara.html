@@ -182,6 +182,29 @@
         padding: 6px 0;
         border-bottom: 1px solid rgba(255,255,255,0.15);
       }
+
+      /* Fila de cada medicion guardada: texto a la izquierda, boton de
+         borrar a la derecha */
+      #listaMediciones li.item-historial {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .btn-borrar-medicion {
+        background: transparent;
+        border: none;
+        color: #ff6b6b;
+        font-size: 1.15em;
+        line-height: 1;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+
+      #btnBorrarHistorial {
+        border-color: #ff6b6b;
+        color: #ff6b6b;
+      }
     </style>
   </head>
 
@@ -234,6 +257,9 @@
 
         <h3 style="color:#fff; text-align:center; margin-top:20px;">Mediciones guardadas</h3>
         <ul id="listaMediciones"></ul>
+        <button class="medidor-boton-secundario" id="btnBorrarHistorial" style="display:none;">
+          Borrar todo el historial
+        </button>
       </div>
     </div>
 
@@ -252,17 +278,6 @@
         <button id="btnSalirAR">Salir</button>
       </div>
     </div>
-
-    <!-- ============================================================ -->
-    <!-- DEBUG TEMPORAL: consola visible en el celular (eruda).        -->
-    <!-- Sirve para ver errores reales sin necesitar un computador.    -->
-    <!-- QUITAR estas 2 líneas una vez resuelto el bug del medidor AR. -->
-    <!-- ============================================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>
-      eruda.init();
-      console.log("RigPro debug — navigator.userAgent:", navigator.userAgent);
-    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="../assest/js/medidorCamara.js"></script>
