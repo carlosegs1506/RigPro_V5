@@ -189,6 +189,15 @@
     scene.add(luz);
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
+    // FIX: por defecto Three.js limpia el canvas cada frame con negro
+    // OPACO (alpha 1), aunque el renderer se haya creado con alpha:true.
+    // En una sesion immersive-ar el navegador compone este canvas ENCIMA
+    // del video real de la camara usando el canal alfa: donde el canvas
+    // tiene alfa 1 tapa la camara, donde tiene alfa 0 se ve el mundo real.
+    // Sin esta linea, cada frame se limpiaba a negro opaco y tapaba
+    // completamente el feed de la camara (pantalla negra), aunque la
+    // sesion AR ya estuviera corriendo bien.
+    renderer.setClearColor(0x000000, 0);
     // Pixel ratio limitado a 2: en celulares con pantalla muy densa
     // (devicePixelRatio 3 o mas), renderizar sin tope aca sumado a la
     // sesion AR puede sobrecargar la GPU justo cuando arranca la camara,
