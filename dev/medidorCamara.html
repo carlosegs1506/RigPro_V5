@@ -253,6 +253,17 @@
       </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- DEBUG TEMPORAL: consola visible en el celular (eruda).        -->
+    <!-- Sirve para ver errores reales sin necesitar un computador.    -->
+    <!-- QUITAR estas 2 líneas una vez resuelto el bug del medidor AR. -->
+    <!-- ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>
+      eruda.init();
+      console.log("RigPro debug — navigator.userAgent:", navigator.userAgent);
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r160.0/three.min.js"></script>
     <script src="../assest/js/medidorCamara.js"></script>
   </body>
