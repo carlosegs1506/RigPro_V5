@@ -1,29 +1,39 @@
 // medidorCamara.js
 //
-// Medidor de distancias con camara usando WebXR Device API (hit-test) +
-// Three.js. Solo funciona en navegadores/contextos que soporten
-// "immersive-ar" con la feature "hit-test" -- en la practica, Chrome en
-// Android con ARCore. Dentro de RigPro empaquetado como TWA, esto corre
-// sobre el Chrome real del sistema, asi que deberia funcionar igual que en
-// el navegador.
+// Medidor de distancias con camara usando WebXR Device API (hit-test +
+// anchors) + Three.js. Solo funciona en navegadores/contextos que
+// soporten "immersive-ar" -- en la practica, Chrome en Android con
+// ARCore. Dentro de RigPro empaquetado como TWA, esto corre sobre el
+// Chrome real del sistema, asi que deberia funcionar igual que en el
+// navegador.
 //
 // Flujo:
 // 1. Al cargar la pagina, se revisa si el navegador soporta AR.
 // 2. Si soporta, se habilita el boton "Iniciar medicion AR".
 // 3. Al entrar en AR, se muestra un reticulo (anillo) que sigue las
-//    superficies reales detectadas.
+//    superficies reales detectadas, con la posicion suavizada (promedio
+//    de las ultimas lecturas) para que no tiemble.
 // 4. El usuario toca la pantalla para marcar el primer punto, apunta a
-//    otro lugar y toca de nuevo para el segundo punto.
+//    otro lugar y toca de nuevo para el segundo punto. Cada punto se
+//    ancla con un WebXR Anchor para que ARCore lo siga rastreando y no
+//    se desplace visualmente al moverte.
 // 5. Se calcula la distancia euclidiana 3D entre ambos puntos y se
 //    muestra en metros/centimetros.
 
 (function () {
   const CLAVE_HISTORIAL = "rigpro_medidor_historial";
 
+  // Cuantas lecturas recientes del hit-test se promedian para suavizar
+  // el reticulo y la posicion de cada punto marcado.
+  const TAMANIO_BUFFER_ESTABILIZACION = 8;
+
   let renderer, scene, camera, reticle, xrSession, hitTestSource, xrRefSpace;
   let puntos = []; // Vector3[] de los puntos marcados en la medicion actual
+  let anclas = []; // (XRAnchor|null)[] -- un anchor por punto, en el mismo orden que "puntos"
   let marcadores = []; // Mesh[] de las esferas que marcan cada punto
   let lineaActual = null; // Mesh de la linea entre los 2 puntos
+  let ultimoHitTestResult = null; // ultimo XRHitTestResult recibido, para poder crear un anchor al tocar
+  let bufferPosicionesReticulo = []; // Vector3[] -- ultimas lecturas crudas, para el promedio
 
   const elMensajeCompatibilidad = document.getElementById("mensajeCompatibilidad");
   const elBtnIniciarAR = document.getElementById("btnIniciarAR");
@@ -35,6 +45,7 @@
   const elBtnSalirAR = document.getElementById("btnSalirAR");
   const elBtnDeshacerPunto = document.getElementById("btnDeshacerPunto");
   const elListaMediciones = document.getElementById("listaMediciones");
+  const elBtnBorrarHistorial = document.getElementById("btnBorrarHistorial");
   const elPanelErrorAR = document.getElementById("panelErrorAR");
   const elMensajeErrorAR = document.getElementById("mensajeErrorAR");
   const elBtnCerrarPanelError = document.getElementById("btnCerrarPanelError");
@@ -119,7 +130,10 @@
     try {
       xrSession = await navigator.xr.requestSession("immersive-ar", {
         requiredFeatures: ["hit-test"],
-        optionalFeatures: ["dom-overlay"],
+        // "anchors" es opcional: si el dispositivo no lo soporta, el
+        // resto de la app sigue funcionando igual, solo que sin la
+        // correccion automatica de deriva en los puntos ya marcados.
+        optionalFeatures: ["dom-overlay", "anchors"],
         domOverlay: { root: elArOverlay },
       });
     } catch (error) {
@@ -189,14 +203,12 @@
     scene.add(luz);
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
-    // FIX: por defecto Three.js limpia el canvas cada frame con negro
-    // OPACO (alpha 1), aunque el renderer se haya creado con alpha:true.
-    // En una sesion immersive-ar el navegador compone este canvas ENCIMA
-    // del video real de la camara usando el canal alfa: donde el canvas
-    // tiene alfa 1 tapa la camara, donde tiene alfa 0 se ve el mundo real.
-    // Sin esta linea, cada frame se limpiaba a negro opaco y tapaba
-    // completamente el feed de la camara (pantalla negra), aunque la
-    // sesion AR ya estuviera corriendo bien.
+    // El renderer se crea con alpha:true, pero eso solo permite que el
+    // canvas TENGA transparencia -- Three.js igual lo limpia cada frame
+    // con negro opaco por defecto. En una sesion immersive-ar el navegador
+    // compone este canvas ENCIMA del video real de la camara usando el
+    // canal alfa, asi que si no bajamos el alfa de limpieza a 0, el canvas
+    // tapa completamente la camara real (pantalla negra).
     renderer.setClearColor(0x000000, 0);
     // Pixel ratio limitado a 2: en celulares con pantalla muy densa
     // (devicePixelRatio 3 o mas), renderizar sin tope aca sumado a la
@@ -208,47 +220,129 @@
     elArCanvasContainer.innerHTML = "";
     elArCanvasContainer.appendChild(renderer.domElement);
 
-    // Reticulo: anillo que muestra donde se detecto una superficie real
+    // Reticulo: anillo que muestra donde se detecto una superficie real.
+    // Usamos position/quaternion normales (matrixAutoUpdate por defecto
+    // en true) en vez de pisar la matriz a mano, porque ahora movemos el
+    // reticulo a una posicion PROMEDIADA (suavizada) en vez de la lectura
+    // cruda de cada frame -- ver renderizarFrame().
     const geometriaReticulo = new THREE.RingGeometry(0.05, 0.06, 32).rotateX(
       -Math.PI / 2
     );
     const materialReticulo = new THREE.MeshBasicMaterial({ color: 0xffd60a });
     reticle = new THREE.Mesh(geometriaReticulo, materialReticulo);
-    reticle.matrixAutoUpdate = false;
     reticle.visible = false;
     scene.add(reticle);
   }
 
-  // --- 3. Loop de renderizado: actualiza el reticulo segun el hit-test ---
+  // --- 3. Loop de renderizado ---
   function renderizarFrame(timestamp, frame) {
     if (!frame) return;
 
     const results = frame.getHitTestResults(hitTestSource);
 
     if (results.length > 0) {
-      const hit = results[0];
-      const pose = hit.getPose(xrRefSpace);
+      ultimoHitTestResult = results[0];
+      const pose = ultimoHitTestResult.getPose(xrRefSpace);
+
+      const matrizHit = new THREE.Matrix4().fromArray(pose.transform.matrix);
+      const posicionCruda = new THREE.Vector3();
+      const rotacionCruda = new THREE.Quaternion();
+      const escalaCruda = new THREE.Vector3();
+      matrizHit.decompose(posicionCruda, rotacionCruda, escalaCruda);
+
+      // Estabilizacion: en vez de mover el reticulo a la posicion cruda
+      // de este unico frame (que tiembla/rebota un poco), promediamos
+      // las ultimas N lecturas. El reticulo -- y por lo tanto el punto
+      // que se marca al tocar -- queda mas quieto y mas preciso.
+      agregarMuestraReticulo(posicionCruda);
       reticle.visible = true;
-      reticle.matrix.fromArray(pose.transform.matrix);
+      reticle.position.copy(calcularPosicionPromedioReticulo());
+      reticle.quaternion.copy(rotacionCruda);
     } else {
+      ultimoHitTestResult = null;
       reticle.visible = false;
+      bufferPosicionesReticulo = []; // se perdio la superficie: reiniciar el promedio
     }
+
+    actualizarPuntosAnclados(frame);
 
     renderer.render(scene, camera);
   }
 
-  // --- 4. Al tocar la pantalla: marcar un punto ---
-  function alTocarPantalla() {
-    if (!reticle.visible) return; // No hay superficie detectada ahi todavia
-
-    const posicion = new THREE.Vector3();
-    posicion.setFromMatrixPosition(reticle.matrix);
-
-    agregarPunto(posicion);
+  function agregarMuestraReticulo(posicion) {
+    bufferPosicionesReticulo.push(posicion.clone());
+    if (bufferPosicionesReticulo.length > TAMANIO_BUFFER_ESTABILIZACION) {
+      bufferPosicionesReticulo.shift();
+    }
   }
 
-  function agregarPunto(posicion) {
+  function calcularPosicionPromedioReticulo() {
+    const promedio = new THREE.Vector3();
+    bufferPosicionesReticulo.forEach((p) => promedio.add(p));
+    promedio.divideScalar(bufferPosicionesReticulo.length);
+    return promedio;
+  }
+
+  // Los puntos ya marcados que tienen un anchor de WebXR asociado se
+  // re-consultan cada frame para que se mantengan pegados al mismo lugar
+  // real, aunque ARCore ajuste su propio mapa del entorno mientras te
+  // mueves. Sin esto, el punto quedaba fijo en la posicion exacta que
+  // tenia en el instante de tocar la pantalla, y podia "saltar" un poco
+  // cuando ARCore recalibraba -- este es el fix del problema reportado.
+  function actualizarPuntosAnclados(frame) {
+    let huboActualizacion = false;
+
+    for (let i = 0; i < anclas.length; i++) {
+      const ancla = anclas[i];
+      if (!ancla) continue;
+
+      const pose = frame.getPose(ancla.anchorSpace, xrRefSpace);
+      if (!pose) continue;
+
+      const nuevaPosicion = new THREE.Vector3().setFromMatrixPosition(
+        new THREE.Matrix4().fromArray(pose.transform.matrix)
+      );
+      puntos[i].copy(nuevaPosicion);
+      marcadores[i].position.copy(nuevaPosicion);
+      huboActualizacion = true;
+    }
+
+    if (huboActualizacion && puntos.length === 2) {
+      const distanciaMetros = puntos[0].distanceTo(puntos[1]);
+      mostrarDistancia(distanciaMetros);
+      dibujarLinea(puntos[0], puntos[1]);
+    }
+  }
+
+  // --- 4. Al tocar la pantalla: marcar un punto ---
+  async function alTocarPantalla() {
+    if (!reticle.visible || !ultimoHitTestResult) return;
+
+    // Usamos la posicion YA estabilizada del reticulo (el promedio de
+    // las ultimas lecturas), no la lectura cruda de un solo frame.
+    const posicion = reticle.position.clone();
+
+    // Intentamos crear un anchor de WebXR en ese punto: le pide a ARCore
+    // que siga rastreando ese lugar exacto del mundo real, frame a
+    // frame, en vez de quedarnos con una posicion fija calculada una
+    // sola vez. Si el dispositivo/navegador no soporta anchors, seguimos
+    // funcionando igual, solo que sin esa correccion automatica.
+    let ancla = null;
+    const hitTestParaAncla = ultimoHitTestResult;
+    if (hitTestParaAncla && typeof hitTestParaAncla.createAnchor === "function") {
+      try {
+        ancla = await hitTestParaAncla.createAnchor();
+      } catch (error) {
+        ancla = null;
+      }
+    }
+
+    agregarPunto(posicion, ancla);
+  }
+
+  function agregarPunto(posicion, ancla) {
     puntos.push(posicion.clone());
+    anclas.push(ancla || null);
 
     const geometriaEsfera = new THREE.SphereGeometry(0.012, 16, 16);
     const materialEsfera = new THREE.MeshBasicMaterial({ color: 0xffd60a });
@@ -290,6 +384,10 @@
   // --- 5. Controles de la sesion ---
   function reiniciarMedicionActual() {
     puntos = [];
+    anclas.forEach((a) => {
+      if (a && typeof a.delete === "function") a.delete();
+    });
+    anclas = [];
     marcadores.forEach((m) => scene.remove(m));
     marcadores = [];
     if (lineaActual) {
@@ -304,6 +402,10 @@
   function deshacerUltimoPunto() {
     if (puntos.length === 0) return;
     puntos.pop();
+    const ultimaAncla = anclas.pop();
+    if (ultimaAncla && typeof ultimaAncla.delete === "function") {
+      ultimaAncla.delete();
+    }
     const ultimoMarcador = marcadores.pop();
     if (ultimoMarcador) scene.remove(ultimoMarcador);
     if (lineaActual) {
@@ -329,18 +431,23 @@
     elArOverlay.classList.remove("activo");
     xrSession = null;
     hitTestSource = null;
+    ultimoHitTestResult = null;
+    bufferPosicionesReticulo = [];
     elBtnIniciarAR.disabled = false;
     elBtnIniciarAR.textContent = "Iniciar medición AR";
   }
 
   // --- 6. Historial de mediciones (guardado local en el dispositivo) ---
-  function guardarMedicionEnHistorial(distanciaMetros) {
-    let historial = [];
+  function leerHistorial() {
     try {
-      historial = JSON.parse(localStorage.getItem(CLAVE_HISTORIAL)) || [];
+      return JSON.parse(localStorage.getItem(CLAVE_HISTORIAL)) || [];
     } catch (e) {
-      historial = [];
+      return [];
     }
+  }
+
+  function guardarMedicionEnHistorial(distanciaMetros) {
+    let historial = leerHistorial();
     historial.unshift({
       valor: distanciaMetros,
       fecha: new Date().toLocaleString("es-CL"),
@@ -350,13 +457,22 @@
     renderizarHistorial();
   }
 
+  // Borra una sola medicion del historial, identificada por su posicion
+  // (indice) en la lista actual.
+  function borrarMedicion(indice) {
+    const historial = leerHistorial();
+    historial.splice(indice, 1);
+    localStorage.setItem(CLAVE_HISTORIAL, JSON.stringify(historial));
+    renderizarHistorial();
+  }
+
+  function borrarTodoElHistorial() {
+    localStorage.removeItem(CLAVE_HISTORIAL);
+    renderizarHistorial();
+  }
+
   function renderizarHistorial() {
-    let historial = [];
-    try {
-      historial = JSON.parse(localStorage.getItem(CLAVE_HISTORIAL)) || [];
-    } catch (e) {
-      historial = [];
-    }
+    const historial = leerHistorial();
 
     elListaMediciones.innerHTML = "";
 
@@ -364,16 +480,32 @@
       const li = document.createElement("li");
       li.textContent = "Todavía no has hecho ninguna medición.";
       elListaMediciones.appendChild(li);
+      elBtnBorrarHistorial.style.display = "none";
       return;
     }
 
-    historial.forEach((item) => {
+    elBtnBorrarHistorial.style.display = "block";
+
+    historial.forEach((item, indice) => {
       const li = document.createElement("li");
+      li.className = "item-historial";
+
       const texto =
         item.valor < 1
           ? `${(item.valor * 100).toFixed(1)} cm`
           : `${item.valor.toFixed(2)} m`;
-      li.textContent = `${texto} — ${item.fecha}`;
+
+      const spanTexto = document.createElement("span");
+      spanTexto.textContent = `${texto} — ${item.fecha}`;
+
+      const btnBorrar = document.createElement("button");
+      btnBorrar.textContent = "✕";
+      btnBorrar.className = "btn-borrar-medicion";
+      btnBorrar.setAttribute("aria-label", "Borrar esta medición");
+      btnBorrar.addEventListener("click", () => borrarMedicion(indice));
+
+      li.appendChild(spanTexto);
+      li.appendChild(btnBorrar);
       elListaMediciones.appendChild(li);
     });
   }
@@ -383,6 +515,11 @@
   elBtnNuevaMedicion.addEventListener("click", reiniciarMedicionActual);
   elBtnSalirAR.addEventListener("click", salirDeAR);
   elBtnDeshacerPunto.addEventListener("click", deshacerUltimoPunto);
+  elBtnBorrarHistorial.addEventListener("click", () => {
+    if (confirm("¿Borrar todas las mediciones guardadas? No se puede deshacer.")) {
+      borrarTodoElHistorial();
+    }
+  });
 
   window.addEventListener("resize", () => {
     if (renderer) {
