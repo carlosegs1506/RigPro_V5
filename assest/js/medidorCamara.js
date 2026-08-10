@@ -1,18 +1,25 @@
 // medidorCamara.js
 //
-// Medidor de distancias con camara usando WebXR Device API (hit-test +
-// anchors) + Three.js. Solo funciona en navegadores/contextos que
-// soporten "immersive-ar" -- en la practica, Chrome en Android con
-// ARCore. Dentro de RigPro empaquetado como TWA, esto corre sobre el
-// Chrome real del sistema, asi que deberia funcionar igual que en el
-// navegador.
+// Medidor de distancias con camara usando WebXR Device API + Three.js.
+// Solo funciona en navegadores/contextos que soporten "immersive-ar" --
+// en la practica, Chrome en Android con ARCore. Dentro de RigPro
+// empaquetado como TWA, esto corre sobre el Chrome real del sistema, asi
+// que deberia funcionar igual que en el navegador.
+//
+// Deteccion de superficie (2 metodos, el primero mas rapido si esta
+// disponible):
+// 1. Depth API: profundidad por pixel en el centro de la pantalla, sin
+//    necesitar que ARCore identifique un plano completo primero. Mas
+//    rapido y funciona en mas tipos de superficie.
+// 2. hit-test tradicional (deteccion de planos): respaldo si el Depth
+//    API no esta soportado en el dispositivo o no da resultado ese frame.
 //
 // Flujo:
 // 1. Al cargar la pagina, se revisa si el navegador soporta AR.
 // 2. Si soporta, se habilita el boton "Iniciar medicion AR".
-// 3. Al entrar en AR, se muestra un reticulo (anillo) que sigue las
-//    superficies reales detectadas, con la posicion suavizada (promedio
-//    de las ultimas lecturas) para que no tiemble.
+// 3. Al entrar en AR, se muestra un reticulo (anillo) en el centro de la
+//    pantalla que sigue la superficie real detectada, con la posicion
+//    suavizada (promedio de las ultimas lecturas) para que no tiemble.
 // 4. El usuario toca la pantalla para marcar el primer punto, apunta a
 //    otro lugar y toca de nuevo para el segundo punto. Cada punto
 //    intenta anclarse con un WebXR Anchor para que ARCore lo siga
@@ -20,26 +27,32 @@
 // 5. Se calcula la distancia euclidiana 3D entre ambos puntos y se
 //    muestra en metros/centimetros.
 //
-// DEBUG: hay una linea de texto discreta (id="arDebugAnchors") que
-// muestra si los anchors realmente estan soportados en este dispositivo
-// y si cada punto logro anclarse. Quitarla junto con su logica una vez
-// que el problema de "el punto se mueve" quede resuelto y confirmado.
+// DEBUG: hay 2 lineas de texto discretas que muestran (1) si anchors y
+// depth-sensing estan realmente soportados en este dispositivo, y (2) en
+// vivo, cual metodo de deteccion esta funcionando en cada momento.
+// Quitarlas junto con su logica una vez que todo quede confirmado.
 
 (function () {
   const CLAVE_HISTORIAL = "rigpro_medidor_historial";
 
-  // Cuantas lecturas recientes del hit-test se promedian para suavizar
-  // el reticulo y la posicion de cada punto marcado.
+  // Cuantas lecturas recientes se promedian para suavizar el reticulo y
+  // la posicion de cada punto marcado.
   const TAMANIO_BUFFER_ESTABILIZACION = 8;
+
+  // Rango razonable de distancias para aceptar una lectura del Depth
+  // API como valida (en metros). Fuera de este rango, se descarta como
+  // ruido/dato invalido.
+  const DEPTH_MIN_METROS = 0.05;
+  const DEPTH_MAX_METROS = 15;
 
   let renderer, scene, camera, reticle, xrSession, hitTestSource, xrRefSpace;
   let puntos = []; // Vector3[] de los puntos marcados en la medicion actual
   let anclas = []; // (XRAnchor|null)[] -- un anchor por punto, en el mismo orden que "puntos"
   let marcadores = []; // Mesh[] de las esferas que marcan cada punto
   let lineaActual = null; // Mesh de la linea entre los 2 puntos
-  let ultimoHitTestResult = null; // ultimo XRHitTestResult recibido, para poder crear un anchor al tocar
   let bufferPosicionesReticulo = []; // Vector3[] -- ultimas lecturas crudas, para el promedio
   let anchorsSoportado = false; // se confirma apenas arranca la sesion AR
+  let depthSensingSoportado = false; // se confirma apenas arranca la sesion AR
 
   const elMensajeCompatibilidad = document.getElementById("mensajeCompatibilidad");
   const elBtnIniciarAR = document.getElementById("btnIniciarAR");
@@ -48,6 +61,7 @@
   const elArInstruccion = document.getElementById("arInstruccion");
   const elArDistancia = document.getElementById("arDistancia");
   const elArDebugAnchors = document.getElementById("arDebugAnchors");
+  const elArDebugDeteccion = document.getElementById("arDebugDeteccion");
   const elBtnNuevaMedicion = document.getElementById("btnNuevaMedicion");
   const elBtnSalirAR = document.getElementById("btnSalirAR");
   const elBtnDeshacerPunto = document.getElementById("btnDeshacerPunto");
@@ -137,11 +151,15 @@
     try {
       xrSession = await navigator.xr.requestSession("immersive-ar", {
         requiredFeatures: ["hit-test"],
-        // "anchors" es opcional: si el dispositivo no lo soporta, el
-        // resto de la app sigue funcionando igual, solo que sin la
-        // correccion automatica de deriva en los puntos ya marcados.
-        optionalFeatures: ["dom-overlay", "anchors"],
+        // "anchors" y "depth-sensing" son opcionales: si el dispositivo
+        // no los soporta, el resto de la app sigue funcionando igual,
+        // solo que sin esas mejoras puntuales.
+        optionalFeatures: ["dom-overlay", "anchors", "depth-sensing"],
         domOverlay: { root: elArOverlay },
+        depthSensing: {
+          usagePreference: ["cpu-optimized"],
+          dataFormatPreference: ["luminance-alpha"],
+        },
       });
     } catch (error) {
       clearTimeout(timeoutId);
@@ -197,14 +215,18 @@
     }
 
     // DIAGNOSTICO: XRSession.enabledFeatures nos dice, con certeza, cuales
-    // de las features que pedimos como opcionales realmente quedaron
-    // activas para esta sesion en este dispositivo concreto -- en vez de
-    // asumir que "anchors" funciona solo porque lo pedimos.
+    // de las features opcionales realmente quedaron activas en este
+    // dispositivo concreto -- en vez de asumir que funcionan solo porque
+    // las pedimos.
     anchorsSoportado = !!(
       xrSession.enabledFeatures && xrSession.enabledFeatures.includes("anchors")
     );
+    depthSensingSoportado = !!(
+      xrSession.enabledFeatures && xrSession.enabledFeatures.includes("depth-sensing")
+    );
     elArDebugAnchors.textContent =
-      "[debug] anchors: " + (anchorsSoportado ? "soportado" : "NO soportado en este navegador");
+      "[debug] anchors: " + (anchorsSoportado ? "sí" : "no") +
+      " · depth-sensing: " + (depthSensingSoportado ? "sí" : "no");
 
     reiniciarMedicionActual();
 
@@ -238,10 +260,6 @@
     elArCanvasContainer.appendChild(renderer.domElement);
 
     // Reticulo: anillo que muestra donde se detecto una superficie real.
-    // Usamos position/quaternion normales (matrixAutoUpdate por defecto
-    // en true) en vez de pisar la matriz a mano, porque ahora movemos el
-    // reticulo a una posicion PROMEDIADA (suavizada) en vez de la lectura
-    // cruda de cada frame -- ver renderizarFrame().
     const geometriaReticulo = new THREE.RingGeometry(0.05, 0.06, 32).rotateX(
       -Math.PI / 2
     );
@@ -255,44 +273,91 @@
   function renderizarFrame(timestamp, frame) {
     if (!frame) return;
 
-    const results = frame.getHitTestResults(hitTestSource);
+    // Three.js solo actualiza camera.matrixWorld/projectionMatrix DENTRO
+    // de renderer.render() -- como necesitamos usar esa matriz ANTES de
+    // renderizar (para calcular la posicion del Depth API), la
+    // refrescamos a mano aca con getCamera(), que hace exactamente eso
+    // sin dibujar nada todavia.
+    renderer.xr.getCamera(camera);
 
-    if (results.length > 0) {
-      ultimoHitTestResult = results[0];
-      const pose = ultimoHitTestResult.getPose(xrRefSpace);
+    let posicionDetectada = null;
+    let rotacionDetectada = null;
+    let metodoUsado = "";
 
-      const matrizHit = new THREE.Matrix4().fromArray(pose.transform.matrix);
-      const posicionCruda = new THREE.Vector3();
-      const rotacionCruda = new THREE.Quaternion();
-      const escalaCruda = new THREE.Vector3();
-      matrizHit.decompose(posicionCruda, rotacionCruda, escalaCruda);
+    // Intento 1 (mas rapido / mas amplio de superficies): Depth API. Da
+    // un valor de profundidad por pixel en el centro de la pantalla, sin
+    // necesitar que ARCore identifique un plano completo primero.
+    if (depthSensingSoportado) {
+      try {
+        const viewerPose = frame.getViewerPose(xrRefSpace);
+        if (viewerPose && viewerPose.views.length > 0) {
+          const depthInfo = frame.getDepthInformation(viewerPose.views[0]);
+          if (depthInfo) {
+            // (0.5, 0.5) = centro exacto de la pantalla, donde esta el
+            // reticulo/mira.
+            const distanciaMetros = depthInfo.getDepthInMeters(0.5, 0.5);
+            if (
+              isFinite(distanciaMetros) &&
+              distanciaMetros > DEPTH_MIN_METROS &&
+              distanciaMetros < DEPTH_MAX_METROS
+            ) {
+              // El centro de pantalla siempre corresponde al eje -Z de
+              // la camara (el "frente" exacto), asi que el punto 3D es
+              // simplemente avanzar esa distancia en linea recta desde
+              // la camara -- no hace falta una proyeccion mas compleja.
+              const puntoLocal = new THREE.Vector3(0, 0, -distanciaMetros);
+              posicionDetectada = puntoLocal.applyMatrix4(camera.matrixWorld);
+              rotacionDetectada = camera.getWorldQuaternion(new THREE.Quaternion());
+              metodoUsado = "depth";
+            }
+          }
+        }
+      } catch (error) {
+        posicionDetectada = null;
+      }
+    }
 
-      // Estabilizacion: en vez de mover el reticulo a la posicion cruda
-      // de este unico frame (que tiembla/rebota un poco), promediamos
-      // las ultimas N lecturas. El reticulo -- y por lo tanto el punto
-      // que se marca al tocar -- queda mas quieto y mas preciso.
-      agregarMuestraReticulo(posicionCruda);
+    // Intento 2 (respaldo): hit-test tradicional basado en deteccion de
+    // planos, para cuando el Depth API no esta disponible o no dio
+    // resultado este frame en particular.
+    if (!posicionDetectada) {
+      const results = frame.getHitTestResults(hitTestSource);
+      if (results.length > 0) {
+        const hit = results[0];
+        const pose = hit.getPose(xrRefSpace);
+        const matrizHit = new THREE.Matrix4().fromArray(pose.transform.matrix);
+        const pos = new THREE.Vector3();
+        const rot = new THREE.Quaternion();
+        const escala = new THREE.Vector3();
+        matrizHit.decompose(pos, rot, escala);
+        posicionDetectada = pos;
+        rotacionDetectada = rot;
+        metodoUsado = "hit-test (plano)";
+      }
+    }
+
+    if (posicionDetectada) {
+      agregarMuestraReticulo(posicionDetectada);
       reticle.visible = true;
       reticle.position.copy(calcularPosicionPromedioReticulo());
-      reticle.quaternion.copy(rotacionCruda);
+      if (rotacionDetectada) reticle.quaternion.copy(rotacionDetectada);
 
       if (puntos.length === 0) {
         elArInstruccion.textContent = "Apunta al primer punto y toca la pantalla";
       }
     } else {
-      ultimoHitTestResult = null;
       reticle.visible = false;
       bufferPosicionesReticulo = []; // se perdio la superficie: reiniciar el promedio
 
-      // Aviso util mientras ARCore todavia no reconoce ninguna
-      // superficie: superficies sin textura (espejos, vidrio, metal muy
-      // pulido/reflejante) pueden tardar mucho o nunca ser detectadas,
-      // asi que ayuda saber que hay que mover el celular.
       if (puntos.length === 0) {
         elArInstruccion.textContent =
           "Buscando superficie… mueve el celular lentamente de lado a lado";
       }
     }
+
+    elArDebugDeteccion.textContent = posicionDetectada
+      ? "[debug] detección activa: " + metodoUsado
+      : "[debug] detección activa: ninguna (buscando)";
 
     actualizarPuntosAnclados(frame);
 
@@ -345,9 +410,11 @@
   // --- 4. Al tocar la pantalla: marcar un punto ---
   // Recibe el evento "select" completo (no se llama sin argumentos). Los
   // eventos de WebXR traen su propio XRFrame en evento.frame, que es lo
-  // que se necesita para crear el anchor con frame.createAnchor().
+  // que se necesita para crear el anchor con frame.createAnchor(). El
+  // anchor se crea directamente desde la posicion ya detectada (sea por
+  // depth o por hit-test, da igual el origen), como un XRRigidTransform.
   async function alTocarPantalla(evento) {
-    if (!reticle.visible || !ultimoHitTestResult || !xrRefSpace) return;
+    if (!reticle.visible) return;
 
     // Usamos la posicion YA estabilizada del reticulo (el promedio de
     // las ultimas lecturas), no la lectura cruda de un solo frame.
@@ -358,19 +425,19 @@
     const frameDelEvento = evento && evento.frame ? evento.frame : null;
 
     if (!anchorsSoportado) {
-      motivoSinAncla = "anchors no soportado en este navegador";
+      motivoSinAncla = "anchors no soportado";
     } else if (!frameDelEvento) {
       motivoSinAncla = "el evento select no trajo un frame";
     } else if (typeof frameDelEvento.createAnchor !== "function") {
       motivoSinAncla = "frame.createAnchor no existe";
     } else {
       try {
-        const poseDelHit = ultimoHitTestResult.getPose(xrRefSpace);
-        if (!poseDelHit) {
-          motivoSinAncla = "no se pudo obtener el pose del hit-test";
-        } else {
-          ancla = await frameDelEvento.createAnchor(poseDelHit.transform, xrRefSpace);
-        }
+        const transform = new XRRigidTransform({
+          x: posicion.x,
+          y: posicion.y,
+          z: posicion.z,
+        });
+        ancla = await frameDelEvento.createAnchor(transform, xrRefSpace);
       } catch (error) {
         motivoSinAncla = "error al crear: " + error.message;
       }
@@ -476,7 +543,6 @@
     elArOverlay.classList.remove("activo");
     xrSession = null;
     hitTestSource = null;
-    ultimoHitTestResult = null;
     bufferPosicionesReticulo = [];
     elBtnIniciarAR.disabled = false;
     elBtnIniciarAR.textContent = "Iniciar medición AR";
