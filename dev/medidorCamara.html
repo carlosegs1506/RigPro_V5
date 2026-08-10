@@ -120,15 +120,14 @@
         margin-top: 4px !important;
       }
 
-      /* Linea de diagnostico: soporte de anchors y si cada punto se
-         logro anclar o no. Texto chico y discreto, pero visible sin
-         necesitar computador ni consola. QUITAR cuando el bug este
-         resuelto y confirmado. */
+      /* Lineas de diagnostico: soporte de anchors/depth y que metodo de
+         deteccion esta funcionando en vivo. Texto chico y discreto.
+         QUITAR cuando quede todo confirmado y funcionando bien. */
       .ar-debug {
         font-size: 0.72em !important;
         opacity: 0.85;
         color: #ffd60a !important;
-        margin-top: 6px !important;
+        margin-top: 4px !important;
       }
 
       .ar-panel-inferior {
@@ -283,6 +282,7 @@
         <p id="arInstruccion">Apunta al primer punto y toca la pantalla</p>
         <p class="ar-distancia" id="arDistancia" style="display:none;"></p>
         <p class="ar-debug" id="arDebugAnchors"></p>
+        <p class="ar-debug" id="arDebugDeteccion"></p>
       </div>
       <div class="ar-panel-inferior">
         <button id="btnDeshacerPunto">Deshacer</button>
