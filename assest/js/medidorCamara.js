@@ -7,15 +7,12 @@
 // Chrome real del sistema, asi que deberia funcionar igual que en el
 // navegador.
 //
-// NOTA: se probo agregar el Depth API de WebXR para acelerar la
-// deteccion de superficie, pero en pruebas reales resulto MAS lento en
-// el dispositivo de prueba (probablemente por el costo de procesar
-// profundidad por pixel en JavaScript en hardware mas limitado) -- se
-// revirtio. La investigacion de apps similares en Play Store (AR Ruler,
-// Regla AR, Google Measure) confirmo que incluso esas apps nativas
-// (no basadas en navegador) tienen la misma demora inicial de "mueve el
-// celular para que la app detecte el entorno" -- es una limitacion del
-// propio ARCore, no de esta implementacion.
+// MODO DE PUNTOS ENCADENADOS: cada toque en la pantalla agrega un punto
+// nuevo. A partir del segundo punto, cada punto se conecta con el
+// ANTERIOR (no solo el primero con el segundo), formando un recorrido
+// continuo -- util para recorrer, por ejemplo, las 4 esquinas de un
+// objeto y obtener el perimetro completo. Se muestra el tramo recien
+// medido y el total acumulado de todos los tramos.
 //
 // Flujo:
 // 1. Al cargar la pagina, se revisa si el navegador soporta AR.
@@ -23,16 +20,15 @@
 // 3. Al entrar en AR, se muestra un reticulo (anillo) que sigue las
 //    superficies reales detectadas, con la posicion suavizada (promedio
 //    de las ultimas lecturas) para que no tiemble.
-// 4. El usuario toca la pantalla para marcar el primer punto, apunta a
-//    otro lugar y toca de nuevo para el segundo punto. Cada punto se
-//    ancla con un WebXR Anchor para que ARCore lo siga rastreando y no
-//    se desplace visualmente al moverte.
-// 5. Se calcula la distancia euclidiana 3D entre ambos puntos y se
-//    muestra en metros/centimetros. Si repites la misma medicion varias
-//    veces seguidas (tocando "Nueva medicion" y volviendo a marcar los
-//    2 puntos), se muestra tambien el promedio de las ultimas 3 --
-//    siguiendo la misma recomendacion que da AR Ruler para mejorar la
-//    confianza en el resultado.
+// 4. Cada toque marca un punto nuevo, anclado con un WebXR Anchor para
+//    que ARCore lo siga rastreando y no se desplace visualmente al
+//    moverte. Desde el segundo punto en adelante, se dibuja el tramo
+//    hacia el punto anterior y se suma al total.
+// 5. "Nueva medicion" limpia todo para empezar un recorrido nuevo.
+//
+// DEBUG: hay una linea de texto discreta que confirma si cada punto
+// logro anclarse o no. Quitarla junto con la consola eruda del HTML una
+// vez que quede confirmado que todo funciona bien.
 
 (function () {
   const CLAVE_HISTORIAL = "rigpro_medidor_historial";
@@ -41,17 +37,13 @@
   // el reticulo y la posicion de cada punto marcado.
   const TAMANIO_BUFFER_ESTABILIZACION = 8;
 
-  // Cuantas mediciones repetidas seguidas se promedian para mostrar el
-  // "promedio de las ultimas N".
-  const TAMANIO_BUFFER_MEDICIONES_REPETIDAS = 3;
-
   let renderer, scene, camera, reticle, xrSession, hitTestSource, xrRefSpace;
-  let puntos = []; // Vector3[] de los puntos marcados en la medicion actual
+  let puntos = []; // Vector3[] de todos los puntos marcados en el recorrido actual
   let anclas = []; // (XRAnchor|null)[] -- un anchor por punto, en el mismo orden que "puntos"
   let marcadores = []; // Mesh[] de las esferas que marcan cada punto
-  let lineaActual = null; // Mesh de la linea entre los 2 puntos
-  let bufferPosicionesReticulo = []; // Vector3[] -- ultimas lecturas crudas, para el promedio del reticulo
-  let ultimasDistancias = []; // number[] -- ultimas mediciones completas seguidas, para el promedio
+  let segmentos = []; // Mesh[] de las lineas entre cada punto y el anterior
+  let distanciaTotal = 0; // suma de todos los tramos del recorrido actual
+  let bufferPosicionesReticulo = []; // Vector3[] -- ultimas lecturas crudas, para el promedio
   let anchorsSoportado = false; // se confirma apenas arranca la sesion AR
 
   const elMensajeCompatibilidad = document.getElementById("mensajeCompatibilidad");
@@ -60,7 +52,7 @@
   const elArCanvasContainer = document.getElementById("arCanvasContainer");
   const elArInstruccion = document.getElementById("arInstruccion");
   const elArDistancia = document.getElementById("arDistancia");
-  const elArPromedio = document.getElementById("arPromedio");
+  const elArPromedio = document.getElementById("arPromedio"); // ahora muestra el TOTAL acumulado
   const elArDebugAnchors = document.getElementById("arDebugAnchors");
   const elBtnNuevaMedicion = document.getElementById("btnNuevaMedicion");
   const elBtnSalirAR = document.getElementById("btnSalirAR");
@@ -79,6 +71,10 @@
   elBtnCerrarPanelError.addEventListener("click", () => {
     elPanelErrorAR.style.display = "none";
   });
+
+  function formatearDistancia(metros) {
+    return metros < 1 ? `${(metros * 100).toFixed(1)} cm` : `${metros.toFixed(2)} m`;
+  }
 
   // --- 1. Comprobar compatibilidad al cargar la pagina ---
   async function comprobarCompatibilidad() {
@@ -122,11 +118,6 @@
     elBtnIniciarAR.disabled = true;
     elBtnIniciarAR.textContent = "Iniciando cámara…";
 
-    // Si requestSession no responde en un tiempo razonable, lo mas probable
-    // es que falte "Google Play Services para RA" (ARCore) instalado en el
-    // dispositivo -- Chrome no siempre avisa esto con un error claro, se
-    // queda esperando indefinidamente. Con este timeout evitamos que la
-    // pantalla quede pegada sin ninguna explicacion.
     const tiempoLimiteMs = 15000;
     let seAgotoElTiempo = false;
     const timeoutId = setTimeout(() => {
@@ -140,20 +131,12 @@
       );
     }, tiempoLimiteMs);
 
-    // El elemento del dom-overlay debe estar visible ANTES de pedir la
-    // sesion -- si sigue en display:none al momento de requestSession(),
-    // Chrome puede quedarse esperando indefinidamente en vez de completar
-    // el inicio de la sesion. Por eso se activa aca, antes del try/catch,
-    // y se revierte si algo falla.
     elArCanvasContainer.classList.add("activo");
     elArOverlay.classList.add("activo");
 
     try {
       xrSession = await navigator.xr.requestSession("immersive-ar", {
         requiredFeatures: ["hit-test"],
-        // "anchors" es opcional: si el dispositivo no lo soporta, el
-        // resto de la app sigue funcionando igual, solo que sin la
-        // correccion automatica de deriva en los puntos ya marcados.
         optionalFeatures: ["dom-overlay", "anchors"],
         domOverlay: { root: elArOverlay },
       });
@@ -176,9 +159,6 @@
 
     clearTimeout(timeoutId);
     if (seAgotoElTiempo) {
-      // El timeout ya disparo su propia alerta y restauro el boton; si la
-      // sesion igual llega a resolver tarde, la cerramos para no quedar en
-      // un estado inconsistente.
       elArCanvasContainer.classList.remove("activo");
       elArOverlay.classList.remove("activo");
       await xrSession.end();
@@ -196,9 +176,6 @@
 
       renderer.xr.setReferenceSpaceType("local");
       await renderer.xr.setSession(xrSession);
-      // Usamos el mismo reference space que ya maneja Three.js internamente
-      // en vez de pedir uno propio por separado (redundante, y evita
-      // conflictos entre dos referencias "local" pedidas de forma distinta).
       xrRefSpace = renderer.xr.getReferenceSpace();
     } catch (error) {
       mostrarPanelError(
@@ -217,9 +194,6 @@
       "[debug] anchors soportado: " + (anchorsSoportado ? "sí" : "no");
     console.log(elArDebugAnchors.textContent);
 
-    ultimasDistancias = [];
-    elArPromedio.style.display = "none";
-
     reiniciarMedicionActual();
 
     renderer.setAnimationLoop(renderizarFrame);
@@ -227,31 +201,19 @@
 
   function configurarEscenaThreeJs() {
     scene = new THREE.Scene();
-
     camera = new THREE.PerspectiveCamera();
 
     const luz = new THREE.HemisphereLight(0xffffff, 0x444444, 1.5);
     scene.add(luz);
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
-    // El renderer se crea con alpha:true, pero eso solo permite que el
-    // canvas TENGA transparencia -- Three.js igual lo limpia cada frame
-    // con negro opaco por defecto. En una sesion immersive-ar el navegador
-    // compone este canvas ENCIMA del video real de la camara usando el
-    // canal alfa, asi que si no bajamos el alfa de limpieza a 0, el canvas
-    // tapa completamente la camara real (pantalla negra).
     renderer.setClearColor(0x000000, 0);
-    // Pixel ratio limitado a 2: en celulares con pantalla muy densa
-    // (devicePixelRatio 3 o mas), renderizar sin tope aca sumado a la
-    // sesion AR puede sobrecargar la GPU justo cuando arranca la camara,
-    // llegando a colgar el dispositivo por completo.
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.xr.enabled = true;
     elArCanvasContainer.innerHTML = "";
     elArCanvasContainer.appendChild(renderer.domElement);
 
-    // Reticulo: anillo que muestra donde se detecto una superficie real.
     const geometriaReticulo = new THREE.RingGeometry(0.05, 0.06, 32).rotateX(
       -Math.PI / 2
     );
@@ -277,9 +239,6 @@
       const escalaCruda = new THREE.Vector3();
       matrizHit.decompose(posicionCruda, rotacionCruda, escalaCruda);
 
-      // Estabilizacion: en vez de mover el reticulo a la posicion cruda
-      // de este unico frame (que tiembla/rebota un poco), promediamos
-      // las ultimas N lecturas.
       agregarMuestraReticulo(posicionCruda);
       reticle.visible = true;
       reticle.position.copy(calcularPosicionPromedioReticulo());
@@ -290,7 +249,7 @@
       }
     } else {
       reticle.visible = false;
-      bufferPosicionesReticulo = []; // se perdio la superficie: reiniciar el promedio
+      bufferPosicionesReticulo = [];
 
       if (puntos.length === 0) {
         elArInstruccion.textContent =
@@ -319,8 +278,8 @@
 
   // Los puntos ya marcados que tienen un anchor de WebXR asociado se
   // re-consultan cada frame para que se mantengan pegados al mismo lugar
-  // real, aunque ARCore ajuste su propio mapa del entorno mientras te
-  // mueves.
+  // real. Si alguno se corrigio, hay que re-dibujar todos los tramos
+  // (son baratos de recrear, son solo lineas) y recalcular el total.
   function actualizarPuntosAnclados(frame) {
     let huboActualizacion = false;
 
@@ -339,10 +298,8 @@
       huboActualizacion = true;
     }
 
-    if (huboActualizacion && puntos.length === 2) {
-      const distanciaMetros = puntos[0].distanceTo(puntos[1]);
-      mostrarDistancia(distanciaMetros);
-      dibujarLinea(puntos[0], puntos[1]);
+    if (huboActualizacion && puntos.length >= 2) {
+      redibujarTodosLosSegmentos();
     }
   }
 
@@ -350,8 +307,6 @@
   async function alTocarPantalla(evento) {
     if (!reticle.visible) return;
 
-    // Usamos la posicion YA estabilizada del reticulo (el promedio de
-    // las ultimas lecturas), no la lectura cruda de un solo frame.
     const posicion = reticle.position.clone();
 
     let ancla = null;
@@ -396,60 +351,75 @@
     scene.add(esfera);
     marcadores.push(esfera);
 
-    if (puntos.length === 1) {
-      elArInstruccion.textContent = "Ahora apunta al segundo punto y toca la pantalla";
-    } else if (puntos.length === 2) {
-      const distanciaMetros = puntos[0].distanceTo(puntos[1]);
-      mostrarDistancia(distanciaMetros);
-      dibujarLinea(puntos[0], puntos[1]);
-      guardarMedicionEnHistorial(distanciaMetros);
-
-      // Promedio de mediciones repetidas: si el usuario mide la misma
-      // distancia varias veces seguidas (tocando "Nueva medicion" y
-      // volviendo a marcar 2 puntos), mostramos el promedio de las
-      // ultimas N -- la misma practica que recomienda AR Ruler para
-      // mejorar la confianza del resultado.
-      ultimasDistancias.push(distanciaMetros);
-      if (ultimasDistancias.length > TAMANIO_BUFFER_MEDICIONES_REPETIDAS) {
-        ultimasDistancias.shift();
-      }
-      actualizarPromedioMostrado();
+    // Desde el segundo punto en adelante, se conecta con el ANTERIOR
+    // (no solo el primero con el segundo) y se suma al total.
+    if (puntos.length >= 2) {
+      const p1 = puntos[puntos.length - 2];
+      const p2 = puntos[puntos.length - 1];
+      const distanciaTramo = p1.distanceTo(p2);
+      dibujarSegmento(p1, p2);
+      distanciaTotal += distanciaTramo;
+      guardarMedicionEnHistorial(distanciaTramo);
     }
+
+    actualizarTextosSegunPuntos();
   }
 
-  function actualizarPromedioMostrado() {
-    if (ultimasDistancias.length < 2) {
-      elArPromedio.style.display = "none";
-      return;
-    }
-    const suma = ultimasDistancias.reduce((acumulado, valor) => acumulado + valor, 0);
-    const promedio = suma / ultimasDistancias.length;
-    const texto =
-      promedio < 1 ? `${(promedio * 100).toFixed(1)} cm` : `${promedio.toFixed(2)} m`;
-    elArPromedio.textContent =
-      `Promedio de ${ultimasDistancias.length} mediciones seguidas: ${texto}`;
-    elArPromedio.style.display = "block";
-  }
-
-  function dibujarLinea(p1, p2) {
-    if (lineaActual) {
-      scene.remove(lineaActual);
-    }
+  function dibujarSegmento(p1, p2) {
     const geometriaLinea = new THREE.BufferGeometry().setFromPoints([p1, p2]);
     const materialLinea = new THREE.LineBasicMaterial({ color: 0xffd60a, linewidth: 3 });
-    lineaActual = new THREE.Line(geometriaLinea, materialLinea);
-    scene.add(lineaActual);
+    const linea = new THREE.Line(geometriaLinea, materialLinea);
+    scene.add(linea);
+    segmentos.push(linea);
   }
 
-  function mostrarDistancia(distanciaMetros) {
-    const texto =
-      distanciaMetros < 1
-        ? `${(distanciaMetros * 100).toFixed(1)} cm`
-        : `${distanciaMetros.toFixed(2)} m`;
-    elArDistancia.textContent = texto + " (aprox.)";
+  function redibujarTodosLosSegmentos() {
+    segmentos.forEach((s) => scene.remove(s));
+    segmentos = [];
+    distanciaTotal = 0;
+    for (let i = 1; i < puntos.length; i++) {
+      const p1 = puntos[i - 1];
+      const p2 = puntos[i];
+      dibujarSegmento(p1, p2);
+      distanciaTotal += p1.distanceTo(p2);
+    }
+    actualizarTextosSegunPuntos();
+  }
+
+  // Centraliza que texto mostrar segun cuantos puntos hay marcados.
+  function actualizarTextosSegunPuntos() {
+    if (puntos.length === 0) {
+      elArDistancia.style.display = "none";
+      elArPromedio.style.display = "none";
+      elArInstruccion.textContent =
+        reticle && reticle.visible
+          ? "Apunta al primer punto y toca la pantalla"
+          : "Buscando superficie… mueve el celular lentamente de lado a lado";
+      return;
+    }
+
+    if (puntos.length === 1) {
+      elArDistancia.style.display = "none";
+      elArPromedio.style.display = "none";
+      elArInstruccion.textContent = "Ahora apunta al siguiente punto y toca la pantalla";
+      return;
+    }
+
+    const ultimoTramo = puntos[puntos.length - 2].distanceTo(puntos[puntos.length - 1]);
+    elArDistancia.textContent = formatearDistancia(ultimoTramo) + " (último tramo)";
     elArDistancia.style.display = "block";
+
+    if (puntos.length > 2) {
+      elArPromedio.textContent =
+        "Total acumulado (" + (puntos.length - 1) + " tramos): " +
+        formatearDistancia(distanciaTotal);
+      elArPromedio.style.display = "block";
+    } else {
+      elArPromedio.style.display = "none";
+    }
+
     elArInstruccion.textContent =
-      "Medición lista. Repite estos 2 puntos para promediar, o toca \"Nueva medición\".";
+      "Toca el siguiente punto para seguir midiendo, o \"Nueva medición\" para terminar";
   }
 
   // --- 5. Controles de la sesion ---
@@ -461,19 +431,25 @@
     anclas = [];
     marcadores.forEach((m) => scene.remove(m));
     marcadores = [];
-    if (lineaActual) {
-      scene.remove(lineaActual);
-      lineaActual = null;
-    }
-    elArDistancia.style.display = "none";
-    elArDistancia.textContent = "";
-    elArInstruccion.textContent = reticle && reticle.visible
-      ? "Apunta al primer punto y toca la pantalla"
-      : "Buscando superficie… mueve el celular lentamente de lado a lado";
+    segmentos.forEach((s) => scene.remove(s));
+    segmentos = [];
+    distanciaTotal = 0;
+    actualizarTextosSegunPuntos();
   }
 
   function deshacerUltimoPunto() {
     if (puntos.length === 0) return;
+
+    // Si el punto que se va a quitar tenia un tramo que lo conectaba
+    // con el anterior, hay que borrar ese tramo y restar su distancia
+    // del total.
+    if (puntos.length >= 2) {
+      const ultimoSegmento = segmentos.pop();
+      if (ultimoSegmento) scene.remove(ultimoSegmento);
+      const distanciaTramo = puntos[puntos.length - 2].distanceTo(puntos[puntos.length - 1]);
+      distanciaTotal -= distanciaTramo;
+    }
+
     puntos.pop();
     const ultimaAncla = anclas.pop();
     if (ultimaAncla && typeof ultimaAncla.delete === "function") {
@@ -481,15 +457,8 @@
     }
     const ultimoMarcador = marcadores.pop();
     if (ultimoMarcador) scene.remove(ultimoMarcador);
-    if (lineaActual) {
-      scene.remove(lineaActual);
-      lineaActual = null;
-    }
-    elArDistancia.style.display = "none";
-    elArInstruccion.textContent =
-      puntos.length === 0
-        ? "Apunta al primer punto y toca la pantalla"
-        : "Ahora apunta al segundo punto y toca la pantalla";
+
+    actualizarTextosSegunPuntos();
   }
 
   async function salirDeAR() {
@@ -505,8 +474,6 @@
     xrSession = null;
     hitTestSource = null;
     bufferPosicionesReticulo = [];
-    ultimasDistancias = [];
-    elArPromedio.style.display = "none";
     elBtnIniciarAR.disabled = false;
     elBtnIniciarAR.textContent = "Iniciar medición AR";
   }
@@ -526,13 +493,11 @@
       valor: distanciaMetros,
       fecha: new Date().toLocaleString("es-CL"),
     });
-    historial = historial.slice(0, 20); // Guardar solo las ultimas 20
+    historial = historial.slice(0, 20);
     localStorage.setItem(CLAVE_HISTORIAL, JSON.stringify(historial));
     renderizarHistorial();
   }
 
-  // Borra una sola medicion del historial, identificada por su posicion
-  // (indice) en la lista actual.
   function borrarMedicion(indice) {
     const historial = leerHistorial();
     historial.splice(indice, 1);
@@ -564,10 +529,7 @@
       const li = document.createElement("li");
       li.className = "item-historial";
 
-      const texto =
-        item.valor < 1
-          ? `${(item.valor * 100).toFixed(1)} cm`
-          : `${item.valor.toFixed(2)} m`;
+      const texto = formatearDistancia(item.valor);
 
       const spanTexto = document.createElement("span");
       spanTexto.textContent = `${texto} — ${item.fecha}`;
