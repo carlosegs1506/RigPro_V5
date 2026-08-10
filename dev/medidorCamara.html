@@ -120,14 +120,22 @@
         margin-top: 4px !important;
       }
 
-      /* Lineas de diagnostico: soporte de anchors/depth y que metodo de
-         deteccion esta funcionando en vivo. Texto chico y discreto.
-         QUITAR cuando quede todo confirmado y funcionando bien. */
+      /* Linea de diagnostico: confirma si el anchor de cada punto se
+         creo correctamente o no. Texto chico y discreto. QUITAR cuando
+         quede confirmado y resuelto. */
       .ar-debug {
         font-size: 0.72em !important;
         opacity: 0.85;
         color: #ffd60a !important;
         margin-top: 4px !important;
+      }
+
+      .ar-promedio {
+        font-size: 0.95em !important;
+        font-weight: normal !important;
+        color: #fff !important;
+        opacity: 0.9;
+        margin-top: 2px !important;
       }
 
       .ar-panel-inferior {
@@ -261,8 +269,11 @@
           <strong>Importante:</strong> esta medición es una <strong>referencia
           aproximada</strong>, no reemplaza una huincha de medir. La precisión
           baja en superficies metálicas, muy pulidas o con poca luz —
-          comunes en componentes de equipos mineros. Verifica siempre con una
-          medición física antes de usar este dato para una maniobra real.
+          comunes en componentes de equipos mineros. Para mayor confianza,
+          repite la misma medición 2 o 3 veces y usa el promedio (así lo
+          recomiendan también las apps de medición AR más usadas).
+          Verifica siempre con una medición física antes de usar este dato
+          para una maniobra real.
         </div>
 
         <h3 style="color:#fff; text-align:center; margin-top:20px;">Mediciones guardadas</h3>
@@ -281,8 +292,8 @@
       <div class="ar-panel-superior">
         <p id="arInstruccion">Apunta al primer punto y toca la pantalla</p>
         <p class="ar-distancia" id="arDistancia" style="display:none;"></p>
+        <p class="ar-distancia ar-promedio" id="arPromedio" style="display:none;"></p>
         <p class="ar-debug" id="arDebugAnchors"></p>
-        <p class="ar-debug" id="arDebugDeteccion"></p>
       </div>
       <div class="ar-panel-inferior">
         <button id="btnDeshacerPunto">Deshacer</button>
