@@ -14,11 +14,16 @@
 //    superficies reales detectadas, con la posicion suavizada (promedio
 //    de las ultimas lecturas) para que no tiemble.
 // 4. El usuario toca la pantalla para marcar el primer punto, apunta a
-//    otro lugar y toca de nuevo para el segundo punto. Cada punto se
-//    ancla con un WebXR Anchor para que ARCore lo siga rastreando y no
-//    se desplace visualmente al moverte.
+//    otro lugar y toca de nuevo para el segundo punto. Cada punto
+//    intenta anclarse con un WebXR Anchor para que ARCore lo siga
+//    rastreando y no se desplace visualmente al moverte.
 // 5. Se calcula la distancia euclidiana 3D entre ambos puntos y se
 //    muestra en metros/centimetros.
+//
+// DEBUG: hay una linea de texto discreta (id="arDebugAnchors") que
+// muestra si los anchors realmente estan soportados en este dispositivo
+// y si cada punto logro anclarse. Quitarla junto con su logica una vez
+// que el problema de "el punto se mueve" quede resuelto y confirmado.
 
 (function () {
   const CLAVE_HISTORIAL = "rigpro_medidor_historial";
@@ -34,6 +39,7 @@
   let lineaActual = null; // Mesh de la linea entre los 2 puntos
   let ultimoHitTestResult = null; // ultimo XRHitTestResult recibido, para poder crear un anchor al tocar
   let bufferPosicionesReticulo = []; // Vector3[] -- ultimas lecturas crudas, para el promedio
+  let anchorsSoportado = false; // se confirma apenas arranca la sesion AR
 
   const elMensajeCompatibilidad = document.getElementById("mensajeCompatibilidad");
   const elBtnIniciarAR = document.getElementById("btnIniciarAR");
@@ -41,6 +47,7 @@
   const elArCanvasContainer = document.getElementById("arCanvasContainer");
   const elArInstruccion = document.getElementById("arInstruccion");
   const elArDistancia = document.getElementById("arDistancia");
+  const elArDebugAnchors = document.getElementById("arDebugAnchors");
   const elBtnNuevaMedicion = document.getElementById("btnNuevaMedicion");
   const elBtnSalirAR = document.getElementById("btnSalirAR");
   const elBtnDeshacerPunto = document.getElementById("btnDeshacerPunto");
@@ -189,6 +196,16 @@
       return;
     }
 
+    // DIAGNOSTICO: XRSession.enabledFeatures nos dice, con certeza, cuales
+    // de las features que pedimos como opcionales realmente quedaron
+    // activas para esta sesion en este dispositivo concreto -- en vez de
+    // asumir que "anchors" funciona solo porque lo pedimos.
+    anchorsSoportado = !!(
+      xrSession.enabledFeatures && xrSession.enabledFeatures.includes("anchors")
+    );
+    elArDebugAnchors.textContent =
+      "[debug] anchors: " + (anchorsSoportado ? "soportado" : "NO soportado en este navegador");
+
     reiniciarMedicionActual();
 
     renderer.setAnimationLoop(renderizarFrame);
@@ -258,10 +275,23 @@
       reticle.visible = true;
       reticle.position.copy(calcularPosicionPromedioReticulo());
       reticle.quaternion.copy(rotacionCruda);
+
+      if (puntos.length === 0) {
+        elArInstruccion.textContent = "Apunta al primer punto y toca la pantalla";
+      }
     } else {
       ultimoHitTestResult = null;
       reticle.visible = false;
       bufferPosicionesReticulo = []; // se perdio la superficie: reiniciar el promedio
+
+      // Aviso util mientras ARCore todavia no reconoce ninguna
+      // superficie: superficies sin textura (espejos, vidrio, metal muy
+      // pulido/reflejante) pueden tardar mucho o nunca ser detectadas,
+      // asi que ayuda saber que hay que mover el celular.
+      if (puntos.length === 0) {
+        elArInstruccion.textContent =
+          "Buscando superficie… mueve el celular lentamente de lado a lado";
+      }
     }
 
     actualizarPuntosAnclados(frame);
@@ -286,9 +316,7 @@
   // Los puntos ya marcados que tienen un anchor de WebXR asociado se
   // re-consultan cada frame para que se mantengan pegados al mismo lugar
   // real, aunque ARCore ajuste su propio mapa del entorno mientras te
-  // mueves. Sin esto, el punto quedaba fijo en la posicion exacta que
-  // tenia en el instante de tocar la pantalla, y podia "saltar" un poco
-  // cuando ARCore recalibraba -- este es el fix del problema reportado.
+  // mueves.
   function actualizarPuntosAnclados(frame) {
     let huboActualizacion = false;
 
@@ -315,27 +343,42 @@
   }
 
   // --- 4. Al tocar la pantalla: marcar un punto ---
-  async function alTocarPantalla() {
-    if (!reticle.visible || !ultimoHitTestResult) return;
+  // Recibe el evento "select" completo (no se llama sin argumentos). Los
+  // eventos de WebXR traen su propio XRFrame en evento.frame, que es lo
+  // que se necesita para crear el anchor con frame.createAnchor().
+  async function alTocarPantalla(evento) {
+    if (!reticle.visible || !ultimoHitTestResult || !xrRefSpace) return;
 
     // Usamos la posicion YA estabilizada del reticulo (el promedio de
     // las ultimas lecturas), no la lectura cruda de un solo frame.
     const posicion = reticle.position.clone();
 
-    // Intentamos crear un anchor de WebXR en ese punto: le pide a ARCore
-    // que siga rastreando ese lugar exacto del mundo real, frame a
-    // frame, en vez de quedarnos con una posicion fija calculada una
-    // sola vez. Si el dispositivo/navegador no soporta anchors, seguimos
-    // funcionando igual, solo que sin esa correccion automatica.
     let ancla = null;
-    const hitTestParaAncla = ultimoHitTestResult;
-    if (hitTestParaAncla && typeof hitTestParaAncla.createAnchor === "function") {
+    let motivoSinAncla = "";
+    const frameDelEvento = evento && evento.frame ? evento.frame : null;
+
+    if (!anchorsSoportado) {
+      motivoSinAncla = "anchors no soportado en este navegador";
+    } else if (!frameDelEvento) {
+      motivoSinAncla = "el evento select no trajo un frame";
+    } else if (typeof frameDelEvento.createAnchor !== "function") {
+      motivoSinAncla = "frame.createAnchor no existe";
+    } else {
       try {
-        ancla = await hitTestParaAncla.createAnchor();
+        const poseDelHit = ultimoHitTestResult.getPose(xrRefSpace);
+        if (!poseDelHit) {
+          motivoSinAncla = "no se pudo obtener el pose del hit-test";
+        } else {
+          ancla = await frameDelEvento.createAnchor(poseDelHit.transform, xrRefSpace);
+        }
       } catch (error) {
-        ancla = null;
+        motivoSinAncla = "error al crear: " + error.message;
       }
     }
+
+    elArDebugAnchors.textContent = ancla
+      ? "[debug] punto anclado correctamente"
+      : "[debug] punto SIN anclar (" + motivoSinAncla + ")";
 
     agregarPunto(posicion, ancla);
   }
@@ -396,7 +439,9 @@
     }
     elArDistancia.style.display = "none";
     elArDistancia.textContent = "";
-    elArInstruccion.textContent = "Apunta al primer punto y toca la pantalla";
+    elArInstruccion.textContent = reticle && reticle.visible
+      ? "Apunta al primer punto y toca la pantalla"
+      : "Buscando superficie… mueve el celular lentamente de lado a lado";
   }
 
   function deshacerUltimoPunto() {
