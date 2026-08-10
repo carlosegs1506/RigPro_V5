@@ -215,6 +215,7 @@
     );
     elArDebugAnchors.textContent =
       "[debug] anchors soportado: " + (anchorsSoportado ? "sí" : "no");
+    console.log(elArDebugAnchors.textContent);
 
     ultimasDistancias = [];
     elArPromedio.style.display = "none";
@@ -379,6 +380,7 @@
     elArDebugAnchors.textContent = ancla
       ? "[debug] punto " + (puntos.length + 1) + " anclado correctamente"
       : "[debug] punto " + (puntos.length + 1) + " SIN anclar (" + motivoSinAncla + ")";
+    console.log(elArDebugAnchors.textContent);
 
     agregarPunto(posicion, ancla);
   }
