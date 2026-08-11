@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Presión de Apoyo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <style>
+      #presionRoot {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .pa-panel {
+        background-color: #050503;
+        border: 3px solid var(--steel);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px auto;
+        width: 95%;
+        color: #fff;
+      }
+
+      .pa-panel label {
+        display: block;
+        margin: 12px 0 4px 0;
+        font-size: 0.95em;
+      }
+
+      .pa-panel select,
+      .pa-panel input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 2px solid var(--steel);
+        background-color: #111;
+        color: #fff;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      .pa-fila {
+        display: flex;
+        gap: 10px;
+      }
+
+      .pa-fila > div {
+        flex: 1;
+      }
+
+      .pa-boton {
+        display: block;
+        width: 95%;
+        margin: 15px auto;
+        padding: 16px;
+        background-color: var(--secondary);
+        color: var(--secondary-ink);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .pa-resultado {
+        text-align: center;
+        margin: 15px auto;
+        width: 95%;
+        padding: 18px;
+        border-radius: 10px;
+        display: none;
+      }
+
+      .pa-resultado.ok {
+        background-color: #e6ffed;
+        border: 3px solid #2e7d32;
+        color: #143d17;
+      }
+
+      .pa-resultado.excede {
+        background-color: #ffe6e6;
+        border: 3px solid #c62828;
+        color: #4d1010;
+      }
+
+      .pa-resultado .pa-valor-grande {
+        font-size: 1.6em;
+        font-weight: bold;
+        margin: 6px 0;
+      }
+
+      .pa-aviso {
+        background-color: #fff8e6;
+        border-left: 4px solid #e6a817;
+        padding: 10px 14px;
+        margin: 15px auto;
+        width: 88%;
+        font-size: 0.88em;
+        line-height: 1.4;
+        text-align: left;
+        color: #1a1400;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="./index_es.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div id="presionRoot">
+      <div class="container_todos">
+        <h2 style="text-align:center;">PRESIÓN DE APOYO (PATAS ESTABILIZADORAS)</h2>
+
+        <div class="pa-panel">
+          <label for="paCarga">Carga en esta pata estabilizadora (kg)</label>
+          <input type="number" id="paCarga" placeholder="Ej: 8500" min="0" />
+
+          <label for="paForma">Forma del plato / madera de apoyo</label>
+          <select id="paForma">
+            <option value="cuadrado">Cuadrado</option>
+            <option value="rectangular">Rectangular</option>
+            <option value="redondo">Redondo</option>
+          </select>
+
+          <div id="paDimsCuadrado">
+            <label for="paLado">Lado (cm)</label>
+            <input type="number" id="paLado" placeholder="Ej: 60" min="0" />
+          </div>
+
+          <div id="paDimsRectangular" style="display:none;">
+            <div class="pa-fila">
+              <div>
+                <label for="paLargo">Largo (cm)</label>
+                <input type="number" id="paLargo" placeholder="Ej: 80" min="0" />
+              </div>
+              <div>
+                <label for="paAncho">Ancho (cm)</label>
+                <input type="number" id="paAncho" placeholder="Ej: 60" min="0" />
+              </div>
+            </div>
+          </div>
+
+          <div id="paDimsRedondo" style="display:none;">
+            <label for="paDiametro">Diámetro (cm)</label>
+            <input type="number" id="paDiametro" placeholder="Ej: 70" min="0" />
+          </div>
+
+          <label for="paTerreno">Tipo de terreno (valor orientativo)</label>
+          <select id="paTerreno">
+            <option value="0">— Selecciona o ingresa manual abajo —</option>
+            <option value="0.31">Relleno no compactado (~0.31 kg/cm²)</option>
+            <option value="0.51">Arcilla blanda (~0.51 kg/cm²)</option>
+            <option value="1.02">Arcilla media (~1.02 kg/cm²)</option>
+            <option value="1.53">Arcilla dura (~1.53 kg/cm²)</option>
+            <option value="2.04">Arena compacta (~2.04 kg/cm²)</option>
+            <option value="2.04b">Asfalto sobre base compactada (~2.04 kg/cm²)</option>
+            <option value="3.06">Grava compactada (~3.06 kg/cm²)</option>
+            <option value="3.06b">Hormigón / losa estructural (~3.06 kg/cm²)</option>
+            <option value="6.1">Roca sana (~6.1 kg/cm²)</option>
+          </select>
+
+          <label for="paCapacidadManual">
+            O ingresa la capacidad portante real del terreno (kg/cm²), si la tienes
+          </label>
+          <input type="number" id="paCapacidadManual" placeholder="Ej: 1.2" min="0" step="0.01" />
+        </div>
+
+        <button class="pa-boton" id="paBtnCalcular">Calcular presión de apoyo</button>
+
+        <div class="pa-resultado" id="paResultado">
+          <p id="paTextoPresion" class="pa-valor-grande"></p>
+          <p id="paTextoCapacidad"></p>
+          <p id="paTextoEstado" style="font-weight:bold; margin-top:10px;"></p>
+          <p id="paTextoAreaMinima" style="margin-top:10px;"></p>
+        </div>
+
+        <div class="pa-aviso">
+          <strong>Importante:</strong> los valores de capacidad portante por tipo de
+          terreno son <strong>orientativos</strong>, basados en referencias
+          geotécnicas generales — no reemplazan un estudio de suelo real. Para
+          izajes críticos, verifica siempre la capacidad portante real del
+          terreno con el ingeniero o geotécnico a cargo antes de posicionar la
+          grúa.
+        </div>
+      </div>
+    </div>
+
+    <script src="../assest/js/presionApoyo.js"></script>
+  </body>
+</html>
