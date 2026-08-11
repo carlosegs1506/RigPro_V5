@@ -120,16 +120,6 @@
         margin-top: 4px !important;
       }
 
-      /* Linea de diagnostico: confirma si el anchor de cada punto se
-         creo correctamente o no. Texto chico y discreto. QUITAR cuando
-         quede confirmado y resuelto. */
-      .ar-debug {
-        font-size: 0.72em !important;
-        opacity: 0.85;
-        color: #ffd60a !important;
-        margin-top: 4px !important;
-      }
-
       .ar-promedio {
         font-size: 0.95em !important;
         font-weight: normal !important;
@@ -292,7 +282,6 @@
         <p id="arInstruccion">Apunta al primer punto y toca la pantalla</p>
         <p class="ar-distancia" id="arDistancia" style="display:none;"></p>
         <p class="ar-distancia ar-promedio" id="arPromedio" style="display:none;"></p>
-        <p class="ar-debug" id="arDebugAnchors"></p>
       </div>
       <div class="ar-panel-inferior">
         <button id="btnDeshacerPunto">Deshacer</button>
@@ -300,12 +289,6 @@
         <button id="btnSalirAR">Salir</button>
       </div>
     </div>
-
-    <!-- DEBUG TEMPORAL: consola visible en el celular (eruda), para ver
-         cualquier error real sin necesitar computador. QUITAR estas 2
-         líneas una vez resuelto el bug del medidor AR. -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="../assest/js/medidorCamara.js"></script>

@@ -25,10 +25,6 @@
 //    moverte. Desde el segundo punto en adelante, se dibuja el tramo
 //    hacia el punto anterior y se suma al total.
 // 5. "Nueva medicion" limpia todo para empezar un recorrido nuevo.
-//
-// DEBUG: hay una linea de texto discreta que confirma si cada punto
-// logro anclarse o no. Quitarla junto con la consola eruda del HTML una
-// vez que quede confirmado que todo funciona bien.
 
 (function () {
   const CLAVE_HISTORIAL = "rigpro_medidor_historial";
@@ -53,7 +49,6 @@
   const elArInstruccion = document.getElementById("arInstruccion");
   const elArDistancia = document.getElementById("arDistancia");
   const elArPromedio = document.getElementById("arPromedio"); // ahora muestra el TOTAL acumulado
-  const elArDebugAnchors = document.getElementById("arDebugAnchors");
   const elBtnNuevaMedicion = document.getElementById("btnNuevaMedicion");
   const elBtnSalirAR = document.getElementById("btnSalirAR");
   const elBtnDeshacerPunto = document.getElementById("btnDeshacerPunto");
@@ -190,9 +185,6 @@
     anchorsSoportado = !!(
       xrSession.enabledFeatures && xrSession.enabledFeatures.includes("anchors")
     );
-    elArDebugAnchors.textContent =
-      "[debug] anchors soportado: " + (anchorsSoportado ? "sí" : "no");
-    console.log(elArDebugAnchors.textContent);
 
     reiniciarMedicionActual();
 
@@ -310,16 +302,13 @@
     const posicion = reticle.position.clone();
 
     let ancla = null;
-    let motivoSinAncla = "";
     const frameDelEvento = evento && evento.frame ? evento.frame : null;
 
-    if (!anchorsSoportado) {
-      motivoSinAncla = "anchors no soportado";
-    } else if (!frameDelEvento) {
-      motivoSinAncla = "el evento select no trajo un frame";
-    } else if (typeof frameDelEvento.createAnchor !== "function") {
-      motivoSinAncla = "frame.createAnchor no existe";
-    } else {
+    if (
+      anchorsSoportado &&
+      frameDelEvento &&
+      typeof frameDelEvento.createAnchor === "function"
+    ) {
       try {
         const transform = new XRRigidTransform({
           x: posicion.x,
@@ -328,14 +317,9 @@
         });
         ancla = await frameDelEvento.createAnchor(transform, xrRefSpace);
       } catch (error) {
-        motivoSinAncla = "error: " + error.message;
+        ancla = null;
       }
     }
-
-    elArDebugAnchors.textContent = ancla
-      ? "[debug] punto " + (puntos.length + 1) + " anclado correctamente"
-      : "[debug] punto " + (puntos.length + 1) + " SIN anclar (" + motivoSinAncla + ")";
-    console.log(elArDebugAnchors.textContent);
 
     agregarPunto(posicion, ancla);
   }
