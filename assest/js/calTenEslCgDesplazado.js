@@ -41,9 +41,9 @@ function calcularTensionCentroMovido() {
 
   // Mostrar resultados
   document.getElementById("tensionMovida1").innerHTML =
-    tension1.toFixed(2) + " Kg";
+    tension1.toFixed(2) + " Ton";
   document.getElementById("tensionMovida2").innerHTML =
-    tension2.toFixed(2) + " Kg";
+    tension2.toFixed(2) + " Ton";
 
   // Mostrar proceso y fórmulas
   mostrarProceso(carga, altura, dif1, dif2, largo1, largo2, tension1, tension2);

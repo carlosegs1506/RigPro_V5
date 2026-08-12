@@ -188,6 +188,7 @@
   const elGrua = document.getElementById("piGrua");
   const elTipoAparejo = document.getElementById("piTipoAparejo");
   const elCamposEstrobo = document.getElementById("piCamposEstrobo");
+  const elCamposEslinga = document.getElementById("piCamposEslinga");
   const elCamposCadena = document.getElementById("piCamposCadena");
   const elIncluirViento = document.getElementById("piIncluirViento");
   const elCamposViento = document.getElementById("piCamposViento");
@@ -227,9 +228,10 @@
   }
 
   elTipoAparejo.addEventListener("change", () => {
-    const esEstrobo = elTipoAparejo.value === "estrobo";
-    elCamposEstrobo.style.display = esEstrobo ? "block" : "none";
-    elCamposCadena.style.display = esEstrobo ? "none" : "block";
+    const valor = elTipoAparejo.value;
+    elCamposEstrobo.style.display = valor === "estrobo" ? "block" : "none";
+    elCamposEslinga.style.display = valor === "eslinga" ? "block" : "none";
+    elCamposCadena.style.display = valor === "cadena" ? "block" : "none";
   });
 
   elIncluirViento.addEventListener("change", () => {
@@ -284,6 +286,15 @@
       capacidadAparejo = calcularEstrobo(pulgadas, amarre);
       const nombreAmarre = { axial: "Axial", lazo: "Lazo", canasta: "Canasta" }[amarre];
       aparejoTexto = `Estrobo de cable ${document.getElementById("piDiametroEstrobo").value}" — amarre ${nombreAmarre}`;
+    } else if (elTipoAparejo.value === "eslinga") {
+      const amarreEslinga = document.getElementById("piAmarreEslinga").value;
+      const capacidadEtiqueta = parseFloat(document.getElementById("piCapacidadEslinga").value);
+      if (!capacidadEtiqueta || capacidadEtiqueta <= 0) {
+        alert("Ingresa la capacidad (WLL) marcada en la etiqueta de la eslinga.");
+        return;
+      }
+      capacidadAparejo = capacidadEtiqueta;
+      aparejoTexto = `Eslinga sintética — amarre ${amarreEslinga} (WLL de etiqueta)`;
     } else {
       const mm = parseFloat(document.getElementById("piMmCadena").value);
       const grado = parseInt(document.getElementById("piGradoCadena").value, 10);

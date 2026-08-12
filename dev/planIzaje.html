@@ -73,7 +73,7 @@
   <body>
     <ul class="ul_principal_segundario">
       <li>
-        <button class="button_principal_segundario"><a href="./index_es.html">Regresar</a></button>
+        <button class="button_principal_segundario"><a href="./principal.html">Regresar</a></button>
         <img class="imagen" src="../assest/img/logo1.png" />
       </li>
     </ul>
@@ -115,6 +115,7 @@
             <label for="piTipoAparejo">Tipo</label>
             <select id="piTipoAparejo">
               <option value="estrobo">Estrobo de cable de acero</option>
+              <option value="eslinga">Eslinga sintética</option>
               <option value="cadena">Cadena</option>
             </select>
 
@@ -127,6 +128,17 @@
                 <option value="lazo">Lazo (choker)</option>
                 <option value="canasta">Canasta</option>
               </select>
+            </div>
+
+            <div id="piCamposEslinga" style="display:none;">
+              <label for="piAmarreEslinga">Tipo de amarre</label>
+              <select id="piAmarreEslinga">
+                <option value="Vertical">Vertical</option>
+                <option value="Estrangulado (choker)">Estrangulado (choker)</option>
+                <option value="Canasta">Canasta</option>
+              </select>
+              <label for="piCapacidadEslinga">Capacidad (WLL) marcada en la etiqueta para ese amarre (Ton)</label>
+              <input type="number" id="piCapacidadEslinga" min="0" step="0.01" placeholder="Ej: 2" />
             </div>
 
             <div id="piCamposCadena" style="display:none;">
