@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Plan de Izaje</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <style>
+      #piRoot { max-width: 480px; margin: 0 auto; }
+      .pi-panel {
+        background-color: #050503; border: 3px solid var(--steel); border-radius: 10px;
+        padding: 20px; margin: 15px auto; width: 95%; color: #fff;
+      }
+      .pi-panel h3 { margin-top: 0; color: var(--secondary); }
+      .pi-panel label { display: block; margin: 12px 0 4px 0; font-size: 0.95em; }
+      .pi-panel input, .pi-panel select, .pi-panel textarea {
+        width: 100%; padding: 10px; border-radius: 6px; border: 2px solid var(--steel);
+        background-color: #111; color: #fff; font-size: 1em; box-sizing: border-box; font-family: inherit;
+      }
+      .pi-fila { display: flex; gap: 10px; }
+      .pi-fila > div { flex: 1; }
+      .pi-checkbox-fila { display: flex; align-items: center; gap: 8px; margin: 12px 0 4px 0; }
+      .pi-checkbox-fila input { width: auto; }
+      .pi-boton {
+        display: block; width: 95%; margin: 15px auto; padding: 16px;
+        background-color: var(--secondary); color: var(--secondary-ink); border: none;
+        border-radius: 8px; font-size: 1.1em; font-weight: bold; cursor: pointer; text-align: center;
+      }
+      .pi-boton-secundario {
+        display: block; width: 95%; margin: 8px auto; padding: 12px; background-color: transparent;
+        color: var(--secondary); border: 2px solid var(--secondary); border-radius: 8px;
+        font-size: 0.95em; cursor: pointer; text-align: center;
+      }
+
+      /* --- Informe --- */
+      #piInforme { display: none; }
+      .pi-hoja {
+        background-color: #fff; color: #111; width: 95%; margin: 15px auto;
+        border-radius: 10px; padding: 20px; font-size: 0.92em; line-height: 1.5;
+      }
+      .pi-hoja h2 { text-align: center; margin-top: 0; }
+      .pi-hoja h4 {
+        background-color: #050503; color: #ffd60a; padding: 6px 10px; border-radius: 6px; margin: 16px 0 8px 0;
+      }
+      .pi-hoja table { width: 100%; border-collapse: collapse; margin: 6px 0; }
+      .pi-hoja table td { padding: 3px 4px; border-bottom: 1px solid #ddd; vertical-align: top; }
+      .pi-resultado-general {
+        text-align: center; font-weight: bold; font-size: 1.3em; padding: 14px;
+        border-radius: 8px; margin: 14px 0;
+      }
+      .pi-resultado-general.apto { background-color: #d9f7e3; color: #143d17; border: 2px solid #2e7d32; }
+      .pi-resultado-general.observaciones { background-color: #fff3cd; color: #4d3800; border: 2px solid #e6a817; }
+      .pi-resultado-general.no-apto { background-color: #ffd9d9; color: #4d1010; border: 2px solid #c62828; }
+      .pi-firma { margin-top: 40px; display: flex; justify-content: space-between; }
+      .pi-firma div { width: 45%; border-top: 1px solid #333; text-align: center; padding-top: 6px; font-size: 0.85em; }
+      .pi-aviso-item { font-size: 0.85em; }
+      .pi-aviso-item.excede { color: #c62828; font-weight: bold; }
+      .pi-aviso-item.precaucion { color: #b45309; font-weight: bold; }
+
+      @media print {
+        .ul_principal_segundario, #piFormSeccion, .pi-boton, .pi-boton-secundario, .pi-no-imprimir { display: none !important; }
+        #piInforme { display: block !important; }
+        .pi-hoja { box-shadow: none; }
+        body { background: #fff; }
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario"><a href="./index_es.html">Regresar</a></button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div id="piRoot">
+      <div class="container_todos">
+        <h2 style="text-align:center;">PLAN DE IZAJE</h2>
+
+        <div id="piFormSeccion">
+          <div class="pi-panel">
+            <h3>Datos generales</h3>
+            <label for="piFecha">Fecha</label>
+            <input type="date" id="piFecha" />
+            <label for="piProyecto">Proyecto / cliente / ubicación</label>
+            <input type="text" id="piProyecto" placeholder="Ej: Faena Norte, Cía Minera X" />
+            <label for="piResponsable">Responsable / rigger a cargo</label>
+            <input type="text" id="piResponsable" placeholder="Ej: Carlos Sepúlveda" />
+          </div>
+
+          <div class="pi-panel">
+            <h3>Grúa y maniobra</h3>
+            <label for="piGrua">Grúa (de tu biblioteca)</label>
+            <select id="piGrua"></select>
+
+            <div class="pi-fila">
+              <div>
+                <label for="piRadio">Radio de trabajo deseado (m)</label>
+                <input type="number" id="piRadio" min="0" step="0.1" placeholder="Ej: 8" />
+              </div>
+              <div>
+                <label for="piPeso">Peso de la carga (Ton)</label>
+                <input type="number" id="piPeso" min="0" step="0.01" placeholder="Ej: 4.5" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pi-panel">
+            <h3>Aparejo principal</h3>
+            <label for="piTipoAparejo">Tipo</label>
+            <select id="piTipoAparejo">
+              <option value="estrobo">Estrobo de cable de acero</option>
+              <option value="cadena">Cadena</option>
+            </select>
+
+            <div id="piCamposEstrobo">
+              <label for="piDiametroEstrobo">Diámetro del estrobo (pulgadas, ej: 7/8, 1 1/2)</label>
+              <input type="text" id="piDiametroEstrobo" placeholder="Ej: 7/8" />
+              <label for="piAmarreEstrobo">Tipo de amarre</label>
+              <select id="piAmarreEstrobo">
+                <option value="axial">Axial</option>
+                <option value="lazo">Lazo (choker)</option>
+                <option value="canasta">Canasta</option>
+              </select>
+            </div>
+
+            <div id="piCamposCadena" style="display:none;">
+              <label for="piMmCadena">Diámetro de la cadena (mm)</label>
+              <input type="number" id="piMmCadena" min="0" step="0.1" placeholder="Ej: 13" />
+              <label for="piGradoCadena">Grado</label>
+              <select id="piGradoCadena">
+                <option value="8">Grado 8</option>
+                <option value="10">Grado 10</option>
+              </select>
+            </div>
+
+            <label for="piDiametroGrillete">Diámetro del grillete (pulgadas, ej: 1, 1 1/4)</label>
+            <input type="text" id="piDiametroGrillete" placeholder="Ej: 1" />
+          </div>
+
+          <div class="pi-panel">
+            <div class="pi-checkbox-fila">
+              <input type="checkbox" id="piIncluirViento" />
+              <label for="piIncluirViento" style="margin:0;">Incluir verificación de viento</label>
+            </div>
+            <div id="piCamposViento" style="display:none;">
+              <label for="piVientoActual">Viento actual/pronosticado (km/h)</label>
+              <input type="number" id="piVientoActual" min="0" placeholder="Ej: 25" />
+              <label for="piVientoLimite">Límite del fabricante (km/h)</label>
+              <input type="number" id="piVientoLimite" min="0" placeholder="Ej: 45" />
+            </div>
+
+            <div class="pi-checkbox-fila">
+              <input type="checkbox" id="piIncluirPresion" />
+              <label for="piIncluirPresion" style="margin:0;">Incluir verificación de presión de apoyo</label>
+            </div>
+            <div id="piCamposPresion" style="display:none;">
+              <label for="piCargaPata">Carga en la pata estabilizadora (Ton)</label>
+              <input type="number" id="piCargaPata" min="0" step="0.01" placeholder="Ej: 6" />
+              <label for="piCapacidadTerreno">Capacidad portante del terreno (Ton/m²)</label>
+              <input type="number" id="piCapacidadTerreno" min="0" step="0.1" placeholder="Ej: 5" />
+            </div>
+          </div>
+
+          <div class="pi-panel">
+            <label for="piNotas">Notas / observaciones (opcional)</label>
+            <textarea id="piNotas" style="min-height:60px;"></textarea>
+          </div>
+
+          <button class="pi-boton" id="piBtnGenerar">Generar Plan de Izaje</button>
+        </div>
+
+        <div id="piInforme">
+          <button class="pi-boton pi-no-imprimir" id="piBtnImprimir">🖨 Imprimir / Guardar como PDF</button>
+          <button class="pi-boton-secundario pi-no-imprimir" id="piBtnNuevo">Editar / Nuevo plan</button>
+
+          <div class="pi-hoja" id="piHoja"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assest/js/planIzaje.js"></script>
+  </body>
+</html>

@@ -30,6 +30,7 @@
   const elRadio = document.getElementById("bgRadio");
   const elCapacidad = document.getElementById("bgCapacidad");
   const elBtnAgregarPunto = document.getElementById("bgBtnAgregarPunto");
+  const elBtnGenerarPlan = document.getElementById("bgBtnGenerarPlan");
   const elBtnBorrarGrua = document.getElementById("bgBtnBorrarGrua");
 
   function leerGruas() {
@@ -235,6 +236,10 @@
 
   elBtnAgregarGrua.addEventListener("click", agregarGrua);
   elBtnAgregarPunto.addEventListener("click", agregarPunto);
+  elBtnGenerarPlan.addEventListener("click", () => {
+    if (!grUaSeleccionadaId) return;
+    window.location.href = "./planIzaje.html?gruaId=" + encodeURIComponent(grUaSeleccionadaId);
+  });
   elBtnBorrarGrua.addEventListener("click", () => {
     if (!grUaSeleccionadaId) return;
     const gruas = leerGruas();
