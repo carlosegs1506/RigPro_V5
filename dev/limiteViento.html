@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Límite de Viento</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <style>
+      #vientoRoot { max-width: 480px; margin: 0 auto; }
+      .vt-panel {
+        background-color: #050503; border: 3px solid var(--steel); border-radius: 10px;
+        padding: 20px; margin: 15px auto; width: 95%; color: #fff;
+      }
+      .vt-panel label { display: block; margin: 12px 0 4px 0; font-size: 0.95em; }
+      .vt-panel input, .vt-panel select {
+        width: 100%; padding: 10px; border-radius: 6px; border: 2px solid var(--steel);
+        background-color: #111; color: #fff; font-size: 1em; box-sizing: border-box;
+      }
+      .vt-boton {
+        display: block; width: 95%; margin: 15px auto; padding: 16px;
+        background-color: var(--secondary); color: var(--secondary-ink); border: none;
+        border-radius: 8px; font-size: 1.1em; font-weight: bold; cursor: pointer; text-align: center;
+      }
+      .vt-resultado {
+        text-align: center; margin: 15px auto; width: 95%; padding: 18px;
+        border-radius: 10px; display: none; font-weight: bold; font-size: 1.15em;
+      }
+      .vt-resultado.ok { background-color: #d9f7e3; border: 3px solid #2e7d32; color: #143d17; }
+      .vt-resultado.precaucion { background-color: #fff3cd; border: 3px solid #e6a817; color: #4d3800; }
+      .vt-resultado.no-izar { background-color: #ffd9d9; border: 3px solid #c62828; color: #4d1010; }
+      .vt-aviso {
+        background-color: #fff8e6; border-left: 4px solid #e6a817; padding: 10px 14px;
+        margin: 15px auto; width: 88%; font-size: 0.88em; line-height: 1.4; text-align: left; color: #1a1400;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario"><a href="./index_es.html">Regresar</a></button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div id="vientoRoot">
+      <div class="container_todos">
+        <h2 style="text-align:center;">LÍMITE DE VIENTO SEGURO</h2>
+
+        <div class="vt-panel">
+          <label for="vtVientoActual">Velocidad de viento actual/pronosticada (km/h)</label>
+          <input type="number" id="vtVientoActual" placeholder="Ej: 28" min="0" />
+
+          <label for="vtLimiteFabricante">Límite máximo de viento del fabricante para izar (km/h)</label>
+          <input type="number" id="vtLimiteFabricante" placeholder="Ej: 45 (revisa el manual de tu grúa)" min="0" />
+
+          <label for="vtTipoCarga">Tipo de carga</label>
+          <select id="vtTipoCarga">
+            <option value="compacta">Compacta (poca superficie al viento)</option>
+            <option value="amplia">Superficie amplia (paneles, lonas, planchas grandes)</option>
+          </select>
+        </div>
+
+        <button class="vt-boton" id="vtBtnCalcular">Verificar</button>
+
+        <div class="vt-resultado" id="vtResultado"></div>
+
+        <div class="vt-aviso">
+          <strong>Importante:</strong> el límite de viento correcto depende de
+          cada grúa y cada carga — este es un chequeo rápido, no reemplaza el
+          manual del fabricante. Con cargas de superficie amplia, el viento
+          real percibido en altura suele ser mayor al medido a nivel de piso;
+          verifica siempre con el supervisor antes de izar en condiciones de
+          viento marginales.
+        </div>
+      </div>
+    </div>
+
+    <script src="../assest/js/limiteViento.js"></script>
+  </body>
+</html>

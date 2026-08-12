@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Inventario de Equipos</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="icon" type="image/png" href="../assest/img/logo1.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assest/css/style.css" />
+    <style>
+      #invRoot {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .inv-panel {
+        background-color: #050503;
+        border: 3px solid var(--steel);
+        border-radius: 10px;
+        padding: 20px;
+        margin: 15px auto;
+        width: 95%;
+        color: #fff;
+      }
+
+      .inv-panel label {
+        display: block;
+        margin: 12px 0 4px 0;
+        font-size: 0.95em;
+      }
+
+      .inv-panel input,
+      .inv-panel select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 2px solid var(--steel);
+        background-color: #111;
+        color: #fff;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      .inv-fila {
+        display: flex;
+        gap: 10px;
+      }
+
+      .inv-fila > div {
+        flex: 1;
+      }
+
+      .inv-boton {
+        display: block;
+        width: 95%;
+        margin: 15px auto;
+        padding: 16px;
+        background-color: var(--secondary);
+        color: var(--secondary-ink);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .inv-boton-secundario {
+        display: block;
+        width: 95%;
+        margin: 8px auto;
+        padding: 10px;
+        background-color: transparent;
+        color: var(--secondary);
+        border: 2px solid var(--secondary);
+        border-radius: 8px;
+        font-size: 0.95em;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      #invLista {
+        width: 95%;
+        margin: 15px auto;
+      }
+
+      .inv-tarjeta {
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        color: #111;
+      }
+
+      .inv-tarjeta.ok {
+        background-color: #d9f7e3;
+        border-left: 6px solid #2e7d32;
+      }
+
+      .inv-tarjeta.proxima {
+        background-color: #fff3cd;
+        border-left: 6px solid #e6a817;
+      }
+
+      .inv-tarjeta.vencida {
+        background-color: #ffd9d9;
+        border-left: 6px solid #c62828;
+      }
+
+      .inv-tarjeta-titulo {
+        font-weight: bold;
+        font-size: 1.05em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .inv-tarjeta-detalle {
+        font-size: 0.88em;
+        margin-top: 4px;
+        line-height: 1.4;
+      }
+
+      .inv-tarjeta-estado {
+        font-weight: bold;
+        margin-top: 6px;
+      }
+
+      .inv-tarjeta-botones {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .inv-tarjeta-botones button {
+        flex: 1;
+        padding: 8px;
+        border-radius: 6px;
+        border: none;
+        font-size: 0.85em;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .inv-btn-inspeccionado {
+        background-color: #050503;
+        color: #ffd60a;
+      }
+
+      .inv-btn-borrar {
+        background-color: transparent;
+        color: #c62828;
+        border: 1px solid #c62828 !important;
+      }
+
+      .inv-vacio {
+        color: #fff;
+        text-align: center;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ul class="ul_principal_segundario">
+      <li>
+        <button class="button_principal_segundario">
+          <a href="./index_es.html">Regresar</a>
+        </button>
+        <img class="imagen" src="../assest/img/logo1.png" />
+      </li>
+    </ul>
+
+    <div id="invRoot">
+      <div class="container_todos">
+        <h2 style="text-align:center;">INVENTARIO DE EQUIPOS</h2>
+
+        <div class="inv-panel">
+          <label for="invNombre">Nombre / identificador del equipo</label>
+          <input type="text" id="invNombre" placeholder="Ej: Eslinga azul #3" />
+
+          <label for="invTipo">Tipo de equipo</label>
+          <select id="invTipo">
+            <option value="Eslinga sintética">Eslinga sintética</option>
+            <option value="Eslinga de cable">Eslinga de cable de acero</option>
+            <option value="Cadena">Cadena</option>
+            <option value="Grillete">Grillete</option>
+            <option value="Gancho">Gancho</option>
+            <option value="Otro">Otro</option>
+          </select>
+
+          <label for="invWll">Capacidad / WLL (kg)</label>
+          <input type="number" id="invWll" placeholder="Ej: 2000" min="0" />
+
+          <label for="invUltimaInspeccion">Fecha de última inspección</label>
+          <input type="date" id="invUltimaInspeccion" />
+
+          <label for="invIntervalo">Frecuencia de inspección</label>
+          <select id="invIntervalo">
+            <option value="1">Mensual</option>
+            <option value="3" selected>Cada 3 meses</option>
+            <option value="6">Cada 6 meses</option>
+            <option value="12">Anual</option>
+          </select>
+
+          <label for="invNotas">Notas (opcional)</label>
+          <input type="text" id="invNotas" placeholder="Ej: guardada en bodega norte" />
+        </div>
+
+        <button class="inv-boton" id="invBtnAgregar">Agregar equipo al inventario</button>
+
+        <h3 style="color:#fff; text-align:center; margin-top:20px;">Equipos registrados</h3>
+        <div id="invLista"></div>
+        <button class="inv-boton-secundario" id="invBtnBorrarTodo" style="display:none; border-color:#ff6b6b; color:#ff6b6b;">
+          Borrar todo el inventario
+        </button>
+      </div>
+    </div>
+
+    <script src="../assest/js/inventarioEquipos.js"></script>
+  </body>
+</html>
